@@ -21,5 +21,6 @@ export const renderRoutes = () => (
       <Route path="join" component={AuthPageJoin} />
       <Route path="*" component={NotFoundPage} />
     </Route>
+
   </Router>
 );

@@ -8,6 +8,7 @@ import ListList from '../components/ListList.jsx';
 import LanguageToggle from '../components/LanguageToggle.jsx';
 import ConnectionNotification from '../components/ConnectionNotification.jsx';
 import Loading from '../components/Loading.jsx';
+import BootStrap from 'react-bootstrap';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
@@ -76,6 +77,19 @@ export default class App extends React.Component {
     });
 
     return (
+      <div>
+        <div className="navibar">
+          <div className="container-fluid">
+              <ul className="navibar-nav">
+                <li><a className="site-title" href="/">Freshmen Guide</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Contact US</a></li>
+              </ul>
+          </div>
+        </div>
+
+
       <div id="container" className={menuOpen ? 'menu-open' : ''}>
         <section id="menu">
           <LanguageToggle />
@@ -97,6 +111,7 @@ export default class App extends React.Component {
               : clonedChildren}
           </ReactCSSTransitionGroup>
         </div>
+      </div>
       </div>
     );
   }
