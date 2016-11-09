@@ -1,5 +1,14 @@
 @import '{}/imports/ui/stylesheets/utils.less';
 
 .page.not-found {
-  .content-scrollable { background: @color-tertiary; }
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+  .content-scrollable {
+    background: @color-tertiary;
+    height: 100%;
+  }
 }
