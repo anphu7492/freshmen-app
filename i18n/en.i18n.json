@@ -15,15 +15,16 @@
       "makePublic": "Make Public",
       "makePrivate": "Make Private",
       "delete": "Delete",
-      "makeListPublic": "Make list public",
-      "makeListPrivate": "Make list private",
+      "makeListPublic": "Make task public",
+      "makeListPrivate": "Make task private",
       "deleteList": "Delete list",
       "cancel": "Cancel",
-      "typeToAdd": "Type to add new tasks"
+      "typeToAdd": "Type to add new steps",
+      "typeToAddDocs": "Type to add new required documents"
     },
     "listList": {
-      "newList": "New List",
-      "newListError": "Could not create list."
+      "newList": "New Task",
+      "newListError": "Could not create task."
     },
     "loading": {
       "loading": "Loading"

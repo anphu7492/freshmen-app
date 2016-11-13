@@ -32,6 +32,11 @@ export default class UserMenu extends BaseComponent {
           {emailLocalPart}
         </a>
         {open
+          ? <a className="btn-secondary" href="/tutor">
+            Profile
+          </a>
+          : null}
+        {open
           ? <a className="btn-secondary" onClick={logout}>
             {i18n.__('components.userMenu.logout')}
           </a>

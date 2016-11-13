@@ -9,6 +9,7 @@ import LanguageToggle from '../components/LanguageToggle.jsx';
 import ConnectionNotification from '../components/ConnectionNotification.jsx';
 import Loading from '../components/Loading.jsx';
 import BootStrap from 'react-bootstrap';
+import TutorDashboard from '../pages/TutorDashboard.jsx'
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
@@ -79,6 +80,7 @@ export default class App extends React.Component {
                 <li><a href="#">About</a></li>
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">Contact US</a></li>
+
               </ul>
           </div>
         </div>
@@ -88,7 +90,7 @@ export default class App extends React.Component {
         <section id="menu">
           {/*<LanguageToggle />*/}
           <UserMenu user={user} logout={this.logout} />
-          <ListList lists={lists} />
+          {/*< ListList lists={lists}>*/}
         </section>
         {showConnectionIssue && !connected
           ? <ConnectionNotification />
@@ -104,9 +106,13 @@ export default class App extends React.Component {
               ? <Loading key="loading" />
               : clonedChildren}
           </ReactCSSTransitionGroup>
+
         </div>
+
       </div>
+
       </div>
+
     );
   }
 }
