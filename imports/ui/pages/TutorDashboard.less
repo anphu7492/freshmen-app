@@ -1,0 +1,46 @@
+@import '{}/imports/ui/stylesheets/utils.less';
+
+@menu-width: 200px;
+
+.taskForm, .eventForm{
+  display:none;
+}
+
+.tutor-dashboard {
+  position: relative;
+  overflow: auto;
+  height:100%;
+button{
+  margin: 5px;
+}
+
+}
+#map-picker{
+  width: 500px;
+  height: 400px;
+}
+
+.tutor-main{
+  position:relative;
+  right:auto;
+  left:0;
+  padding: 10px;
+  display: inline-block;
+  overflow: auto;
+
+}
+
+.tutor-rightbar {
+background-color: #315481;
+background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+background-repeat: no-repeat;
+background-attachment: fixed;
+padding: 10px;
+display: inline-block;
+-webkit-overflow-scrolling: touch;
+position:fixed;
+left:auto;
+right:0;
+width: @menu-width;
+height: 100%;
+}
