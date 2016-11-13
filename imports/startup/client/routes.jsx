@@ -11,6 +11,7 @@ import AuthPageJoin from '../../ui/pages/AuthPageJoin.jsx';
 import NotFoundPage from '../../ui/pages/NotFoundPage.jsx';
 import TutorDashboard from '../../ui/pages/TutorDashboard.jsx';
 import StudentView from '../../ui/pages/StudentView.jsx';
+import AddStudentPage from '../../ui/pages/coordinator/AddStudentPage.jsx';
 
 i18n.setLocale('en');
 
@@ -28,9 +29,10 @@ export const renderRoutes = () => (
     <Route path="/login" component={AuthPageSignIn} />
     <Route path="/join" component={AuthPageJoin} />
     <Route path="/" component={AppContainer} onEnter={requireAuth}>
-    <Route path="tutor" component={TutorDashboard} />
-    <Route path="lists/:id" component={ListPageContainer} />
-    <Route path="/student" component={StudentView} />
+      <Route path="tutor" component={TutorDashboard} />
+      <Route path="lists/:id" component={ListPageContainer} />
+      <Route path="/student" component={StudentView} />
+      <Route path="/coordinator" component={AddStudentPage} />
     </Route>
     <Route path="*" component={NotFoundPage} />
   </Router>

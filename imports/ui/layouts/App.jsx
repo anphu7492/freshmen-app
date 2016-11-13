@@ -32,9 +32,17 @@ export default class App extends React.Component {
 
   componentWillReceiveProps({ loading, children }) {
     // redirect / to a list once lists are ready
-    if (!loading && !children) {
+    /*if (!loading && !children) {
       const list = Lists.findOne();
       this.context.router.replace(`/lists/${list._id}`);
+    }*/
+    if (!loading && !children) {
+      console.log(Meteor.user())
+      if (Meteor.user().role === 'tutor') {
+        this.context.router.replace('/tutor');
+      } else if (Meteor.user().role === 'coordinator') {
+        this.context.router.replace('/coordinator');
+      }
     }
   }
 

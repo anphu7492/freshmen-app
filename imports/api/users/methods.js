@@ -1,14 +1,21 @@
 import { Meteor } from 'meteor/meteor';
 import { AccountsServer } from 'meteor/accounts-base';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-Accounts.validateNewUser(function(user) {
-  console.log('validate', user);
-
-  return user;
-});
-
-Accounts.onCreateUser(function(options, user) {
-  console.log('on create', options,  user);
-  user.name = 'Phu Pham';
-  return user;
+export const createUserFromCoordinator = new ValidatedMethod({
+  name: 'user.create',
+  validate: new SimpleSchema({
+    email: {type: String},
+    password: {type: String},
+    'profile.name': {type: String},
+    'profile.school': {type: String},
+    'profile.major': {type: String},
+    group: {type: String},
+    role: {type: String}
+  }).validator(),
+  run({email, password, profile, group, role}) {
+    console.log('aa', email, password, profile);
+    Accounts.createUser({email, password, profile, group, role});
+  }
 });
