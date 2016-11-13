@@ -9,6 +9,8 @@ import App from '../layouts/App.jsx';
 export default createContainer(() => {
   const publicHandle = Meteor.subscribe('lists.public');
   const privateHandle = Meteor.subscribe('lists.private');
+  Meteor.subscribe('userData');
+
   return {
     user: Meteor.user(),
     loading: !(publicHandle.ready() && privateHandle.ready()),

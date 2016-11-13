@@ -4,3 +4,5 @@ import '../../api/todos/methods.js';
 import '../../api/todos/server/publications.js';
 import '../../api/languages/methods.js';
 import '../../api/users/methods.js';
+import '../../api/users/user.js';
+import '../../api/users/server/publications.js';
