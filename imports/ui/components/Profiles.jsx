@@ -11,7 +11,6 @@ render() {
         <div className="profiles">
         <Student/>
         <br/><br/><br/>
-        <p className="tutortitle">Tutor info</p>
         <Tutor/>
         </div>
     );
