@@ -10,6 +10,7 @@ import ConnectionNotification from '../components/ConnectionNotification.jsx';
 import Loading from '../components/Loading.jsx';
 import BootStrap from 'react-bootstrap';
 import TutorDashboard from '../pages/TutorDashboard.jsx'
+import Profiles from '../components/Profiles.jsx';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
@@ -99,6 +100,7 @@ export default class App extends React.Component {
           {/*<LanguageToggle />*/}
           <UserMenu user={user} logout={this.logout} />
           {/*< ListList lists={lists}>*/}
+          <Profiles/>
         </section>
         {showConnectionIssue && !connected
           ? <ConnectionNotification />
