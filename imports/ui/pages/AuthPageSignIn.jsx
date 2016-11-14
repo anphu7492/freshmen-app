@@ -48,11 +48,12 @@ export default class SignInPage extends BaseComponent {
 
     const content = (
       <div className="wrapper-auth">
+        <h1 className="site-title">Freshmen Guide.</h1>
         <h1 className="title-auth">
           {i18n.__('pages.authPageSignIn.signIn')}
         </h1>
         <p className="subtitle-auth">
-          {i18n.__('pages.authPageSignIn.signInReason')}
+          Log in using the credentials provided by your coordinator.
         </p>
         <form onSubmit={this.onSubmit}>
           <div className="list-errors">
@@ -67,10 +68,10 @@ export default class SignInPage extends BaseComponent {
               ref={(c) => { this.email = c; }}
               placeholder={i18n.__('pages.authPageSignIn.yourEmail')}
             />
-            <span
+          {/*  <span
               className="icon-email"
               title={i18n.__('pages.authPageSignIn.yourEmail')}
-            />
+            /> */}
           </div>
           <div className={`input-symbol ${errorClass('password')}`}>
             <input
@@ -79,10 +80,10 @@ export default class SignInPage extends BaseComponent {
               ref={(c) => { this.password = c; }}
               placeholder={i18n.__('pages.authPageSignIn.password')}
             />
-            <span
+          {/*  <span
               className="icon-lock"
               title={i18n.__('pages.authPageSignIn.password')}
-            />
+            />*/}
           </div>
           <button type="submit" className="btn-primary">
             {i18n.__('pages.authPageSignIn.signInButton')}
@@ -92,8 +93,8 @@ export default class SignInPage extends BaseComponent {
     );
 
     const link = (
-      <Link to="/join" className="link-auth-alt">
-        {i18n.__('pages.authPageSignIn.needAccount')}
+      <Link to="#" className="link-auth-alt">
+        FAQ
       </Link>
     );
 

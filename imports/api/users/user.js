@@ -7,6 +7,7 @@ Accounts.validateNewUser(function(user) {
   return true;
 });
 
+
 Accounts.onCreateUser(function(options, user) {
   console.log('on create', options,  user);
   console.log('user', Meteor.user());

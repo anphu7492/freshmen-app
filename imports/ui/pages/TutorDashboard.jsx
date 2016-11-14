@@ -6,6 +6,7 @@ import StudentCard from '../components/StudentCard.jsx';
 import MobileMenu from '../components/MobileMenu.jsx';
 import { GoogleMap, Marker, SearchBox } from "react-google-maps";
 import $ from "jquery";
+import Posts from '../../api/posts/posts.js'
 
 export default class TutorDashboard extends BaseComponent {
   constructor(props) {
@@ -29,6 +30,10 @@ export default class TutorDashboard extends BaseComponent {
     $('.taskForm').css('display', 'none');
     $('.eventForm').css('display', 'none');
     $('.postForm').css('display', 'block');
+  }
+
+  insertPosts(e) {
+    Posts.insert(e.text);
   }
 
   render() {
@@ -85,7 +90,7 @@ export default class TutorDashboard extends BaseComponent {
 <button type="submit" className="btn btn-primary">Create event</button>
 </form>
 
-<form className="postForm">
+<form className="postForm" onSubmit={this.insertPosts}>
     <h4>Create a post</h4>
 <div className="form-group">
 <input type="text" className="form-control input-lg" id="post" placeholder="What's up?" />
@@ -102,18 +107,24 @@ export default class TutorDashboard extends BaseComponent {
       <div className="tutor-rightbar">
         <div id = "group-section">
           <h3 id ="groupName">Your group</h3>
-          <StudentCard />
-          <StudentCard />
-          <StudentCard />
-          <StudentCard />
+          <StudentCard name="Shek"/>
+          <StudentCard name="Bake"/>
+          <StudentCard name="Shek"/>
+          <StudentCard name="Bake"/>
+          <StudentCard name="Shek"/>
+          <StudentCard name="Bake"/>
         </div>
         <br />
         <div id = "stats-section">
           <h3>Your stats</h3>
-          <h4>Total students - 10</h4>
-          <h4>Total tasks created - 20</h4>
-          <h4>Total completed by students - 15</h4>
-          <h4>Completion rate - 20%</h4>
+          <h4>Students</h4>
+          <h5>6</h5>
+          <h4>Tasks created</h4>
+          <h5>20</h5>
+          <h4>Completed by students</h4>
+          <h5>4</h5>
+          <h4>Completion rate</h4>
+          <h5>20%</h5>
         </div>
       </div>
     </div>

@@ -31,8 +31,8 @@ button{
 }
 
 .tutor-rightbar {
-background-color: #315481;
-background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+background-color: @color-material-red;
+background-image: linear-gradient(to bottom, @color-material-red, @color-material-red 100%);
 background-repeat: no-repeat;
 background-attachment: fixed;
 padding: 10px;
@@ -43,4 +43,38 @@ left:auto;
 right:0;
 width: @menu-width;
 height: 100%;
+overflow: auto;
+
+div h3{
+  text-align: center;
+  font-weight: bolder;
+  font-family: 'Roboto Slab', serif;
+  padding:2px;
+  color: @color-ancillary;
+  margin-bottom: 5px;
+}
+
+div h4{
+  font-size: 15px;
+  font-family: 'Ubuntu', sans-serif;
+  text-align:center;
+  font-weight: bold;
+  color: @color-ancillary;
+  padding:2px;
+}
+
+h5 {
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 20px;
+  color: white;
+}
+}
+
+::-webkit-scrollbar {
+   width: 1em;
+}
+
+::-webkit-scrollbar-track {
+      background-color: black;
 }

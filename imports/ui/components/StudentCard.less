@@ -1,7 +1,30 @@
 @import '{}/imports/ui/stylesheets/utils.less';
 
 .student-card{
-  .position(relative,20,0,0,0);
-  display:block;
-  width: inherit;
+  .position(relative,0,0,0,0);
+  display:inline-block;
+  width: 50%;
+
+  a img{
+    max-height:70px;
+    .position(relative,0,0,0,0);
+    border-radius: 50%;
+    display: block;
+    position:relative;
+    text-align: center;
+    margin: auto;
+    padding:3px;
+  }
+
+  a{
+    text-align: center;
+    .position(relative,0,0,0,0);
+    display: block;
+    margin:auto;
+    width:100%;
+    font-family: 'Roboto Slab', serif;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+  }
 }

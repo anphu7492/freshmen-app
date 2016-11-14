@@ -1,5 +1,8 @@
 @import '{}/imports/ui/stylesheets/utils.less';
 
+
+
+
 .page.auth {
   text-align: center;
   position: absolute;
@@ -9,12 +12,12 @@
   bottom: 0;
 
   .content-scrollable {
-    background: @color-tertiary;
+    background: @color-material-red;
     height: 100%;
   }
 
   .wrapper-auth {
-    padding-top: 4em;
+    padding-top: 8em;
 
     @media screen and (min-width: 40em) {
       margin: 0 auto;
@@ -23,21 +26,33 @@
     }
 
     .title-auth {
-      .font-l1;
-      .type-light;
+      .font-robot-slab;
       color: @color-ancillary;
       margin-bottom: .75rem;
     }
 
+    .site-title {
+      .font-robot-slab;
+      color: @color-ancillary;
+
+    }
+
     .subtitle-auth {
-      color: @color-medium-well;
+      color: white;
       margin: 0 15% 3rem;
+      font-family: 'Roboto Slab', serif;
     }
 
     form {
       .input-symbol {
         margin-bottom: 1px;
         width: 100%;
+        input {
+          padding:10px;
+        }
+
+
+
       }
 
       .btn-primary {
