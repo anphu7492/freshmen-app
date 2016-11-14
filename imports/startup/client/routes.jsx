@@ -12,6 +12,7 @@ import NotFoundPage from '../../ui/pages/NotFoundPage.jsx';
 import TutorDashboard from '../../ui/pages/TutorDashboard.jsx';
 import StudentView from '../../ui/pages/StudentView.jsx';
 import AddStudentPage from '../../ui/pages/coordinator/AddStudentPage.jsx';
+import CoordinatorPageContainer from '../../ui/containers/CoordinatorPageContainer.jsx';
 
 i18n.setLocale('en');
 
@@ -32,7 +33,9 @@ export const renderRoutes = () => (
       <Route path="tutor" component={TutorDashboard} />
       <Route path="lists/:id" component={ListPageContainer} />
       <Route path="/student" component={StudentView} />
-      <Route path="/coordinator" component={AddStudentPage} />
+      <Route path="coordinator" component={CoordinatorPageContainer}>
+        <Route path="add-student" component={AddStudentPage}/>
+      </Route>
     </Route>
     <Route path="*" component={NotFoundPage} />
   </Router>
