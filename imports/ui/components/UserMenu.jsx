@@ -29,7 +29,7 @@ export default class UserMenu extends BaseComponent {
           {open
             ? <span className="icon-arrow-up" />
             : <span className="icon-arrow-down" />}
-          {emailLocalPart}
+          {user.profile.name}
         </a>
         {open
           ? <a className="btn-secondary" href="/tutor">
