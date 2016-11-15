@@ -7,11 +7,26 @@ import { createUserFromCoordinator} from '../../../api/users/methods.js';
 export default class NewStudentForm extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = Object.assign(this.state, { errors: {}});
+    this.state = Object.assign(this.state, { errors: {}, student: {}});
+    this.createStudent = this.createStudent.bind(this);
+    this.handleGroupChange = this.handleGroupChange.bind(this);
+    this.handleRoleChange = this.handleRoleChange.bind(this);
+  }
+
+  handleGroupChange(event) {
+    const student = this.state.student;
+    student.group = event.target.value;
+    this.setState({student: student});
+  }
+
+  handleRoleChange(event) {
+    const student = this.state.student;
+    student.role = event.target.value;
+    this.setState({student: student});
   }
 
   createStudent() {
-    const student = this.props.student;
+    const student = this.state.student;
     const email = student.email.value;
     const password = student.password.value;
     const confirm = student.confirm.value;
@@ -19,8 +34,8 @@ export default class NewStudentForm extends BaseComponent {
     profile.name = student.name.value;
     profile.school = student.school.value;
     profile.major = student.major.value;
-    const group = student.group.value;
-    const role = student.role.value;
+    const group = student.group;
+    const role = student.role;
     const errors = {};
 
     if (!email) {
@@ -38,6 +53,7 @@ export default class NewStudentForm extends BaseComponent {
       return;
     }
 
+    console.log(email, password, profile, group, role);
     createUserFromCoordinator.call({
       email: email,
       password: password,
@@ -61,10 +77,15 @@ export default class NewStudentForm extends BaseComponent {
   }
 
   render() {
+    const { groups } = this.props;
     const { errors } = this.state;
     const errorMessages = Object.keys(errors).map(key => errors[key]);
     const errorClass = key => errors[key] && 'error';
-    console.log(errors, this.props);
+
+    const groupOptions = groups.map(group => (
+      <option key={group._id} value={group._id}>{group.name}</option>
+    ));
+    console.log(errors, this.state);
 
     return (
       <Grid bsClass="student">
@@ -80,7 +101,7 @@ export default class NewStudentForm extends BaseComponent {
                 className="form-control"
                 type="text"
                 name="name"
-                ref={(c) => { this.props.student.name = c; }}
+                ref={(c) => { this.state.student.name = c; }}
                 placeholder="Student Name"
               />
             </div>
@@ -91,7 +112,7 @@ export default class NewStudentForm extends BaseComponent {
                 className="form-control"
                 type="email"
                 name="email"
-                ref={(c) => { this.props.student.email = c; }}
+                ref={(c) => { this.state.student.email = c; }}
                 placeholder="Student Email"
               />
             </div>
@@ -104,7 +125,7 @@ export default class NewStudentForm extends BaseComponent {
                 className="form-control"
                 type="text"
                 name="school"
-                ref={(c) => { this.props.student.school = c; }}
+                ref={(c) => { this.state.student.school = c; }}
                 placeholder="School"
               />
             </div>
@@ -115,7 +136,7 @@ export default class NewStudentForm extends BaseComponent {
                 className="form-control"
                 type="text"
                 name="major"
-                ref={(c) => { this.props.student.major = c; }}
+                ref={(c) => { this.state.student.major = c; }}
                 placeholder="Major"
               />
             </div>
@@ -124,24 +145,26 @@ export default class NewStudentForm extends BaseComponent {
         <Row>
           <Col xs={12} sm={6}>
             <div className={`input-field ${errorClass('group')}`}>
-              <input
-                className="form-control"
-                type="text"
-                name="group"
-                ref={(c) => { this.props.student.group = c; }}
-                placeholder="Student Group"
-              />
+              <select className="form-control" value={this.state.student.group} onChange={this.handleGroupChange}>
+                <option value="">Select group</option>
+                {groupOptions}
+              </select>
             </div>
           </Col>
           <Col xs={12} sm={6}>
             <div className={`input-field ${errorClass('role')}`}>
-              <input
-                className="form-control"
-                type="text"
-                name="role"
-                ref={(c) => { this.props.student.role = c; }}
-                placeholder="Student Role"
-              />
+              {/*<input*/}
+                {/*className="form-control"*/}
+                {/*type="text"*/}
+                {/*name="role"*/}
+                {/*ref={(c) => { this.state.student.role = c; }}*/}
+                {/*placeholder="Student Role"*/}
+              {/*/>*/}
+              <select className="form-control" value={this.state.student.role} onChange={this.handleRoleChange}>
+                <option value="">Select role</option>
+                <option value="tutor">Tutor</option>
+                <option value="student">Student</option>
+              </select>
             </div>
           </Col>
         </Row>
@@ -152,7 +175,7 @@ export default class NewStudentForm extends BaseComponent {
                 className="form-control"
                 type="password"
                 name="password"
-                ref={(c) => { this.props.student.password = c; }}
+                ref={(c) => { this.state.student.password = c; }}
                 placeholder="Account Password"
               />
             </div>
@@ -163,7 +186,7 @@ export default class NewStudentForm extends BaseComponent {
                 className="form-control"
                 type="password"
                 name="confirm"
-                ref={(c) => { this.props.student.confirm = c; }}
+                ref={(c) => { this.state.student.confirm = c; }}
                 placeholder="Confirm Account Password"
               />
             </div>
@@ -175,5 +198,5 @@ export default class NewStudentForm extends BaseComponent {
 }
 
 NewStudentForm.propTypes = {
-  student: React.PropTypes.object
+  groups: React.PropTypes.array
 };
