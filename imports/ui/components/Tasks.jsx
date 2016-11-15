@@ -26,20 +26,22 @@ this.setState({data: 'Data updated...'})
         return (
             <div className="tasks">
                   <p className="eventtitle">Register at AYY - Deadline 01 September 2017
-                  <button onClick = {this.updateState} className="close-button"
-                  name="button" value="OK" type="button">Mark as Completed</button>
-                  </p>
+                    </p>
                   <p className="inlinetitle">Tutor Instructions </p>
-                  <p className="instructions">The new name of the Aalto University Learning Centre is Harald Herlin Learning Centre.
-                  The name was published at the opening event on 4 November.
-                  The Harald Herlin Learning Centre was opened after a renovation on Monday 30 October.
+                  <p className="instructions">
+                    1. Collect below documents<br />
+                  2. Go to Ayy office<br />
+                3. Pay union fees.
+
                   </p>
                   <p className="inlinetitle">Required documents</p>
                   <p className="instructions">Letter of Admission, Passport, RP card </p>
                   <div className="event-location">
                   </div>
-                  
+                  <button onClick = {this.updateState} className="btn-success close-button"
+                  name="button" value="OK" type="button">Mark as Completed</button>
 
+                  <Comments />
             </div>
         );
     }

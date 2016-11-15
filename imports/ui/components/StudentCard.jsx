@@ -17,7 +17,7 @@ export default class StudentCard extends BaseComponent{
     return (
       <div className="student-card">
 
-        <a href="/profile"><img src="http://userproplugin.com/userpro/wp-content/plugins/userpro/img/default_avatar_male.jpg" alt="sup" /></a>
+        <a href="/profile"><img src="http://orig08.deviantart.net/0f29/f/2014/283/e/f/butters_stotch_by_edgotru-d7v25i4.png" alt="sup" /></a>
         <a href="/profile"><p>{name}</p></a>
       </div>
     );
