@@ -107,8 +107,8 @@ export default class App extends React.Component {
         <section id="menu">
           {/*<LanguageToggle />*/}
           <UserMenu user={user} logout={this.logout} />
-          <ListList lists={lists}/>
           <Profiles/>
+          {/*<ListList lists={lists}/>*/}
         </section>
         {showConnectionIssue && !connected
           ? <ConnectionNotification />
