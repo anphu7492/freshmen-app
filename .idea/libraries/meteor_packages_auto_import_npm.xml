@@ -5440,9 +5440,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/rangeRight.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/flattenDepth.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/once.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.0.4/npm/node_modules/async/lib/async.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_mapToArray.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.0.4/npm/node_modules/async/support/sync-package-managers.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/words.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/assignInWith.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_baseSetData.js" />
@@ -5452,7 +5450,6 @@
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/functions.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_defineProperty.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_hasUnicode.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.0.4/npm/node_modules/lru-cache/lib/lru-cache.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_isFlattenable.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_Uint8Array.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_castFunction.js" />
@@ -5489,7 +5486,9 @@
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_baseSortedIndex.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/setWith.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/isSymbol.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/npm/node_modules/async/lib/async.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_compareMultiple.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/npm/node_modules/async/support/sync-package-managers.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_compareAscending.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_equalObjects.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_baseIsArrayBuffer.js" />
@@ -5499,6 +5498,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_addSetEntry.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_baseFindKey.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/debounce.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/npm/node_modules/lru-cache/lib/lru-cache.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/union.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha-core/1.0.1/npm/node_modules/mocha/lib/reporters/min.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_toSource.js" />
@@ -17303,9 +17303,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/rangeRight.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/flattenDepth.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/once.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.0.4/npm/node_modules/async/lib/async.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_mapToArray.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.0.4/npm/node_modules/async/support/sync-package-managers.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/words.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/assignInWith.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_baseSetData.js" />
@@ -17315,7 +17313,6 @@
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/functions.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_defineProperty.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_hasUnicode.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.0.4/npm/node_modules/lru-cache/lib/lru-cache.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_isFlattenable.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_Uint8Array.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_castFunction.js" />
@@ -17352,7 +17349,9 @@
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_baseSortedIndex.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/setWith.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/isSymbol.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/npm/node_modules/async/lib/async.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_compareMultiple.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/npm/node_modules/async/support/sync-package-managers.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_compareAscending.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_equalObjects.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_baseIsArrayBuffer.js" />
@@ -17362,6 +17361,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_addSetEntry.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_baseFindKey.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/debounce.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/npm/node_modules/lru-cache/lib/lru-cache.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/union.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha-core/1.0.1/npm/node_modules/mocha/lib/reporters/min.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-compiler/6.13.0/npm/node_modules/lodash/_toSource.js" />

@@ -5,10 +5,8 @@
 
 body {
   .position(absolute, 0, 0, 0, 0);
-  background-color: @color-material-red;
-  background-image: linear-gradient(to bottom, @color-material-red, @color-material-red 100%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: @color-primary !important;
+  color: white;
 }
 
 .navibar {
@@ -78,9 +76,9 @@ body {
   .position(absolute, 0, 0, 0, 0);
   transition: all 200ms ease-out;
   transform: translate3d(0, 0, 0);
-  background: @color-ancillary;//@color-tertiary;
   opacity: 1;
   overflow: auto;
+  right: 200px;
 
   @media screen and (min-width: 40em) {
     left: @menu-width;
@@ -106,6 +104,11 @@ body {
       left: @menu-width;
     }
   }
+}
+#right-sidebar {
+  position: absolute;
+  right: 0;
+  color: white;
 }
 
 // Transparent screen to prevent interactions on content when menu is open

@@ -12,6 +12,7 @@ import BootStrap from 'react-bootstrap';
 import TutorDashboard from '../pages/TutorDashboard.jsx'
 import Profiles from '../components/Profiles.jsx';
 import { Link } from 'react-router';
+import StudentCard from '../components/StudentCard.jsx';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
@@ -44,6 +45,8 @@ export default class App extends React.Component {
         this.context.router.replace('/tutor');
       } else if (Meteor.user().role === 'coordinator') {
         this.context.router.replace('/coordinator');
+      } else if (Meteor.user().role === 'student') {
+        this.context.router.replace('/student');
       }
     }
   }
@@ -126,7 +129,31 @@ export default class App extends React.Component {
           </ReactCSSTransitionGroup>
 
         </div>
-
+        <div id="right-sidebar">
+          <div className="tutor-rightbar">
+            <div id = "group-section">
+              <h3 id ="groupName">Your group</h3>
+              <StudentCard name="Shek"/>
+              <StudentCard name="Bake"/>
+              <StudentCard name="Shek"/>
+              <StudentCard name="Bake"/>
+              <StudentCard name="Shek"/>
+              <StudentCard name="Bake"/>
+            </div>
+            <br />
+            <div id = "stats-section">
+              <h3>Your stats</h3>
+              <h4>Students</h4>
+              <h5>6</h5>
+              <h4>Tasks created</h4>
+              <h5>20</h5>
+              <h4>Completed by students</h4>
+              <h5>4</h5>
+              <h4>Completion rate</h4>
+              <h5>20%</h5>
+            </div>
+          </div>
+        </div>
       </div>
 
       </div>
