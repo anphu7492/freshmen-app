@@ -6,7 +6,7 @@ class Loading extends BaseComponent {
   render() {
     return (
       <img
-        src="/logo-todos.svg"
+        src="/ring.svg"
         className="loading-app"
         alt={i18n.__('components.loading.loading')}
       />
