@@ -2,7 +2,7 @@
 
 @menu-width: 200px;
 
-.taskForm, .eventForm{
+.taskForm, .eventForm, .postForm{
   display:none;
 }
 
@@ -27,7 +27,43 @@ button{
   padding: 10px;
   display: inline-block;
   overflow: auto;
+  width: 76%;
 
+  .button-group {
+    margin:auto;
+    left:0;
+    right:0;
+    position:relative;
+    width: 90%;
+
+    button {
+      width: auto;
+    }
+  }
+
+  form{
+    background-color: #a3c2c2;
+    margin:10px;
+    border-radius: 3px;
+    padding:15px;
+
+    h4{
+      padding:5px;
+      font-family: 'Roboto Slab', serif;
+
+      color: @color-ancillary;
+    }
+
+    div input{
+      border-radius: 3px;
+    }
+    button{
+      width:98%;
+      background-color: @color-ancillary;
+      color:white;
+      font-family: 'Ubuntu', sans-serif;
+    }
+  }
 }
 
 .tutor-rightbar {
@@ -72,9 +108,16 @@ h5 {
 }
 
 ::-webkit-scrollbar {
-   width: 1em;
+   width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-      background-color: black;
+      background-color: #ff8080;
+}
+
+::-webkit-scrollbar-thumb {
+      background-color: @color-material-red;   //#19194d
+      opacity: 75%;
+      border-radius: 2px;
+
 }

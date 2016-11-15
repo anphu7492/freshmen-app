@@ -15,12 +15,13 @@ body {
     background-color: @color-ancillary;
     position: fixed;
     top: 0;
-    height: 40px;
+    height: 50px;
     color: white;
-    box-shadow: 0px 0px 5px gray;
+  //  box-shadow: 0px 0px 5px gray;
     text-align: center;
-    font-size: 20px;
-    line-height: 15px;
+
+    font-size: 25px;
+    line-height: 25px;
     z-index: 999;
     padding: 5px;
     width: 100%;
@@ -28,7 +29,9 @@ body {
 
 .navibar div ul {
     list-style-type: none;
-    margin: 0;
+    margin: auto;
+    top:0;
+    bottom:0;
     padding: 0;
     overflow: hidden;
 }
@@ -50,7 +53,7 @@ body {
 
 #container {
   .position(absolute, 0, 0, 0, 0);
-    top: 40px;
+    top: 50px;
   @media screen and (min-width: 60em) {
     left: @column;
     right: @column;
@@ -75,7 +78,7 @@ body {
   .position(absolute, 0, 0, 0, 0);
   transition: all 200ms ease-out;
   transform: translate3d(0, 0, 0);
-  background: @color-tertiary;
+  background: @color-ancillary;//@color-tertiary;
   opacity: 1;
   overflow: auto;
 

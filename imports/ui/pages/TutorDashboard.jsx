@@ -6,7 +6,7 @@ import StudentCard from '../components/StudentCard.jsx';
 import MobileMenu from '../components/MobileMenu.jsx';
 import { GoogleMap, Marker, SearchBox } from "react-google-maps";
 import $ from "jquery";
-import Posts from '../../api/posts/posts.js'
+import Posts from '../components/Posts.jsx';
 
 export default class TutorDashboard extends BaseComponent {
   constructor(props) {
@@ -53,11 +53,11 @@ export default class TutorDashboard extends BaseComponent {
             <input type="submit" value="Submit" />
           </form>
         */}
-
+<div className="button-group">
 <button className="btn btn-success" onClick={this.taskFormFunc}>Create Task</button>
 <button className="btn btn-info" onClick={this.eventFormFunc}>Create Event</button>
 <button className="btn btn-warning" onClick={this.postFormFunc}>Create Post</button>
-
+</div>
       <form className="taskForm">
           <h4>Create a task</h4>
   <div className="form-group">
@@ -72,7 +72,7 @@ export default class TutorDashboard extends BaseComponent {
   </div>
 
 
-<button type="submit" className="btn btn-primary">Create task</button>
+<button type="submit" className="btn btn-success">Create task</button>
 </form>
 
 <form className="eventForm">
@@ -87,7 +87,7 @@ export default class TutorDashboard extends BaseComponent {
 <div className="form-group">
 <input type="text" className="form-control" id="where" placeholder="Where?" />
 </div>
-<button type="submit" className="btn btn-primary">Create event</button>
+<button type="submit" className="btn  btn-success">Create event</button>
 </form>
 
 <form className="postForm" onSubmit={this.insertPosts}>
@@ -95,10 +95,11 @@ export default class TutorDashboard extends BaseComponent {
 <div className="form-group">
 <input type="text" className="form-control input-lg" id="post" placeholder="What's up?" />
 </div>
-<button type="submit" className="btn btn-primary">Post</button>
+<button type="submit" className="btn btn-success">Post</button>
 </form>
 
-
+<Posts name="Shek" />
+<Posts name="Bake" />
 
 
 

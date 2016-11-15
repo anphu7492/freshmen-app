@@ -18,7 +18,11 @@ this.updateState = this.updateState.bind(this);
 updateState(e) {
 this.setState({data: 'Data updated...'})
 }
+
+
+
     render() {
+    //  var style1 = { .embedded-map-display .map-generator{max-width: 100%; max-height: 100%; background: none;} ;
         return (
             <div className="tasks">
                   <p className="eventtitle">Register at AYY - Deadline 01 September 2017
@@ -34,7 +38,8 @@ this.setState({data: 'Data updated...'})
                   <p className="instructions">Letter of Admission, Passport, RP card </p>
                   <div className="event-location">
                   </div>
-                  <Comments/>
+                  
+
             </div>
         );
     }
