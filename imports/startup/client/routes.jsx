@@ -13,6 +13,7 @@ import TutorDashboard from '../../ui/pages/TutorDashboard.jsx';
 import StudentDashboard from '../../ui/pages/StudentDashboard.jsx';
 import AddGroupPage from '../../ui/pages/coordinator/AddGroupPage.jsx';
 import AddStudentPage from '../../ui/pages/coordinator/AddStudentPage.jsx';
+import CoordinatorPageContainer from '../../ui/containers/CoordinatorPageContainer.jsx';
 
 i18n.setLocale('en');
 
