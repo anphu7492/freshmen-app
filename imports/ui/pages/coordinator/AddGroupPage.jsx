@@ -26,13 +26,15 @@ export default class AddGroupPage extends BaseComponent {
 
   render() {
     return (
-      <form className="group-new input-symbol" onSubmit={this.createGroup}>
-        <input
-          className="form-control"
-          type="text"
-          ref={(c) => { this.newGroup = c; }}
-          placeholder="Enter group name"
-        />
+      <form className="group-new" onSubmit={this.createGroup}>
+        <div className="form-group">
+          <input
+            className="form-control"
+            type="text"
+            ref={(c) => { this.newGroup = c; }}
+            placeholder="Enter group name"
+          />
+        </div>
         <button type="submit" className="btn-primary">
           Add
         </button>

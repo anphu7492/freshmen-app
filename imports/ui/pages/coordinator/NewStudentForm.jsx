@@ -88,7 +88,7 @@ export default class NewStudentForm extends BaseComponent {
     console.log(errors, this.state);
 
     return (
-      <Grid bsClass="student">
+      <Grid bsClass="student-form">
         <div className="list-errors">
           {errorMessages.map(msg => (
             <div className="list-item" key={msg}>{msg}</div>
