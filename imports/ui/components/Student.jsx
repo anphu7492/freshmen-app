@@ -15,7 +15,7 @@ export default class Student extends React.Component {
             <div className="student">
             <p className="studenttitle">Hello!</p>
                 <div className="student-image">
-                    <img src="http://userproplugin.com/userpro/wp-content/plugins/userpro/img/default_avatar_male.jpg"
+                    <img src="https://upload.wikimedia.org/wikipedia/en/7/77/EricCartman.png"
                          height="80px" width="80px" alt="Student Image"/>
                     <p className="profile-name">{user.profile.name}</p>
                     <p className="profile-school">{user.profile.major}</p>

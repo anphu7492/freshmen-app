@@ -22,10 +22,10 @@ export default class EventAcceptance extends React.Component {
     return (
         <div className="accept-reject">
         <button onClick = {this.updateState} className="btn btn-success"
-              name="button" value="YES" id="accept" type="button">Accept</button>
-        <div className="divider"/>
+              name="button" value="YES" id="accept" type="button">Going</button>
+        
         <button onClick = {this.updateState} className="btn btn-danger"
-              name="button" value="NO" id="decline" type="button">Reject</button>
+              name="button" value="NO" id="decline" type="button">Nope</button>
         </div>
     );
 }
