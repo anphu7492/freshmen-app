@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
 
+
 export default class Comments extends React.Component {
 constructor(props) {
 super(props);
