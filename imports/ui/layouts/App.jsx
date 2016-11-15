@@ -11,6 +11,7 @@ import Loading from '../components/Loading.jsx';
 import BootStrap from 'react-bootstrap';
 import TutorDashboard from '../pages/TutorDashboard.jsx'
 import Profiles from '../components/Profiles.jsx';
+import { Link } from 'react-router';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
@@ -39,7 +40,6 @@ export default class App extends React.Component {
       this.context.router.replace(`/lists/${list._id}`);
     }*/
     if (!loading && !children) {
-      console.log(Meteor.user())
       if (Meteor.user().role === 'tutor') {
         this.context.router.replace('/tutor');
       } else if (Meteor.user().role === 'coordinator') {
@@ -80,6 +80,13 @@ export default class App extends React.Component {
       key: location.pathname,
     });
 
+    const coordinatorMenu = (
+      <li>
+        <Link to="/coordinator/add-student">Add students</Link>
+        <Link to="/coordinator/add-group">Add groups</Link>
+      </li>
+    );
+
     return (
       <div>
         <div className="navibar">
@@ -89,6 +96,7 @@ export default class App extends React.Component {
                 <li><a href="#">About</a></li>
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">Contact US</a></li>
+                {!loading && user.role === 'coordinator' ? coordinatorMenu : ''}
 
               </ul>
           </div>
@@ -99,7 +107,7 @@ export default class App extends React.Component {
         <section id="menu">
           {/*<LanguageToggle />*/}
           <UserMenu user={user} logout={this.logout} />
-          {/*< ListList lists={lists}>*/}
+          <ListList lists={lists}/>
           <Profiles/>
         </section>
         {showConnectionIssue && !connected

@@ -3,7 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 import { Groups } from '../groups.js';
 
-Meteor.publishComposite('groups.query', function queryGroups(params) {
+Meteor.publish('groups.query', function queryGroups(params) {
   new SimpleSchema({
     _id: { type: String }
   }).validate(params);
@@ -13,4 +13,12 @@ Meteor.publishComposite('groups.query', function queryGroups(params) {
   return Groups.findOne({
     _id: groupId
   });
+});
+
+Meteor.publish('groups.all', function queryAllGroups() {
+  if (!this.userId) {
+    return this.ready();
+  }
+
+  return Groups.find();
 });

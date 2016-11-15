@@ -19,6 +19,8 @@ Groups.deny({
 Groups.schema = new SimpleSchema({
   name: {
     type: String,
+    index: true,
+    unique: true,
     max: 100
   },
   createdAt: {
@@ -34,7 +36,7 @@ Groups.schema = new SimpleSchema({
 
 Groups.attachSchema(Groups.schema);
 
-Group.publicFields = {
+Groups.publicFields = {
   name: 1,
   createdAt: 1
 };

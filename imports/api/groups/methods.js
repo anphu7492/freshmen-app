@@ -1,4 +1,4 @@
-import { Groups } from './groups';
+import { Groups } from './groups.js';
 import { _ } from 'meteor/underscore';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
@@ -9,18 +9,27 @@ export const insert = new ValidatedMethod({
   validate: new SimpleSchema({
     name: {type: String, unique: true}
   }).validator(),
-  run({ text }) {
-    console.log('user', this.user);
-    if (!this.user || this.user.role !== 'coordinator') {
+  run({ name }) {
+    let currentUser = Meteor.user();
+    if (!currentUser || currentUser.role !== 'coordinator') {
       throw new Meteor.Error('Unauthorized', 'You do not have permission to create group.')
     }
     const newGroup = {
-      text: text,
+      name: name,
       createdAt: new Date(),
       creator: this.userId
     };
 
-    Groups.insert(newGroup);
+    try {
+      Groups.insert(newGroup);
+    } catch(err) {
+      if (err.code === 11000) {
+        throw new Meteor.Error('Duplicate', 'Group name has been taken. Choose another name.');
+      } else {
+        throw new Meteor.Error('Server Error', 'Something went wrong.');
+      }
+    }
+
   }
 });
 

@@ -1,16 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { AccountsServer } from 'meteor/accounts-base';
 
-Accounts.validateNewUser(function(user) {
-  console.log('validate', user);
-
-  return true;
-});
-
 Accounts.onCreateUser(function(options, user) {
-  console.log('on create', options,  user);
-  console.log('user', Meteor.user());
-
   let allowedRoles = ['tutor', 'student'];
   //TODO: validate required fields
 

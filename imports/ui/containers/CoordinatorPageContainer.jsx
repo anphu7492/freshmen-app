@@ -1,11 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
-import CoordinatorDashboard from '../pages/coordinator/Dashboard.jsx';
+import CoordinatorDashboard from '../pages/coordinator/CoordinatorDashboard.jsx';
+import { Groups } from '../../api/groups/groups.js';
 
 const CoordinatorPageContainer = createContainer(() => {
-  let data = [];
+  const groupsHandle = Meteor.subscribe('groups.all');
+  const loading = !groupsHandle.ready();
+
+  const groups = Groups.find().fetch();
   return {
-    data
+    loading,
+    groups
   };
 }, CoordinatorDashboard);
 

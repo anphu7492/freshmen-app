@@ -18,3 +18,7 @@ To lint:
 ```bash
 meteor npm run lint
 ```
+
+### Useful links:
+Roles and permissions:
+https://guide.meteor.com/accounts.html#roles-and-permissions

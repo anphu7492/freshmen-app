@@ -30,6 +30,7 @@ export default class AddStudentPage extends BaseComponent {
   }
 
   render() {
+    const { groups } = this.props;
     const { errors } = this.state;
     const errorMessages = Object.keys(errors).map(key => errors[key]);
     const errorClass = key => errors[key] && 'error';
@@ -40,6 +41,7 @@ export default class AddStudentPage extends BaseComponent {
         key={index}
         submitted={this.state.submitted}
         student={student}
+        groups={groups}
       />
     ));
     return (
@@ -57,3 +59,7 @@ export default class AddStudentPage extends BaseComponent {
     )
   }
 }
+
+AddStudentPage.propTypes = {
+  groups: React.PropTypes.array
+};
