@@ -66,3 +66,4 @@ shell-server@0.2.1
 audit-argument-checks@1.0.7
 fortawesome:fontawesome
 chrismbeckett:toastr
+dburles:google-maps
