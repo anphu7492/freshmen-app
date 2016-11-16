@@ -7,6 +7,9 @@ import MobileMenu from '../components/MobileMenu.jsx';
 import { GoogleMap, Marker, SearchBox } from "react-google-maps";
 import $ from "jquery";
 import Posts from '../components/Posts.jsx';
+import Tasks from '../components/Tasks.jsx';
+import Events from '../components/Events.jsx';
+
 
 export default class TutorDashboard extends BaseComponent {
   constructor(props) {
@@ -98,7 +101,9 @@ export default class TutorDashboard extends BaseComponent {
             <button type="submit" className="btn btn-success">Post</button>
           </form>
 
-          <Posts name="Shek" />
+          <Tasks/>
+
+          <Events/>
           <Posts name="Bake" />
         </div>
       </div>

@@ -51,7 +51,7 @@ export default class AddStudentPage extends BaseComponent {
           <button type="button" className="btn-primary" onClick={this.addStudent}>
             Add
           </button>
-          <button type="submit" className="btn-primary">
+          <button type="submit" className="btn-success">
             Create
           </button>
         </form>

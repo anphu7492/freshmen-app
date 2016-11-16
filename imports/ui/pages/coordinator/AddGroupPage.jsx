@@ -42,10 +42,11 @@ export default class AddGroupPage extends BaseComponent {
             ref={(c) => { this.newGroup = c; }}
             placeholder="Enter group name"
           />
-        </div>
+
         <button type="submit" className="btn-primary">
           Add
         </button>
+        </div>
       </form>
     )
   }

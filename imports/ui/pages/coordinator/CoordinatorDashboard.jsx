@@ -1,6 +1,9 @@
 import React from 'react';
 import BaseComponent from '../../components/BaseComponent.jsx';
 import Message from '../../components/Message.jsx';
+import Tasks from '../../components/Tasks.jsx';
+import Events from '../../components/Events.jsx';
+import Posts from '../../components/Posts.jsx';
 
 export default class CoordinatorDashboard extends BaseComponent {
   constructor(props) {
@@ -21,6 +24,10 @@ export default class CoordinatorDashboard extends BaseComponent {
         {loading
           ? <Message title="Loading" />
           : childrenWithProps}
+
+          <Tasks/>
+          <Posts name="Bake" />
+          <Events/>
       </div>
     )
   }
