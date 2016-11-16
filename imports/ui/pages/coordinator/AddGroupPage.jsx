@@ -18,9 +18,17 @@ export default class AddGroupPage extends BaseComponent {
     const groupName = this.newGroup;
 
     if (groupName.value.trim()) {
+      console.log(insert.call);
       insert.call({
         name: groupName.value
-      }, displayError);
+      }, function(err) {
+        if (err) {
+          displayError(err);
+        } else {
+          toastr.success('Success', 'Group has been added');
+          groupName.value = '';
+        }
+      });
     }
   }
 

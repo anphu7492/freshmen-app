@@ -194,7 +194,9 @@
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/reporters/landing.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/hook.async.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/hook.sync.nested.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/chrismbeckett_toastr/2.1.2_1/web.browser/packages/chrismbeckett_toastr.js" />
         <item url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.3.1/web.browser/check-npm-versions.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/chrismbeckett_toastr/2.1.2_1/web.browser/packages/chrismbeckett_toastr/lib/toastr.css" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/debug.js" />
         <item url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/support/browser-entry.js" />
         <item url="file://$USER_HOME$/.meteor/packages/session/1.1.7/web.browser/session.js" />
@@ -589,7 +591,9 @@
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/reporters/landing.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/hook.async.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/test/hook.sync.nested.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/chrismbeckett_toastr/2.1.2_1/web.browser/packages/chrismbeckett_toastr.js" />
       <root url="file://$USER_HOME$/.meteor/packages/tmeasday_check-npm-versions/0.3.1/web.browser/check-npm-versions.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/chrismbeckett_toastr/2.1.2_1/web.browser/packages/chrismbeckett_toastr/lib/toastr.css" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/lib/browser/debug.js" />
       <root url="file://$USER_HOME$/.meteor/packages/practicalmeteor_mocha/2.4.5_6/web.browser/support/browser-entry.js" />
       <root url="file://$USER_HOME$/.meteor/packages/session/1.1.7/web.browser/session.js" />

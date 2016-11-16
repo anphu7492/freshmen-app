@@ -7,6 +7,6 @@ export const displayError = (error) => {
     // It would be better to not alert the error here but inform the user in some
     // more subtle way
     console.log(error);
-    alert(i18n.__(error.error)); // eslint-disable-line no-alert
+    toastr.error(error.reason || error.message, error.error); // eslint-disable-line no-alert
   }
 };
