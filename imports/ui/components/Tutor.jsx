@@ -11,9 +11,9 @@ export default class Tutor extends React.Component {
             <div className="student">
             <p className="tutortitle">Tutor info</p>
                 <div className="tutor-image">
-                <img src="http://userproplugin.com/userpro/wp-content/plugins/userpro/img/default_avatar_male.jpg"
+                <img src="https://upload.wikimedia.org/wikipedia/en/7/77/EricCartman.png"
                      height="80px" width="80px" alt="Tutor Image"/>
-                     <p className="profile-name">{user.profile.name}</p>
+                   <p className="profile-name">Tutor</p>
                      <p className="profile-school">{user.profile.major}</p>
                      <p className="profile-school">{user.profile.school}</p>
                      <img src="https://www.seeklogo.net/wp-content/uploads/2016/09/facebook-icon-preview.png"

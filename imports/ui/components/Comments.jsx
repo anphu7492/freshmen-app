@@ -25,7 +25,7 @@ export default class Comments extends React.Component {
         <textarea cols="50" className="" placeholder="Enter a comment">
 
         </textarea>
-        <button onClick = {this.updateState} className="post-button"
+        <button onClick = {this.updateState} className="btn post-button"
                 name="button" value="OK" type="button">Post</button>
       </div>
     );

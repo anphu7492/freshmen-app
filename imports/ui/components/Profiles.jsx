@@ -10,7 +10,7 @@ render() {
     return (
         <div className="profiles">
         <Student/>
-        <br/><br/><br/>
+        <br/>
         <Tutor/>
         </div>
     );

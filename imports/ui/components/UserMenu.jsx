@@ -32,7 +32,7 @@ export default class UserMenu extends BaseComponent {
           {user.profile.name}
         </a>
         {open
-          ? <a className="btn-secondary" href="/tutor">
+          ? <a className="btn-secondary" href="#">
             Profile
           </a>
           : null}

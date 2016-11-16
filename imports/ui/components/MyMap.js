@@ -3,8 +3,8 @@ import GoogleMap from '../components/GoogleMap.js';
 
 function handleMapOptions() {
   return {
-    center: new google.maps.LatLng(-37.8136, 144.9631),
-    zoom: 8,
+    center: new google.maps.LatLng(60.1845061,24.8290702),
+    zoom: 17,
   };
 }
 
@@ -20,7 +20,7 @@ function handleOnReady(name) {
 function MyMap() {
   return (
     <GoogleMap onReady={handleOnReady} mapOptions={handleMapOptions}>
-      Loading!
+      Loading Map ...
     </GoogleMap>
   );
 }

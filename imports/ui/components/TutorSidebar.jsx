@@ -9,12 +9,12 @@ export default class TutorSidebar extends BaseComponent {
       <div className="tutor-rightbar">
         <div id = "group-section">
           <h3 id ="groupName">Your group</h3>
-          <StudentCard name="Shek"/>
-          <StudentCard name="Bake"/>
-          <StudentCard name="Shek"/>
-          <StudentCard name="Bake"/>
-          <StudentCard name="Shek"/>
-          <StudentCard name="Bake"/>
+          <StudentCard name="Butters"/>
+          <StudentCard name="Stan"/>
+          <StudentCard name="Kyle"/>
+          <StudentCard name="Jimmy"/>
+          <StudentCard name="Kenny"/>
+          <StudentCard name="Eric"/>
         </div>
         <br />
         <div id = "stats-section">
