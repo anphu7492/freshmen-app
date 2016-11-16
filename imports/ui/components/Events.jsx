@@ -4,6 +4,7 @@ import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
 import Comments from '../components/Comments.jsx';
 import EventAcceptance from '../components/Accept.jsx';
+import MyMap from '../components/MyMap.js';
 
 export default class Events extends React.Component {
 constructor(props) {
@@ -29,7 +30,11 @@ this.setState({data: 'Data updated...'})
                   <p className="inlinetitle">Required documents</p>
                   <p className="instructions">None </p>
                   <div className="event-location">
-                  </div>
+                      <p className="inlinetitle">Where?</p>
+                      <MyMap />
+                    </div>
+
+
                   <EventAcceptance/>
                   <Comments/>
 

@@ -38,7 +38,8 @@ this.setState({data: 'Data updated...'})
                   <p className="inlinetitle">Required documents</p>
                   <p className="instructions">Letter of Admission, Passport, RP card </p>
                   <div className="event-location">
-                    <MyMap/>
+                    <p className="inlinetitle">Where?</p>
+                    <MyMap />
                   </div>
                   <button onClick = {this.updateState} className="btn-success close-button"
                   name="button" value="OK" type="button">Mark as Completed</button>
