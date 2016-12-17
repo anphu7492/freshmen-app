@@ -15,7 +15,7 @@ var ATLANTIC_OCEAN = {
   longitude: -55.491477
 };
 
-var Application = React.createClass({
+var EventLocator = React.createClass({
   getInitialState: function () {
     return {
       isGeocodingError: false,
@@ -140,4 +140,4 @@ var Application = React.createClass({
   }
 });
 
-module.exports = Application;
+module.exports = EventLocator;
