@@ -43,13 +43,16 @@ export default class NewStudentForm extends BaseComponent {
     const errors = {};
 
     if (!email) {
-      errors.email = i18n.__('pages.authPageJoin.emailRequired');
+      errors.email = "Email required";
     }
     if (!password) {
-      errors.password = i18n.__('pages.authPageJoin.passwordRequired');
+      errors.password = "Password required";
     }
     if (confirm !== password) {
-      errors.confirm = i18n.__('pages.authPageJoin.passwordConfirm');
+      errors.confirm = "Confirmed password doesn't match";
+    }
+    if (!role) {
+      errors.role = "Role required";
     }
 
     this.setState({ errors });
@@ -66,7 +69,6 @@ export default class NewStudentForm extends BaseComponent {
       role: role
     }, (err) => {
       if (err) {
-        console.log('err', err);
         this.setState({
           errors: { none: err.reason },
         });

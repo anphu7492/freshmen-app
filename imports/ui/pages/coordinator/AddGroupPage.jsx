@@ -8,7 +8,7 @@ export default class AddGroupPage extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = Object.assign(this.state, {
-
+      errors: {}
     });
     this.createGroup = this.createGroup.bind(this);
   }
@@ -21,7 +21,7 @@ export default class AddGroupPage extends BaseComponent {
       console.log(insert.call);
       insert.call({
         name: groupName.value
-      }, function(err) {
+      }, (err) => {
         if (err) {
           displayError(err);
         } else {
@@ -29,12 +29,24 @@ export default class AddGroupPage extends BaseComponent {
           groupName.value = '';
         }
       });
+    } else {
+      this.setState({
+        errors: {none: "Group name is required"}
+      });
     }
   }
 
   render() {
+    const { errors } = this.state;
+    const errorMessages = Object.keys(errors).map(key => errors[key]);
+
     return (
       <form className="group-new" onSubmit={this.createGroup}>
+        <div className="list-errors">
+          {errorMessages.map(msg => (
+            <div className="list-item" key={msg}>{msg}</div>
+          ))}
+        </div>
         <div className="form-group">
           <input
             className="form-control"
