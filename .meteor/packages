@@ -67,3 +67,5 @@ audit-argument-checks@1.0.7
 fortawesome:fontawesome
 chrismbeckett:toastr
 dburles:google-maps
+cfs:standard-packages
+cfs:gridfs

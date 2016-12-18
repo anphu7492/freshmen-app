@@ -11,6 +11,10 @@ export const createUserFromCoordinator = new ValidatedMethod({
     'profile.name': {type: String},
     'profile.school': {type: String},
     'profile.major': {type: String},
+    'profile.photo': {type: String},
+    'profile.facebook': {type: String},
+    'profile.twitter': {type: String},
+    'profile.phone': {type: String},
     group: {type: String},
     role: {type: String}
   }).validator(),
