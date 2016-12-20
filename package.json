@@ -14,7 +14,7 @@
     "classnames": "^2.2.5",
     "core-js": "^2.4.1",
     "faker": "^3.1.0",
-    "google-map-react": "^0.21.3",
+    "google-map-react": "^0.21.5",
     "jquery": "^3.1.1",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.3.1",
@@ -23,6 +23,8 @@
     "react-dom": "^15.4.1",
     "react-dropzone": "^3.7.3",
     "react-google-maps": "^4.11.0",
+    "react-places-autocomplete": "^2.3.2",
+    "react-pure-render": "^1.0.2",
     "react-router": "^2.8.1",
     "superagent": "^3.3.0"
   },

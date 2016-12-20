@@ -4,6 +4,7 @@ import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
 import Comments from '../components/Comments.jsx';
 import MyMap from '../components/MyMap.js';
+import PinEventLocation from '../components/PinEventLocation.jsx';
 
 export default class Tasks extends React.Component {
 constructor(props) {
@@ -39,7 +40,9 @@ this.setState({data: 'Data updated...'})
                   <p className="instructions">Letter of Admission, Passport, RP card </p>
                   <div className="event-location">
                     <p className="inlinetitle">Where?</p>
-                    <MyMap />
+                    <div ClassName="mapdiv">
+                      <PinEventLocation longitude="60.1867" latitude="24.8277"/>
+                      </div>
                   </div>
                   <button onClick = {this.updateState} className="btn-success close-button"
                   name="button" value="OK" type="button">Mark as Completed</button>
