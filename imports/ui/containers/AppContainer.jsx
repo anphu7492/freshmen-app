@@ -10,7 +10,8 @@ export default createContainer(() => {
   const publicHandle = Meteor.subscribe('lists.public');
   const privateHandle = Meteor.subscribe('lists.private');
   const userHandle = Meteor.subscribe('userData');
-
+  const allUserData = Meteor.subscribe('allUserData');
+  const imageData = Meteor.subscribe('images');
   return {
     user: Meteor.user(),
     loading: !(publicHandle.ready() && privateHandle.ready() && userHandle.ready()),

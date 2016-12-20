@@ -8,3 +8,4 @@ import '../../api/users/user.js';
 import '../../api/users/server/publications.js';
 import '../../api/groups/methods.js';
 import '../../api/groups/server/publications.js';
+import '../../api/images/server/publications.js';

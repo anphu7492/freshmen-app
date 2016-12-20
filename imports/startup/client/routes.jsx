@@ -14,7 +14,7 @@ import StudentDashboard from '../../ui/pages/StudentDashboard.jsx';
 import AddGroupPage from '../../ui/pages/coordinator/AddGroupPage.jsx';
 import AddStudentPage from '../../ui/pages/coordinator/AddStudentPage.jsx';
 import CoordinatorPageContainer from '../../ui/containers/CoordinatorPageContainer.jsx';
-
+import ProfilePage from '../../ui/pages/ProfilePage.jsx';
 i18n.setLocale('en');
 
 function requireAuth(nextState, replace) {
@@ -34,9 +34,11 @@ export const renderRoutes = () => (
       <Route path="tutor" component={TutorDashboard} />
       <Route path="lists/:id" component={ListPageContainer} />
       <Route path="student" component={StudentDashboard} />
+      <Route path="/profile/:id" component={ProfilePage}/>
       <Route path="coordinator" component={CoordinatorPageContainer}>
         <Route path="add-group" component={AddGroupPage}/>
         <Route path="add-student" component={AddStudentPage}/>
+
       </Route>
     </Route>
     <Route path="*" component={NotFoundPage} />
