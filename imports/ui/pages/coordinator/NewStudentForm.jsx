@@ -34,6 +34,10 @@ export default class NewStudentForm extends BaseComponent {
     profile.name = student.name.value;
     profile.school = student.school.value;
     profile.major = student.major.value;
+    profile.facebook = "unset";
+    profile.photo = "unset";
+    profile.twitter = "unset";
+    profile.phone = "unset";
     const group = student.group;
     const role = student.role;
     const errors = {};

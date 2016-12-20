@@ -22,7 +22,7 @@ export default class UserMenu extends BaseComponent {
     const { user, logout } = this.props;
     const email = user.emails[0].address;
     const emailLocalPart = email.substring(0, email.indexOf('@'));
-
+ const profileLink = "/profile/" + user._id;
     return (
       <div className="user-menu vertical">
         <a href="#toggle" className="btn-secondary" onClick={this.toggle}>
@@ -32,7 +32,7 @@ export default class UserMenu extends BaseComponent {
           {user.profile.name}
         </a>
         {open
-          ? <a className="btn-secondary" href="#">
+          ? <a className="btn-secondary" href={profileLink}>
             Profile
           </a>
           : null}
