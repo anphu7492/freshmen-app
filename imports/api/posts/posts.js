@@ -31,19 +31,85 @@ Posts.deny({
 });
 */
 
+EventSchema = new SimpleSchema({
+  location: {
+    type: String,
+    max: 100
+  },
+  time: {
+    type: Date
+  },
+  going: [{
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  }],
+  notGoing: [{
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  }],
+  maybe: [{
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  }],
+});
+
+TaskSchema = new SimpleSchema({
+  task: [{
+    type: String,
+    max: 300
+  }],
+  assignees: [{
+    user: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    },
+    status: {
+      type: String,
+      allowedValues: ['ongoing', 'completed']
+    }
+  }]
+});
+
+CommentSchema = new SimpleSchema({
+  content: {
+    type: String,
+    max: 1000
+  },
+  creator: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  },
+  created: {
+    type: Date,
+    defaultValue: Date.now
+  }
+});
 
 Posts.schema = new SimpleSchema({
-  postId: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Id,
-    denyUpdate: true,
-  },
   text: {
     type: String,
     max: 1000,
+    optional: true
+  },
+  event: {
+    type: EventSchema
+  },
+  task: {
+    type: TaskSchema
+  },
+  group: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
+  },
+  creator: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    denyUpdate: true
   },
   createdAt: {
     type: Date,
+    defaultValue: Date.now,
     denyUpdate: true,
   },
 });
@@ -51,16 +117,15 @@ Posts.schema = new SimpleSchema({
 Posts.attachSchema(Posts.schema);
 
 Posts.publicFields = {
-  postId: 1,
   text: 1,
+  event: 1,
+  task: 1,
+  group: 1,
+  creator: 1,
   createdAt: 1,
 };
 
-Factory.define('post', Posts, {
-  postId: () => Factory.get('post'),
-  text: () => faker.lorem.sentence(),
-  createdAt: () => new Date(),
-});
+Factory.define('post', Posts, {});
 
 Posts.helpers({
   post() {
