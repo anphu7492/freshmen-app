@@ -12,10 +12,8 @@ class PinEventLocation extends React.Component {
         if (status === google.maps.GeocoderStatus.OK) {
           this.setState({ lng : results[0].geometry.location.lng() });
           this.setState({ lat : results[0].geometry.location.lat() });
-          console.log(this.state.lat)
          }
         }.bind(this));
-      console.log(this.state.lat)
       this.map = new google.maps.Map(this.refs.map, {
       center: new google.maps.LatLng(this.state.lng,this.state.lat),
       zoom: 17
