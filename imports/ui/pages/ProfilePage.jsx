@@ -12,7 +12,7 @@ constructor(props){
   super(props);
   var id = this.props.params.id.trim();
   var userss = Meteor.users.find().fetch();
-
+  const imageData = Meteor.subscribe('images');
   console.log(userss);
  // const uname = userss.find(_id)
    //console.log(Meteor.users.find().fetch());
@@ -116,9 +116,11 @@ onImageDrop(files) {
     this.handleImageUpload(files[0]);
 }
 
-handleImageUpload(file) {
+handleImageUpload() {
 console.log('In handle upload');
-      FS.Utility.eachFile(event, function(file) {
+var file = document.querySelector('input[type=file]').files[0];
+console.log(file);
+
         Images.insert(file, function (err, fileObj) {
 
           if (err){
@@ -126,12 +128,14 @@ console.log('In handle upload');
           } else {
              // handle success depending what you need to do
             var userId = Meteor.userId();
+            console.log(file);
+            console.log("uploaded image");
             var imagesURL = {
               'profile.photo': '/cfs/files/images/' + fileObj._id
             };
             Meteor.users.update(userId, {$set: imagesURL});
           }
-        });
+        
      });
   }
 
@@ -154,7 +158,7 @@ render(){
   return (<div id="profile-page">
   <img className="profile-pic" src={this.state.photo}
         alt="Profile photo"/><br />
-      <button style={{display:this.state.notEditable}} className="btn btn-success">Edit photo</button>
+      <input type="file" name="photo" onChange={this.handleImageUpload}/>
       <h3>{this.state.name}</h3>
   <p>{this.state.role}</p>
   <p>{this.state.major}, {this.state.school}</p>

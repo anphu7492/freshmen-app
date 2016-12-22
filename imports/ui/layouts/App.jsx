@@ -127,7 +127,7 @@ export default class App extends React.Component {
 
         </div>
         <div id="right-sidebar">
-          {user && user.role === 'tutor'
+          {user && (user.role === 'tutor' || user.role === 'student') 
             ? <TutorSidebar/>
             : ''
           }
