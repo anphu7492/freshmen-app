@@ -41,7 +41,7 @@ this.setState({data: 'Data updated...'})
                   <div className="event-location">
                     <p className="inlinetitle">Where?</p>
                     <div ClassName="mapdiv">
-                      <PinEventLocation longitude="60.1867" latitude="24.8277"/>
+                      <PinEventLocation address="delhi, india"/>
                       </div>
                   </div>
                   <button onClick = {this.updateState} className="btn-success close-button"
