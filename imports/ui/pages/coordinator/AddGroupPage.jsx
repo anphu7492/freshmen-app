@@ -25,7 +25,7 @@ export default class AddGroupPage extends BaseComponent {
         if (err) {
           displayError(err);
         } else {
-          toastr.success('Success', 'Group has been added');
+          toastr.success('Group has been added', 'Success');
           groupName.value = '';
         }
       });
