@@ -4,7 +4,7 @@ import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
 import Comments from '../components/Comments.jsx';
 import EventAcceptance from '../components/Accept.jsx';
-import PinEventLocation from '../components/PinEventLocation.jsx';
+import Locator from '../components/Locator.jsx';
 
 export default class Events extends React.Component {
 constructor(props) {
@@ -31,7 +31,7 @@ this.setState({data: 'Data updated...'})
                   <p className="instructions">None </p>
                   <div className="event-location">
                       <p className="inlinetitle">Where?</p>
-                      <PinEventLocation address="Aalto university, 02150 Espoo, Finland"/>
+                      <Locator address="Helsinki, Finland"/>
                     </div>
                   <EventAcceptance/>
                   <Comments/>

@@ -42,7 +42,7 @@ this.setState({data: 'Data updated...'})
                     <p className="inlinetitle">Where?</p>
                     <div ClassName="mapdiv">
                       <Locator address="Helsinki, Finland"/>
-                      </div>
+                    </div>
                   </div>
                   <button onClick = {this.updateState} className="btn-success close-button"
                   name="button" value="OK" type="button">Mark as Completed</button>

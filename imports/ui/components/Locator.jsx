@@ -76,9 +76,7 @@ var Locator = React.createClass({
     });
 
     this.geocoder = new google.maps.Geocoder();
-    var address = "Stockholm, Sweden";
-    console.log(this.props.address);
-    this.geocodeAddress(address);
+    this.geocodeAddress(this.props.address);
   },
   setMapElementReference: function (mapElementReference) {
     this.mapElement = mapElementReference;
