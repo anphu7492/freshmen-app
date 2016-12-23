@@ -10,7 +10,7 @@ import Loading from '../components/Loading.jsx';
 import Profiles from '../components/Profiles.jsx';
 import { Link } from 'react-router';
 import TutorSidebar from '../components/TutorSidebar.jsx';
-
+import StudentSidebar from '../components/StudentSidebar.jsx';
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
 export default class App extends React.Component {
@@ -129,6 +129,10 @@ export default class App extends React.Component {
         <div id="right-sidebar">
           {user && (user.role === 'tutor' || user.role === 'student') 
             ? <TutorSidebar/>
+            : ''
+          }
+          {user && user.role === 'student'
+            ? <StudentSidebar/>
             : ''
           }
         </div>

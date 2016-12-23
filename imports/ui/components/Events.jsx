@@ -4,7 +4,7 @@ import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
 import Comments from '../components/Comments.jsx';
 import EventAcceptance from '../components/Accept.jsx';
-import MyMap from '../components/MyMap.js';
+import Locator from '../components/Locator.jsx';
 
 export default class Events extends React.Component {
 constructor(props) {
@@ -31,10 +31,8 @@ this.setState({data: 'Data updated...'})
                   <p className="instructions">None </p>
                   <div className="event-location">
                       <p className="inlinetitle">Where?</p>
-                      <MyMap />
+                      <Locator address="Helsinki, Finland"/>
                     </div>
-
-
                   <EventAcceptance/>
                   <Comments/>
 
