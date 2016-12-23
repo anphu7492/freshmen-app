@@ -38,7 +38,6 @@ constructor(props){
    this.state.emails = userObj[0].emails[0].address;
    this.handleEdit = this.handleEdit.bind(this);
    this.handleImageUpload = this.handleImageUpload.bind(this);
-   this.onImageDrop = this.onImageDrop.bind(this);
    this.handlePhoneChange = this.handlePhoneChange.bind(this);
    this.handleFacebookChange = this.handleFacebookChange.bind(this);
    this.handleTwitterChange = this.handleTwitterChange.bind(this);
@@ -108,35 +107,35 @@ document.getElementById("cancelform").setAttribute("style","display:none");
 }
 
 
-onImageDrop(files) {
-    this.setState({
-      uploadedFile: files[0]
-    });
-    console.log('In imagedrop');
-    this.handleImageUpload(files[0]);
-}
-
 handleImageUpload() {
 console.log('In handle upload');
-var file = document.querySelector('input[type=file]').files[0];
-console.log(file);
+var files = document.querySelector('input[type=file]').files;
+console.log(files);
+var picLink = this.state.photo;
+$.cloudinary.config({
+cloud_name: 'aalto',
+});
 
-        Images.insert(file, function (err, fileObj) {
+Cloudinary.upload(files, {}, function(err, result)  {
+  if (err){
+    console.log(err);
+    return;
+  }
+  console.log(result);
+  var userId = Meteor.userId();
+  picLink = result.secure_url;
+  var imagesURL = {
+    'profile.photo': picLink
+  };
+  Meteor.users.update(userId, {$set: imagesURL});
 
-          if (err){
-             console.log(err);
-          } else {
-             // handle success depending what you need to do
-            var userId = Meteor.userId();
-            console.log(file);
-            console.log("uploaded image");
-            var imagesURL = {
-              'profile.photo': '/cfs/files/images/' + fileObj._id
-            };
-            Meteor.users.update(userId, {$set: imagesURL});
-          }
-        
-     });
+});
+     setTimeout(() => {
+       this.setState({
+         photo: picLink
+       });
+    },2000);
+
   }
 
 componentWillMount() {
@@ -158,7 +157,8 @@ render(){
   return (<div id="profile-page">
   <img className="profile-pic" src={this.state.photo}
         alt="Profile photo"/><br />
-      <input type="file" name="photo" onChange={this.handleImageUpload}/>
+      <label className="btn btn-success" id="pic-label" htmlFor="pic-selector">Change photo</label>
+      <input id="pic-selector"  type="file" name="photo" onChange={this.handleImageUpload}/>
       <h3>{this.state.name}</h3>
   <p>{this.state.role}</p>
   <p>{this.state.major}, {this.state.school}</p>
