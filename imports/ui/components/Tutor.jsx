@@ -16,10 +16,10 @@ export default class Tutor extends React.Component {
                    <p className="profile-name">Tutor</p>
                      <p className="profile-school">{user.profile.major}</p>
                      <p className="profile-school">{user.profile.school}</p>
-                     <img src="https://www.seeklogo.net/wp-content/uploads/2016/09/facebook-icon-preview.png"
-                               height="40px" width="40px" alt="Facebook"/>
-                     <img src="https://www.seeklogo.net/wp-content/uploads/2015/09/twitter-icon-circle-logo.png"
-                               height="38px" width="38px" alt="Twitter"/>
+                     <a href={user.profile.facebook}><img src="https://www.seeklogo.net/wp-content/uploads/2016/09/facebook-icon-preview.png"
+                               height="40px" width="40px" alt="Facebook" target="_blank"/></a>
+                     <a href={user.profile.twitter}><img src="https://www.seeklogo.net/wp-content/uploads/2015/09/twitter-icon-circle-logo.png"
+                               height="38px" width="38px" alt="Twitter" target="_blank"/></a>
                 </div>
             </div>
         );
