@@ -54,7 +54,7 @@ EventSchema = new SimpleSchema({
 });
 
 TaskSchema = new SimpleSchema({
-  task: [{
+  todos: [{
     type: String,
     max: 300
   }],
@@ -86,16 +86,26 @@ CommentSchema = new SimpleSchema({
 });
 
 Posts.schema = new SimpleSchema({
+  type: {
+    type: String,
+    allowedValues: ['simple', 'event', 'task']
+  },
   text: {
     type: String,
     max: 1000,
     optional: true
   },
   event: {
-    type: EventSchema
+    type: EventSchema,
+    optional: true
   },
   task: {
-    type: TaskSchema
+    type: TaskSchema,
+    optional: true
+  },
+  comments: {
+    type: [CommentSchema],
+    defaultValue: []
   },
   group: {
     type: String,
@@ -120,6 +130,7 @@ Posts.publicFields = {
   text: 1,
   event: 1,
   task: 1,
+  comments: 1,
   group: 1,
   creator: 1,
   createdAt: 1,

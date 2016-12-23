@@ -9,6 +9,7 @@ import $ from "jquery";
 import Posts from '../components/Posts.jsx';
 import Tasks from '../components/Tasks.jsx';
 import Events from '../components/Events.jsx';
+import PostCreate from '../components/post-create/PostCreate';
 
 
 export default class TutorDashboard extends BaseComponent {
@@ -46,6 +47,7 @@ export default class TutorDashboard extends BaseComponent {
 
       <div className="tutor-dashboard">
         <div className ="tutor-main">
+          <PostCreate></PostCreate>
           {/*     <form className="createTask">
            Task name -
            <input type="text" name="taskname" /><br />
