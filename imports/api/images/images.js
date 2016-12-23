@@ -3,7 +3,7 @@ import { Factory } from 'meteor/factory';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Meteor } from 'meteor/meteor';
 
-var imageStore = new FS.Store.GridFS('profile-pic');
+var imageStore = new FS.Store.GridFS('images');
 
 export const Images = new FS.Collection('images', {
  stores: [imageStore]
