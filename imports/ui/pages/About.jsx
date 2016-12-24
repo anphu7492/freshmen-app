@@ -12,7 +12,7 @@ export default class About extends BaseComponent {
                     <h1 id="about-title">&nbsp; &nbsp;About Freshmen Guide</h1>
                     <p id="description">A Student , A Tutor , A Study Corordinator</p>
                     &nbsp;
-                    <p id="content">Freshmen Guide is a service designed to relieve the stress of the orientation week on newly enrolled students. It aims at providing a one-stop solution to all the guidance a new student might need during the orientation week.</p>
+                    <p id="content"><b>Freshmen Guide</b> is a service designed to relieve the stress of the orientation week on newly enrolled students. It aims at providing a one-stop solution to all the guidance a new student might need during the orientation week.</p>
                 </div>
                 &nbsp;
                 <div className="contributors">
