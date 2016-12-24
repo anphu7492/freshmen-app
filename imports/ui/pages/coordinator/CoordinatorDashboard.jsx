@@ -13,7 +13,7 @@ export default class CoordinatorDashboard extends BaseComponent {
 
   render() {
     const { loading, groups } = this.props;
-    console.log(groups);
+    
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
         groups: groups
