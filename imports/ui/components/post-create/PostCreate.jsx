@@ -24,24 +24,39 @@ export default class PostCreate extends BaseComponent {
   }
 
   onCreateTask() {
-    if (this.post.type === 'task') {
+    if (this.state.post.type === 'task') {
       return;
     }
-    this.post.type = 'task';
-    this.post.event = null;
-    this.post.task = {
+    const {post} = this.state;
+
+    post.type = 'task';
+    post.event = null;
+    post.task = {
       todos: [],
       assignees: [{}]
-    }
+    };
+
+    this.setState({
+      post: post
+    });
   }
 
   onCreateEvent() {
     if (this.state.post.type === 'event') {
       return;
     }
-    this.state.post.type = 'event';
-    this.state.post.task = null;
-    this.state.post.event = {}
+    const {post} = this.state;
+
+    post.type = 'event';
+    post.task = null;
+    post.event = {
+      location: '',
+      time: null
+    };
+
+    this.setState({
+      post: post
+    });
   }
 
   renderTasksBox() {
@@ -66,13 +81,15 @@ export default class PostCreate extends BaseComponent {
 
   render() {
     const { post } = this.state;
+    console.log(post);
 
     return (
       <div className="post-box">
         <form className="post-create" onSubmit={this.onPostCreate}>
           <textarea
             name="content"
-            className="text form-control" ref={(c) => {post.content = c}}>
+            className="text form-control"
+            ref={(c) => {post.content = c}}>
           </textarea>
           {post.type === 'task' ?
             this.renderTasksBox() :

@@ -41,7 +41,7 @@ export default class Tasks extends React.Component {
         <div className="event-location">
           <p className="inlinetitle">Where?</p>
           <div className="mapdiv">
-            <Locator address="Helsinki, Finland"/>
+            <Locator address="Kilonkallio 10, Finland"/>
           </div>
         </div>
         <button onClick = {this.updateState} className="btn-success close-button"
