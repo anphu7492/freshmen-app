@@ -93,9 +93,9 @@ export default class App extends React.Component {
           <div className="container-fluid">
               <ul className="navibar-nav">
                 <li><a className="site-title" href="/">Freshmen Guide</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Contact US</a></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/faq">FAQ</Link></li>
+                <li><Link to="/contact-us">Contact US</Link></li>
                 {!loading && user.role === 'coordinator' ? coordinatorMenu : ''}
 
               </ul>
