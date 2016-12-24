@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
 import {findUser} from '../../api/users/methods.js';
-import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import Images from '../../api/images/images.js';
 

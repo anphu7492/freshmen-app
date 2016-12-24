@@ -40,7 +40,7 @@ this.setState({data: 'Data updated...'})
                   <p className="instructions">Letter of Admission, Passport, RP card </p>
                   <div className="event-location">
                     <p className="inlinetitle">Where?</p>
-                    <div ClassName="mapdiv">
+                    <div className="mapdiv">
                       <Locator address="Helsinki, Finland"/>
                     </div>
                   </div>
