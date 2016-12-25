@@ -1,8 +1,10 @@
 import React from 'react';
+import { Random } from 'meteor/random';
 import BaseComponent from '../BaseComponent.jsx';
+import update from 'immutability-helper';
 
 import {
-
+  insert
 } from '../../../api/posts/methods';
 
 export default class PostCreate extends BaseComponent {
@@ -16,28 +18,68 @@ export default class PostCreate extends BaseComponent {
     this.onPostCreate = this.onPostCreate.bind(this);
     this.onCreateTask = this.onCreateTask.bind(this);
     this.onCreateEvent = this.onCreateEvent.bind(this);
+    this.onAddTask = this.onAddTask.bind(this);
+    this.onRemoveTask = this.onRemoveTask.bind(this);
   }
 
   onPostCreate(event) {
     event.preventDefault();
-    console.log(this.post);
+    console.log(this.state.post);
+    const { post } = this.state;
+    let newPost = {
+      type: post.type,
+      text: post.text.value
+    };
+    console.log(newPost);
+    insert.call({
+      type: newPost.type,
+      text: newPost.text
+    })
   }
 
   onCreateTask() {
     if (this.state.post.type === 'task') {
       return;
     }
-    const {post} = this.state;
+    let { post } = this.state;
 
     post.type = 'task';
     post.event = null;
     post.task = {
-      todos: [],
+      todos: [
+        {id: Random.id(), text: 'Enter a task'}
+      ],
       assignees: [{}]
     };
 
     this.setState({
       post: post
+    });
+  }
+
+  onAddTask() {
+    if (this.state.post.type !== 'task') {
+      return;
+    }
+
+    const { post } = this.state;
+    post.task.todos.push({id: Random.id(), text: ''});
+
+    this.setState({
+      post: post
+    });
+  }
+
+  onRemoveTask(index) {
+    console.log(index);
+    if (this.state.post.type !== 'task') {
+      return;
+    }
+
+    this.setState({
+      post: update(this.state.post, {
+        task: {todos: {$splice: [[index,1]]}}
+      })
     });
   }
 
@@ -47,34 +89,62 @@ export default class PostCreate extends BaseComponent {
     }
     const {post} = this.state;
 
-    post.type = 'event';
+    /*post.type = 'event';
     post.task = null;
     post.event = {
       location: '',
       time: null
-    };
+    };*/
 
     this.setState({
-      post: post
+      post: update(this.state.post, {
+        type: {$set: 'event'},
+        task: {$set: null},
+        event: {$set: {
+          location: '',
+          time: null
+        }}
+      })
     });
   }
 
   renderTasksBox() {
     const { post } = this.state;
-
+    let items = post.task.todos.map((todo, index) => {
+      return (
+        <div key={todo.id} className="row">
+          <div className="col-sm-10">
+            <input type="text"
+                   className="form-control"
+                   ref={(c) => {todo.text = c}}
+                   placeholder="Enter a task"/>
+          </div>
+          {index > 0
+            ? <i className="icon-close col-sm-2"
+                 onClick={() => this.onRemoveTask(index)}></i>
+            : null}
+        </div>
+      );
+    });
     return (
       <div className="post-task">
-        task area
+        {items}
+        <button className="btn" type="button" onClick={this.onAddTask}>Add task</button>
       </div>
     )
   }
 
   renderEventBox() {
     const { post } = this.state;
-
+    console.log(post);
     return (
       <div className="post-event">
-        event area
+        <input className="location form-control"
+               type="text"
+               ref={(c) => { post.event ? post.event.location = c : null}}/>
+        <input className="date form-control"
+               type="text"
+               ref={(c) => { post.event ? post.event.time = c : null}}/>
       </div>
     )
   }
@@ -87,24 +157,24 @@ export default class PostCreate extends BaseComponent {
       <div className="post-box">
         <form className="post-create" onSubmit={this.onPostCreate}>
           <textarea
-            name="content"
+            name="text"
             className="text form-control"
-            ref={(c) => {post.content = c}}>
+            ref={(c) => {post.text = c}}>
           </textarea>
           {post.type === 'task' ?
             this.renderTasksBox() :
             post.type === 'event' ? this.renderEventBox() : ''}
           <div className="post-types row">
             <div className="col-sm-10">
-              <button className="btn" onClick={this.onCreateTask}>
+              <button className="btn" type="button" onClick={this.onCreateTask}>
                 Task
               </button>
-              <button className="btn" onClick={this.onCreateEvent}>
+              <button className="btn" type="button" onClick={this.onCreateEvent}>
                 Event
               </button>
             </div>
             <div className="col-sm-2">
-              <button className="btn submit">Post</button>
+              <button className="btn submit" type="submit">Post</button>
             </div>
           </div>
         </form>

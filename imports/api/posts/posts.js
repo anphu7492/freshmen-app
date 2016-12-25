@@ -4,7 +4,7 @@ import faker from 'faker';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 
-class PostsCollection extends Mongo.Collection{
+class PostsCollection extends Mongo.Collection {
   insert(doc, callback) {
     const ourDoc = doc;
     ourDoc.createdAt = ourDoc.createdAt || new Date();
@@ -23,13 +23,11 @@ class PostsCollection extends Mongo.Collection{
 }
 
 export const Posts = new PostsCollection('Posts');
-/*
 Posts.deny({
   insert() { return true; },
   update() { return true; },
   remove() { return true; },
 });
-*/
 
 EventSchema = new SimpleSchema({
   location: {
@@ -39,35 +37,37 @@ EventSchema = new SimpleSchema({
   time: {
     type: Date
   },
-  going: [{
-    type: String,
+  going: {
+    type: [String],
     regEx: SimpleSchema.RegEx.Id
-  }],
-  notGoing: [{
-    type: String,
+  },
+  notGoing: {
+    type: [String],
     regEx: SimpleSchema.RegEx.Id
-  }],
-  maybe: [{
-    type: String,
+  },
+  maybe: {
+    type: [String],
     regEx: SimpleSchema.RegEx.Id
-  }],
+  }
 });
 
 TaskSchema = new SimpleSchema({
-  todos: [{
-    type: String,
+  todos: {
+    type: [String],
     max: 300
-  }],
-  assignees: [{
-    user: {
-      type: String,
-      regEx: SimpleSchema.RegEx.Id
-    },
-    status: {
-      type: String,
-      allowedValues: ['ongoing', 'completed']
-    }
-  }]
+  },
+  assignees: {
+    type: [Object],
+    maxCount: 20
+  },
+  "assignees.$.user": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  },
+  "assignees.$.status": {
+    type: String,
+    allowedValues: ['ongoing', 'completed']
+  }
 });
 
 CommentSchema = new SimpleSchema({
@@ -136,6 +136,7 @@ Posts.publicFields = {
   createdAt: 1,
 };
 
+/*
 Factory.define('post', Posts, {});
 
 Posts.helpers({
@@ -146,3 +147,4 @@ Posts.helpers({
     return this.editableBy(userId);
   },
 });
+*/
