@@ -13,9 +13,15 @@ export default createContainer(() => {
   const allUserData = Meteor.subscribe('allUserData');
   const imageData = Meteor.subscribe('images');
   const groupsHandle = Meteor.subscribe('groups.all');
+  const postHandle = Meteor.subscribe('posts.query');
   return {
     user: Meteor.user(),
-    loading: !(publicHandle.ready() && privateHandle.ready() && userHandle.ready() &&groupsHandle.ready()),
+    loading: !(
+      publicHandle.ready() &&
+      privateHandle.ready() &&
+      userHandle.ready() &&
+      groupsHandle.ready() &&
+      postHandle.ready()),
     connected: Meteor.status().connected,
     menuOpen: Session.get('menuOpen'),
     lists: Lists.find({ $or: [
