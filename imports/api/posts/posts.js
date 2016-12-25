@@ -14,7 +14,7 @@ class PostsCollection extends Mongo.Collection {
   }
 }
 
-export const Posts = new PostsCollection('Olala');
+export const Posts = new PostsCollection('Posts');
 
 Posts.deny({
   insert() { return true; },
@@ -22,7 +22,7 @@ Posts.deny({
   // remove() { return true; },
 });
 
-/*EventSchema = new SimpleSchema({
+EventSchema = new SimpleSchema({
   location: {
     type: String,
     max: 100
@@ -76,9 +76,9 @@ CommentSchema = new SimpleSchema({
     type: Date,
     defaultValue: Date.now
   }
-});*/
+});
 
-/*Posts.schema = new SimpleSchema({
+Posts.schema = new SimpleSchema({
   type: {
     type: String,
     allowedValues: ['simple', 'event', 'task']
@@ -115,33 +115,12 @@ CommentSchema = new SimpleSchema({
     defaultValue: Date.now,
     denyUpdate: true,
   },
-});*/
-
-Posts.schema = new SimpleSchema({
-  type: {
-    type: String,
-    // allowedValues: ['simple', 'event', 'task']
-  },
-  text: {
-    type: String,
-    max: 1000,
-    optional: true
-  },
-  creator: {
-    type: String,
-    // regEx: SimpleSchema.RegEx.Id,
-    // denyUpdate: true
-  },
-  createdAt: {
-    type: Date,
-    // defaultValue: Date.now,
-    // denyUpdate: true,
-  }
 });
+
 
 Posts.attachSchema(Posts.schema);
 
-/*Posts.publicFields = {
+Posts.publicFields = {
   type: 1,
   text: 1,
   event: 1,
@@ -150,17 +129,10 @@ Posts.attachSchema(Posts.schema);
   group: 1,
   creator: 1,
   createdAt: 1
-};*/
-Posts.publicFields = {
-  type: 1,
-  text: 1,
-  creator: 1,
-  createdAt: 1
 };
 
-// Factory.define('post', Posts, {});
+Factory.define('post', Posts, {});
 
-/*
 Posts.helpers({
   post() {
     return Posts.find({});
@@ -169,4 +141,3 @@ Posts.helpers({
     return this.editableBy(userId);
   },
 });
-*/

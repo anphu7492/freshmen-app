@@ -10,11 +10,11 @@ export const insert = new ValidatedMethod({
   validate: new SimpleSchema({
     type: {
       type: String,
-      // allowedValues: ['simple', 'event', 'task']
+      allowedValues: ['simple', 'event', 'task']
     },
     text: {
       type: String,
-      // max: 1000
+      max: 1000
     }
   }).validator(),
   run({ type, text }) {
