@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 // XXX: Session
 import { Session } from 'meteor/session';
 import { createContainer } from 'meteor/react-meteor-data';
-
+import { Groups } from '../../api/groups/groups.js';
 import { Lists } from '../../api/lists/lists.js';
 import App from '../layouts/App.jsx';
 
@@ -15,7 +15,9 @@ export default createContainer(() => {
   const groupsHandle = Meteor.subscribe('groups.all');
   return {
     user: Meteor.user(),
-    loading: !(publicHandle.ready() && privateHandle.ready() && userHandle.ready() &&groupsHandle.ready()),
+    groups: Groups.find().fetch(),
+    users: Meteor.users.find().fetch(),
+    loading: !(publicHandle.ready() && privateHandle.ready() && userHandle.ready() &&groupsHandle.ready() && allUserData.ready()),
     connected: Meteor.status().connected,
     menuOpen: Session.get('menuOpen'),
     lists: Lists.find({ $or: [

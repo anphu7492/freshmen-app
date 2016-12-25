@@ -6,8 +6,7 @@ import BaseComponent from '../components/BaseComponent.jsx';
 export default class Student extends React.Component {
   constructor(props) {
     super(props);
-    const { user } = this.props;
-    console.log("in cons"+ user);
+
   /*  var id = Meteor.userId();
     var userss = Meteor.users.find().fetch();
     var user = userss.filter(function( obj ) {
@@ -25,8 +24,9 @@ componentWillMount(){
     render() {
       if (Meteor.user()){
 
-        var user = Meteor.user();
+        const {user} = this.props;
         console.log(user);
+
 
         if(user.profile.photo === "unset" || !user.profile.photo)
           var photo = "https://eliaslealblog.files.wordpress.com/2014/03/user-200.png";

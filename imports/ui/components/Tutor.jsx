@@ -4,13 +4,14 @@ import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
 import { Groups } from '../../api/groups/groups.js';
 
-export default class Tutor extends React.Component {
+export default class Tutor extends BaseComponent {
 constructor(props){
   super(props);
   this.getTutor = this.getTutor.bind(this);
+  const imageData = Meteor.subscribe('images');
 }
 
-    getTutor(groups, users, id){
+    getTutor( users, id){
       var userObj = users.filter(function( obj ) {
       return obj._id == id;
     });
@@ -24,17 +25,17 @@ constructor(props){
 
     }
 
-componentWillReceiveProps({loading, groups}){
+componentDidMount(){
 
 }
 
     render() {
-      const groups = Groups.find().fetch();
+      //const groups = Groups.find().fetch();
 
     if (Meteor.user() && Meteor.user().role === 'student'){
-      var users = Meteor.users.find().fetch();
-
-      var tutor = this.getTutor(groups, users, Meteor.userId());
+      //var users = Meteor.users.find().fetch();
+      const { users } = this.props;
+      var tutor = this.getTutor(users, Meteor.userId());
       //console.log(tutor);
       if (tutor){
       if(tutor.profile.photo === "unset" || !tutor.profile.photo)
