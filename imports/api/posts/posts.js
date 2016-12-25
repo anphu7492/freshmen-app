@@ -8,25 +8,18 @@ class PostsCollection extends Mongo.Collection {
   insert(doc, callback) {
     const ourDoc = doc;
     ourDoc.createdAt = ourDoc.createdAt || new Date();
+    console.log('doc', ourDoc);
     const result = super.insert(ourDoc, callback);
-    return result;
-  }
-  update(selector, modifier) {
-    const result = super.update(selector, modifier);
-    return result;
-  }
-  remove(selector) {
-    const posts = this.find(selector).fetch();
-    const result = super.remove(selector);
     return result;
   }
 }
 
 export const Posts = new PostsCollection('Posts');
+
 Posts.deny({
   insert() { return true; },
-  update() { return true; },
-  remove() { return true; },
+  // update() { return true; },
+  // remove() { return true; },
 });
 
 EventSchema = new SimpleSchema({
@@ -124,19 +117,20 @@ Posts.schema = new SimpleSchema({
   },
 });
 
+
 Posts.attachSchema(Posts.schema);
 
 Posts.publicFields = {
+  type: 1,
   text: 1,
   event: 1,
   task: 1,
   comments: 1,
   group: 1,
   creator: 1,
-  createdAt: 1,
+  createdAt: 1
 };
 
-/*
 Factory.define('post', Posts, {});
 
 Posts.helpers({
@@ -147,4 +141,3 @@ Posts.helpers({
     return this.editableBy(userId);
   },
 });
-*/

@@ -2,10 +2,9 @@ import React from 'react';
 import { Random } from 'meteor/random';
 import BaseComponent from '../BaseComponent.jsx';
 import update from 'immutability-helper';
+import { displayError } from '../../helpers/errors.js';
 
-import {
-  insert
-} from '../../../api/posts/methods';
+import { insert } from '../../../api/posts/methods.js';
 
 export default class PostCreate extends BaseComponent {
   constructor(props) {
@@ -34,7 +33,7 @@ export default class PostCreate extends BaseComponent {
     insert.call({
       type: newPost.type,
       text: newPost.text
-    })
+    }, displayError)
   }
 
   onCreateTask() {
@@ -71,7 +70,6 @@ export default class PostCreate extends BaseComponent {
   }
 
   onRemoveTask(index) {
-    console.log(index);
     if (this.state.post.type !== 'task') {
       return;
     }
@@ -87,14 +85,6 @@ export default class PostCreate extends BaseComponent {
     if (this.state.post.type === 'event') {
       return;
     }
-    const {post} = this.state;
-
-    /*post.type = 'event';
-    post.task = null;
-    post.event = {
-      location: '',
-      time: null
-    };*/
 
     this.setState({
       post: update(this.state.post, {

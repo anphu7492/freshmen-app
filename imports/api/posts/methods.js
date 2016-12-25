@@ -1,12 +1,12 @@
+import { Posts } from './posts';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
-import { Posts } from './posts';
 
 export const insert = new ValidatedMethod({
-  name: 'posts.insert',
+  name: 'posts.update',
   validate: new SimpleSchema({
     type: {
       type: String,
@@ -14,8 +14,7 @@ export const insert = new ValidatedMethod({
     },
     text: {
       type: String,
-      max: 1000,
-      optional: true
+      max: 1000
     }
   }).validator(),
   run({ type, text }) {
@@ -24,11 +23,12 @@ export const insert = new ValidatedMethod({
       type: type,
       text: text
     };
-    // Posts.insert(newPost);
+    newPost.creator = Meteor.userId();
+
+    Posts.insert(newPost);
   }
 });
 
-/*
 const POSTS_METHODS = _.pluck([
   insert
 ], 'name');
@@ -43,4 +43,3 @@ if (Meteor.isServer) {
     connectionId() { return true; },
   }, 5, 1000);
 }
-*/
