@@ -72,6 +72,8 @@ export default class App extends React.Component {
       menuOpen,
       children,
       location,
+      users,
+      groups
     } = this.props;
 
     // eslint-disable-next-line react/jsx-no-bind
@@ -110,8 +112,10 @@ export default class App extends React.Component {
         <section id="menu">
           {/*<LanguageToggle />*/}
           <UserMenu user={user} logout={this.logout} />
-          <Profiles user={user}/>
-          <ListList lists={lists}/>
+          {!loading ?
+            <Profiles user={user} users={users}/>
+            : ''}
+          {/*<ListList lists={lists}/>*/}
         </section>
         {showConnectionIssue && !connected
           ? <ConnectionNotification />
@@ -130,12 +134,12 @@ export default class App extends React.Component {
 
         </div>
         <div id="right-sidebar">
-          {user && (user.role === 'tutor')
-            ? <TutorSidebar/>
+          {user && (user.role === 'tutor' && !loading)
+            ? <TutorSidebar user={user} group={user.group} users={users} groups={groups}/>
             : ''
           }
-          {user && user.role === 'student'
-            ? <StudentSidebar/>
+          {user && user.role === 'student' && !loading
+            ? <StudentSidebar user={user} group={user.group} users={users} groups={groups}/>
             : ''
           }
         </div>

@@ -156,7 +156,7 @@ render(){
   return (<div id="profile-page">
   <img className="profile-pic" src={this.state.photo}
         alt="Profile photo"/><br />
-      <label className="btn btn-success" id="pic-label" htmlFor="pic-selector">Change photo</label>
+      <label style={{display:this.state.notEditable}} className="btn btn-success" id="pic-label" htmlFor="pic-selector">Change photo</label>
       <input id="pic-selector"  type="file" name="photo" onChange={this.handleImageUpload}/>
       <h3>{this.state.name}</h3>
   <p>{this.state.role}</p>
