@@ -21,8 +21,6 @@ export default class Tasks extends React.Component {
     this.setState({data: 'Data updated...'})
   }
 
-
-
   render() {
     //  var style1 = { .embedded-map-display .map-generator{max-width: 100%; max-height: 100%; background: none;} ;
     return (
