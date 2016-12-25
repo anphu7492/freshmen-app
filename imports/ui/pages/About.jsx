@@ -1,9 +1,14 @@
 import React from 'react';
 import BaseComponent from '../components/BaseComponent.jsx';
 import StudentCard from '../components/StudentCard.jsx';
+import {Meteor} from 'meteor/meteor';
 
 export default class About extends BaseComponent {
-
+    constructor(props){
+      super(props);
+      const user = Meteor.user();
+      console.log(user);
+    }
     render() {
         return (
             <div id="about">
@@ -17,19 +22,19 @@ export default class About extends BaseComponent {
                 &nbsp;
                 <div className="contributors">
                     <div id="abhishek">
-                        <img class="img-circle" src="http://www.desktopwallpaperhd.net/wallpapers/19/7/themes-joker-desktop-face-gallery-194503.jpg" height="100px" width="100px"/>
+                        <img className="img-circle" src="http://www.desktopwallpaperhd.net/wallpapers/19/7/themes-joker-desktop-face-gallery-194503.jpg" height="100px" width="100px"/>
                         <h3>Abhishek Ramesh Shetty</h3>
                         <h4>Master's Programme in ICT Innovation.</h4>
                     </div>
 
                     <div id="phu">
-                        <img class="img-circle" src="http://www.desktopwallpaperhd.net/wallpapers/19/7/themes-joker-desktop-face-gallery-194503.jpg" height="100px" width="100px"/>
+                        <img className="img-circle" src="http://www.desktopwallpaperhd.net/wallpapers/19/7/themes-joker-desktop-face-gallery-194503.jpg" height="100px" width="100px"/>
                         <h3>Phu Pham</h3>
                         <h4>Master's Programme in Computer Science.</h4>
                     </div>
 
                     <div id="kalai">
-                        <img class="img-circle" src="http://www.desktopwallpaperhd.net/wallpapers/19/7/themes-joker-desktop-face-gallery-194503.jpg" height="100px" width="100px"/>
+                        <img className="img-circle" src="http://www.desktopwallpaperhd.net/wallpapers/19/7/themes-joker-desktop-face-gallery-194503.jpg" height="100px" width="100px"/>
                         <h3>Kalaiarasan Saminathan</h3>
                         <h4>Master's Programme in Computer Science.</h4>
                     </div>

@@ -11,14 +11,14 @@ export default class StudentCard extends BaseComponent{
 
   render() {
     var user = Meteor.user();
-    const { name } = this.props;
+    const { name, photo, id } = this.props;
     //const email = user.emails[0].address;
     //const emailLocalPart = email.substring(0, email.indexOf('@'));
     return (
       <div className="student-card">
 
-        <a href="/profile"><img src="http://orig08.deviantart.net/0f29/f/2014/283/e/f/butters_stotch_by_edgotru-d7v25i4.png" alt="sup" /></a>
-        <a href="/profile"><p>{name}</p></a>
+        <a href={"/profile/"+id}><img src={photo} alt="sup" /></a>
+        <a href={"/profile/"+id}><p>{name}</p></a>
       </div>
     );
   }

@@ -15,12 +15,13 @@ constructor(props){
 
 render() {
 
-  const {user} = this.props;
+  const {user, users} = this.props;
+  //console.log(user);
     return (
         <div className="profiles">
         <Student user={user}/>
         <br/>
-        <Tutor/>
+        <Tutor user={user} users={users}/>
         </div>
     );
   }

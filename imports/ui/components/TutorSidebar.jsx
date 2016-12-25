@@ -6,9 +6,11 @@ import GroupMembers from '../components/GroupMembers.jsx';
 export default class TutorSidebar extends BaseComponent {
 
     render() {
+        const { user, users, groups } = this.props;
+        const group = this.props.group;
         return (
             <div className="tutor-rightbar">
-                <GroupMembers/>
+                <GroupMembers user={user} group={group} groups={groups} users={users}/>
                 <div id="stats-section">
                     <h3>Your stats</h3>
                     <h4>Students</h4>
