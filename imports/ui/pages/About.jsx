@@ -1,7 +1,6 @@
 import React from 'react';
 import BaseComponent from '../components/BaseComponent.jsx';
-import StudentCard from '../components/StudentCard.jsx';
-import {Meteor} from 'meteor/meteor';
+
 
 export default class About extends BaseComponent {
     constructor(props){
@@ -15,9 +14,11 @@ export default class About extends BaseComponent {
                 &nbsp;
                 <div className="about-content">
                     <h1 id="about-title">&nbsp; &nbsp;About Freshmen Guide</h1>
-                    <p id="description">A Student , A Tutor , A Study Corordinator</p>
+                    <p id="description">A Student , A Tutor , A Study Coordinator</p>
                     &nbsp;
-                    <p id="content">Freshmen Guide is a service designed to relieve the stress of the orientation week on newly enrolled students. It aims at providing a one-stop solution to all the guidance a new student might need during the orientation week.</p>
+                    <p id="content">
+                        <b>Freshmen Guide</b>
+                        is a service designed to relieve the stress of the orientation week on newly enrolled students. It aims at providing a one-stop solution to all the guidance a new student might need during the orientation week.</p>
                 </div>
                 &nbsp;
                 <div className="contributors">
