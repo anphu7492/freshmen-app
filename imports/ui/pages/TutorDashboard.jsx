@@ -6,16 +6,19 @@ import StudentCard from '../components/StudentCard.jsx';
 import MobileMenu from '../components/MobileMenu.jsx';
 import { GoogleMap, Marker, SearchBox } from "react-google-maps";
 import $ from "jquery";
-import Posts from '../components/Posts.jsx';
+//import Posts from '../components/Posts.jsx';
 import Tasks from '../components/Tasks.jsx';
 import Events from '../components/Events.jsx';
 import PostCreate from '../components/post-create/PostCreate';
 import EventLocator from '../components/EventLocator';
-
+import { Groups } from '../../api/groups/groups.js';
+import { Posts } from '../../api/posts/posts.js';
 
 export default class TutorDashboard extends BaseComponent {
   constructor(props) {
     super(props);
+    const tasks = Posts.find({type: "task", creator: Meteor.userId()}).fetch();
+    const otherPosts = Posts.find({type: {$not: "task"}}).fetch;
   }
 
   taskFormFunc() {
@@ -112,7 +115,7 @@ export default class TutorDashboard extends BaseComponent {
           <Tasks/>
 
           <Events/>
-          <Posts name="Bake" />
+          
         </div>
       </div>
     );
