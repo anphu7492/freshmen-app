@@ -40,7 +40,8 @@ export const remove = new ValidatedMethod({
   run({ _id }) {
 
   }
-})
+});
+
 const POSTS_METHODS = _.pluck([
   insert
 ], 'name');

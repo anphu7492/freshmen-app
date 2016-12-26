@@ -4,6 +4,10 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Groups } from '../groups.js';
 
 Meteor.publish('groups.query', function queryGroups(params) {
+  if (!this.userId) {
+    return;
+  }
+
   new SimpleSchema({
     _id: { type: String }
   }).validate(params);
@@ -15,10 +19,19 @@ Meteor.publish('groups.query', function queryGroups(params) {
   });
 });
 
-Meteor.publish('groups.all', function queryAllGroups() {
+Meteor.publishComposite('groups.all', function queryAllGroups() {
   if (!this.userId) {
     return this.ready();
   }
 
-  return Groups.find();
+  return {
+    find() {
+      return Groups.find({});
+    },
+    children: [{
+      find(group) {
+        return Meteor.users.find({_id: group.creator});
+      }
+    }]
+  }
 });

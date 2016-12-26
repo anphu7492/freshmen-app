@@ -4,6 +4,7 @@ import { Session } from 'meteor/session';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Groups } from '../../api/groups/groups.js';
 import { Lists } from '../../api/lists/lists.js';
+import { Posts } from '../../api/posts/posts.js';
 import App from '../layouts/App.jsx';
 
 export default createContainer(() => {
@@ -14,6 +15,7 @@ export default createContainer(() => {
   const imageData = Meteor.subscribe('images');
   const groupsHandle = Meteor.subscribe('groups.all');
   const postHandle = Meteor.subscribe('posts.query');
+
   return {
     user: Meteor.user(),
     loading: !(
@@ -22,11 +24,13 @@ export default createContainer(() => {
       userHandle.ready() &&
       groupsHandle.ready() &&
       allUserData.ready() &&
-      postHandle.ready()),
+      postHandle.ready()
+    ),
     groups: Groups.find().fetch(),
     users: Meteor.users.find().fetch(),
     connected: Meteor.status().connected,
     menuOpen: Session.get('menuOpen'),
+    posts: Posts.find().fetch(),
     lists: Lists.find({ $or: [
       { userId: { $exists: false } },
       { userId: Meteor.userId() },

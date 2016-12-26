@@ -73,8 +73,11 @@ export default class App extends React.Component {
       children,
       location,
       users,
-      groups
+      groups,
+      posts
     } = this.props;
+
+    console.log('post', posts);
 
     // eslint-disable-next-line react/jsx-no-bind
     const closeMenu = this.toggleMenu.bind(this, false);
@@ -115,7 +118,7 @@ export default class App extends React.Component {
           {!loading ?
             <Profiles user={user} users={users}/>
             : ''}
-          {/*<ListList lists={lists}/>*/}
+          <ListList lists={lists}/>
         </section>
         {showConnectionIssue && !connected
           ? <ConnectionNotification />
@@ -160,6 +163,8 @@ App.propTypes = {
   children: React.PropTypes.element, // matched child route component
   location: React.PropTypes.object,  // current router location
   params: React.PropTypes.object,    // parameters of the current route
+  groups: React.PropTypes.array,
+  posts: React.PropTypes.array
 };
 
 App.contextTypes = {

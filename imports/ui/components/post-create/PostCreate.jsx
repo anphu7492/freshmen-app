@@ -56,15 +56,14 @@ export default class PostCreate extends BaseComponent {
       }
     }
 
-    console.log(newPost);
-
     insert.call({
       type: newPost.type,
       text: newPost.text,
       event: newPost.event ? newPost.event : null,
       task: newPost.task ? newPost.task : null
-    }, displayError)
-      this.props.callBack(newPost)
+    }, displayError);
+
+    this.props.callBack(newPost)
   }
 
   onCreateTask() {
@@ -202,7 +201,6 @@ export default class PostCreate extends BaseComponent {
       return current.isAfter( yesterday );
     };
 
-    console.log(post);
     return (
       <div className="post-event">
         <input className="location form-control"

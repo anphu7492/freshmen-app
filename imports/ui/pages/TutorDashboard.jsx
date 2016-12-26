@@ -14,14 +14,13 @@ import PostCreate from '../components/post-create/PostCreate';
 import EventLocator from '../components/EventLocator';
 import { Groups } from '../../api/groups/groups.js';
 import { Posts } from '../../api/posts/posts.js';
+import PostList from '../components/post-list/PostList';
 
 export default class TutorDashboard extends BaseComponent {
   constructor(props) {
     super(props);
     const users = Meteor.users.find().fetch();
     const id = Meteor.userId();
-
-
 
     this.state.tasks = Posts.find({type: "task", creator: Meteor.userId()}).fetch();
     this.state.otherPosts = Posts.find({type: {$not: "task"}}).fetch();
@@ -30,9 +29,9 @@ export default class TutorDashboard extends BaseComponent {
   }
 
   update(){
-    this.setState({otherPosts: Posts.find({type: {$not: "task"}}).fetch()});
-
-
+    this.setState({
+      otherPosts: Posts.find({type: {$not: "task"}}).fetch()
+    });
   }
 
   render() {
@@ -53,7 +52,8 @@ export default class TutorDashboard extends BaseComponent {
             <EventLocator/>
           </div>
 
-          {postsToDisplay}
+          {/*{postsToDisplay}*/}
+          {/*<PostList posts={this.state.otherPosts} loading={false}/>*/}
         </div>
       </div>
     );
