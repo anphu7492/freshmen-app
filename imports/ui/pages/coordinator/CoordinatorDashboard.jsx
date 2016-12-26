@@ -13,7 +13,7 @@ export default class CoordinatorDashboard extends BaseComponent {
 
   render() {
     const { loading, groups } = this.props;
-    
+
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
         groups: groups
@@ -25,8 +25,7 @@ export default class CoordinatorDashboard extends BaseComponent {
           ? <Message title="Loading" />
           : childrenWithProps}
 
-          <Posts name="Butters"/>
-          <Posts name="Butters" />
+
           <Events/>
       </div>
     )

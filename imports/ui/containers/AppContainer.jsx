@@ -28,6 +28,7 @@ export default createContainer(() => {
     ),
     groups: Groups.find().fetch(),
     users: Meteor.users.find().fetch(),
+    tasks: Posts.find({type: "task", creator: Meteor.userId()}).fetch(),
     connected: Meteor.status().connected,
     menuOpen: Session.get('menuOpen'),
     posts: Posts.find().fetch(),

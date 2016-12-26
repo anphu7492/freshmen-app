@@ -20,12 +20,11 @@ import Loading from '../components/Loading';
 export default class TutorDashboard extends BaseComponent {
   constructor(props) {
     super(props);
-    const users = Meteor.users.find().fetch();
+    this.state.users = Meteor.users.find().fetch();
     const id = Meteor.userId();
 
     this.state.tasks = Posts.find({type: "task", creator: Meteor.userId()}).fetch();
     this.state.otherPosts = Posts.find({type: {$not: "task"}}).fetch();
-
     this.update = this.update.bind(this);
   }
 
@@ -36,12 +35,6 @@ export default class TutorDashboard extends BaseComponent {
   }
 
   render() {
-    console.log(this.state.otherPosts);
-    let postsToDisplay = [];
-    for (let i = 0;  i < this.state.otherPosts.length ; i++ ) {
-      postsToDisplay.push(<Posty key={i} name="Post" content={this.state.otherPosts[i].text} />);
-    }
-
     const { posts, loading } = this.props;
 
     return (
@@ -53,7 +46,6 @@ export default class TutorDashboard extends BaseComponent {
             <EventLocator/>
           </div>
 
-          {/*{postsToDisplay}*/}
           {loading
             ? <Loading key="loading" />
             : <PostList posts={posts} loading={false}/>
