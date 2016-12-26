@@ -5,6 +5,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Groups } from '../../api/groups/groups.js';
 import { Lists } from '../../api/lists/lists.js';
 import App from '../layouts/App.jsx';
+import { Posts } from '../../api/posts/posts.js';
 
 export default createContainer(() => {
   const publicHandle = Meteor.subscribe('lists.public');
@@ -25,6 +26,7 @@ export default createContainer(() => {
       postHandle.ready()),
     groups: Groups.find().fetch(),
     users: Meteor.users.find().fetch(),
+    tasks: Posts.find({type: "task", creator: Meteor.userId()}).fetch(),
     connected: Meteor.status().connected,
     menuOpen: Session.get('menuOpen'),
     lists: Lists.find({ $or: [

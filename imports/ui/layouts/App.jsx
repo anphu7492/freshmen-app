@@ -73,7 +73,8 @@ export default class App extends React.Component {
       children,
       location,
       users,
-      groups
+      groups,
+      tasks
     } = this.props;
 
     // eslint-disable-next-line react/jsx-no-bind
@@ -135,7 +136,7 @@ export default class App extends React.Component {
         </div>
         <div id="right-sidebar">
           {user && (user.role === 'tutor' && !loading)
-            ? <TutorSidebar user={user} group={user.group} users={users} groups={groups}/>
+            ? <TutorSidebar user={user} group={user.group} users={users} groups={groups} tasks={tasks}/>
             : ''
           }
           {user && user.role === 'student' && !loading

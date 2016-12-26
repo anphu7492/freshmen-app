@@ -18,7 +18,7 @@ import { Posts } from '../../api/posts/posts.js';
 export default class TutorDashboard extends BaseComponent {
   constructor(props) {
     super(props);
-    const users = Meteor.users.find().fetch();
+    this.state.users = Meteor.users.find().fetch();
     const id = Meteor.userId();
 
 
@@ -64,7 +64,7 @@ export default class TutorDashboard extends BaseComponent {
     var postsToDisplay = [];
     for (var i = 0;  i < this.state.otherPosts.length ; i++ )
     {
-      postsToDisplay.push(<Posty key={i} name="Post" content={this.state.otherPosts[i].text} />);
+      postsToDisplay.push(<Posty key={i} post={this.state.otherPosts[i]} users={this.state.users} />);
     }
 
     return (

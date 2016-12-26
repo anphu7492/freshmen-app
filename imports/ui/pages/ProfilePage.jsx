@@ -12,6 +12,7 @@ constructor(props){
   var id = this.props.params.id.trim();
   var userss = Meteor.users.find().fetch();
   const imageData = Meteor.subscribe('images');
+
   console.log(userss);
  // const uname = userss.find(_id)
    //console.log(Meteor.users.find().fetch());
