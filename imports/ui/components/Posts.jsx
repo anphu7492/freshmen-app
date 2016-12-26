@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import BaseComponent from './BaseComponent.jsx';
 import Comments from '../components/Comments.jsx';
 
-export default class Posts extends BaseComponent{
+export default class Posty extends BaseComponent{
   constructor(props) {
     super(props);
   //  const name = props.name;
@@ -19,7 +19,7 @@ export default class Posts extends BaseComponent{
       <div className="post">
         <a href="/profile"><img src="http://orig08.deviantart.net/0f29/f/2014/283/e/f/butters_stotch_by_edgotru-d7v25i4.png" alt="sup" /></a>
         <a href="#"><h4>{name} said:</h4></a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>{this.props.content}</p>
         <Comments />
       </div>
     );

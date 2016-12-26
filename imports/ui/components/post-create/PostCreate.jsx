@@ -30,10 +30,12 @@ export default class PostCreate extends BaseComponent {
       text: post.text.value
     };
     console.log(newPost);
+
     insert.call({
       type: newPost.type,
       text: newPost.text
-    }, displayError)
+    }, displayError);
+    this.props.callBack(newPost);
   }
 
   onCreateTask() {
