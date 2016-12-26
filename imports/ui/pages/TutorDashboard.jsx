@@ -8,6 +8,7 @@ import { GoogleMap, Marker, SearchBox } from "react-google-maps";
 import $ from "jquery";
 //import Posts from '../components/Posts.jsx';
 import Tasks from '../components/Tasks.jsx';
+import Posty from '../components/Posts.jsx';
 import Events from '../components/Events.jsx';
 import PostCreate from '../components/post-create/PostCreate';
 import EventLocator from '../components/EventLocator';
@@ -17,8 +18,21 @@ import { Posts } from '../../api/posts/posts.js';
 export default class TutorDashboard extends BaseComponent {
   constructor(props) {
     super(props);
-    const tasks = Posts.find({type: "task", creator: Meteor.userId()}).fetch();
-    const otherPosts = Posts.find({type: {$not: "task"}}).fetch;
+    const users = Meteor.users.find().fetch();
+    const id = Meteor.userId();
+
+
+
+    this.state.tasks = Posts.find({type: "task", creator: Meteor.userId()}).fetch();
+    this.state.otherPosts = Posts.find({type: {$not: "task"}}).fetch();
+
+    this.update = this.update.bind(this);
+  }
+
+  update(){
+    this.setState({otherPosts: Posts.find({type: {$not: "task"}}).fetch()});
+
+
   }
 
   taskFormFunc() {
@@ -46,12 +60,18 @@ export default class TutorDashboard extends BaseComponent {
 
   render() {
     const user = this.props;
+    console.log(this.state.otherPosts);
+    var postsToDisplay = [];
+    for (var i = 0;  i < this.state.otherPosts.length ; i++ )
+    {
+      postsToDisplay.push(<Posty key={i} name="Post" content={this.state.otherPosts[i].text} />);
+    }
 
     return (
 
       <div className="tutor-dashboard">
         <div className ="tutor-main">
-          <PostCreate></PostCreate>
+          <PostCreate callBack={this.update}></PostCreate>
           {/*     <form className="createTask">
            Task name -
            <input type="text" name="taskname" /><br />
@@ -112,10 +132,7 @@ export default class TutorDashboard extends BaseComponent {
             <EventLocator/>
           </div>
 
-          <Tasks/>
-
-          <Events/>
-          
+          {postsToDisplay}
         </div>
       </div>
     );
