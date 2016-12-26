@@ -1,4 +1,6 @@
 import React from 'react';
+import 'moment';
+import Datetime from 'react-datetime';
 import { Random } from 'meteor/random';
 import BaseComponent from '../BaseComponent.jsx';
 import update from 'immutability-helper';
@@ -6,19 +8,27 @@ import { displayError } from '../../helpers/errors.js';
 
 import { insert } from '../../../api/posts/methods.js';
 
+/**
+ * css file must be import in js file,
+ * if we want to import a css file to another stylesheet, change the extension to .less
+ */
+import 'react-datetime/css/react-datetime.css';
+
 export default class PostCreate extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = Object.assign(this.state, {
       post: {
         type: 'simple'
-      }
+      },
+      errors: {}
     });
     this.onPostCreate = this.onPostCreate.bind(this);
     this.onCreateTask = this.onCreateTask.bind(this);
     this.onCreateEvent = this.onCreateEvent.bind(this);
     this.onAddTask = this.onAddTask.bind(this);
     this.onRemoveTask = this.onRemoveTask.bind(this);
+    this.onEventDateChange = this.onEventDateChange.bind(this);
   }
 
   onPostCreate(event) {
@@ -33,7 +43,7 @@ export default class PostCreate extends BaseComponent {
     if (post.type === 'event') {
       newPost.event = {
         location: post.event.location.value,
-        time: post.event.time.valueAsDate
+        time: post.event.time.toDate()
       }
     } else if (post.type == 'task') {
       newPost.task = {
@@ -117,6 +127,15 @@ export default class PostCreate extends BaseComponent {
     });
   }
 
+  onEventDateChange(date) {
+    console.log(typeof date);
+    if (typeof date === 'string' || !date.isValid()) {
+      this.errors.invalidEventDate = true;
+      return;
+    }
+    this.state.post.event.time = date;
+  }
+
   renderTasksBox() {
     const { post } = this.state;
     let items = post.task.todos.map((todo, index) => {
@@ -145,15 +164,22 @@ export default class PostCreate extends BaseComponent {
 
   renderEventBox() {
     const { post } = this.state;
+    const yesterday = Datetime.moment().subtract(1, 'day');
+    const valid = function( current ){
+      return current.isAfter( yesterday );
+    };
+
     console.log(post);
     return (
       <div className="post-event">
         <input className="location form-control"
                type="text"
                ref={(c) => { post.event ? post.event.location = c : null}}/>
-        <input className="date form-control"
-               type="date"
-               ref={(c) => { post.event ? post.event.time = c : null}}/>
+        <Datetime isValidDate={ valid }
+                  timeConstraints={{minutes: {step: 15}}}
+                  dateFormat="DD/MM/YYYY"
+                  inputProps={{readOnly: true}}
+                  onChange={this.onEventDateChange} />
       </div>
     )
   }
