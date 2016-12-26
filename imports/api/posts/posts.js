@@ -32,26 +32,36 @@ EventSchema = new SimpleSchema({
   },
   going: {
     type: [String],
-    regEx: SimpleSchema.RegEx.Id
+    regEx: SimpleSchema.RegEx.Id,
+    defaultValue: []
   },
   notGoing: {
     type: [String],
-    regEx: SimpleSchema.RegEx.Id
+    regEx: SimpleSchema.RegEx.Id,
+    defaultValue: []
   },
   maybe: {
     type: [String],
-    regEx: SimpleSchema.RegEx.Id
+    regEx: SimpleSchema.RegEx.Id,
+    defaultValue: []
   }
 });
 
 TaskSchema = new SimpleSchema({
   todos: {
-    type: [String],
+    type: [Object],
     max: 300
+  },
+  "todos.$._id": {
+    type: String
+  },
+  "todos.$.text": {
+    type: String
   },
   assignees: {
     type: [Object],
-    maxCount: 20
+    maxCount: 20,
+    defaultValue: []
   },
   "assignees.$.user": {
     type: String,

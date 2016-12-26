@@ -7,21 +7,24 @@ import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 
 export const insert = new ValidatedMethod({
   name: 'posts.update',
-  validate: new SimpleSchema({
-    type: {
-      type: String,
-      allowedValues: ['simple', 'event', 'task']
-    },
-    text: {
-      type: String,
-      max: 1000
-    }
-  }).validator(),
-  run({ type, text }) {
-    console.log('create post', type, text);
+  validate: Posts.schema.pick([
+    'type',
+    'text',
+    'event.location',
+    'event.time',
+    'task.todos',
+    'task.todos.$',
+    'task.todos.$._id',
+    'task.todos.$.text'
+  ])
+  .validator(),
+  run({ type, text, event, task }) {
+    console.log('create post', type, text, event, task);
     let newPost = {
       type: type,
-      text: text
+      text: text,
+      event: event ? event : null,
+      task: task ? task: null
     };
     newPost.creator = Meteor.userId();
 
@@ -29,6 +32,15 @@ export const insert = new ValidatedMethod({
   }
 });
 
+export const remove = new ValidatedMethod({
+  name:'posts.remove',
+  validate: new SimpleSchema({
+    _id: { type: String}
+  }).validator(),
+  run({ _id }) {
+
+  }
+})
 const POSTS_METHODS = _.pluck([
   insert
 ], 'name');
