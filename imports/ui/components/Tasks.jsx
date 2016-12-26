@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
 import Comments from '../components/Comments.jsx';
-import MyMap from '../components/MyMap.js';
 import Locator from '../components/Locator.jsx';
 
 export default class Tasks extends React.Component {
