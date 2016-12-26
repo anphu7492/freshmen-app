@@ -5,7 +5,8 @@ export default class ContactUs extends BaseComponent {
     render() {
         return (
             <div>&nbsp;
-                <p id="contact-description">Use this contact form to send feedback.</p>
+              <br/> <br/>
+                <p id="contact-description">How can we help you?</p>
                 <br/>
                 <div className="contact-us-form">
                     <form id="contact_form" action="http://localhost:3000" method="POST" enctype="multipart/form-data">
