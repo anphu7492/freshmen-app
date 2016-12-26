@@ -22,9 +22,29 @@ export default class Tasks extends React.Component {
   }
 
   render() {
-    //  var style1 = { .embedded-map-display .map-generator{max-width: 100%; max-height: 100%; background: none;} ;
+    /*
+    var id = Meteor.userId();
+    const { post, users } = this.props;
+    const postUser = users.filter(function( obj ) {
+    return obj._id == post.creator;
+  });
+    const userName = postUser[0].profile.name;
+    const userPhoto = postUser[0].profile.photo;
+    const userId = postUser[0]._id;
+    const userProfile = "/profile/" + userId;
+    var postDate = new Date(post.createdAt);
+    var deletable = "none";
+    if(id==userId){
+      deletable = "block";
+    }
+*/
     return (
       <div className="tasks">
+
+        {/*  <a href={userProfile}><img src={userPhoto} alt={userName}/></a>
+          <a href={userProfile}><h4>{userName} said:</h4></a>
+          <button style={{display: deletable}} className="btn btn-danger" onClick={this.handleDelete}><span className="glyphicon glyphicon-trash"></span></button>
+*/}
         <p className="eventtitle">Register at AYY - Deadline 01 September 2017
         </p>
         <p className="inlinetitle">Tutor Instructions </p>

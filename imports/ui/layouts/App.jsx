@@ -9,9 +9,12 @@ import ConnectionNotification from '../components/ConnectionNotification.jsx';
 import Loading from '../components/Loading.jsx';
 import Profiles from '../components/Profiles.jsx';
 import { Link } from 'react-router';
+import { Modal } from 'react-bootstrap';
 import TutorSidebar from '../components/TutorSidebar.jsx';
 import StudentSidebar from '../components/StudentSidebar.jsx';
 const CONNECTION_ISSUE_TIMEOUT = 5000;
+import AddGroupPage from '../pages/coordinator/AddGroupPage.jsx';
+import AddStudentPage from '../pages/coordinator/AddStudentPage.jsx';
 
 
 export default class App extends React.Component {
@@ -23,9 +26,29 @@ export default class App extends React.Component {
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.logout = this.logout.bind(this);
+    this.state.showAddStudents = false;
+    this.state.showAddGroups = false;
+    this.openAddStudents = this.openAddStudents.bind(this);
+    this.closeAddStudents = this.closeAddStudents.bind(this);
+    this.openAddGroups = this.openAddGroups.bind(this);
+    this.closeAddGroups = this.closeAddGroups.bind(this);
   }
 
+  closeAddStudents() {
+   this.setState({ showAddStudents: false });
+ }
 
+ openAddStudents() {
+   this.setState({ showAddStudents: true });
+ }
+
+ closeAddGroups() {
+  this.setState({ showAddGroups: false });
+}
+
+openAddGroups() {
+  this.setState({ showAddGroups: true });
+}
 
   componentDidMount() {
     setTimeout(() => {
@@ -88,8 +111,8 @@ export default class App extends React.Component {
 
     const coordinatorMenu = (
       <li>
-        <Link to="/coordinator/add-student">Add students</Link>
-        <Link to="/coordinator/add-group">Add groups</Link>
+        <Link onClick={this.openAddStudents}>Add students</Link>
+        <Link onClick={this.openAddGroups}>Add groups</Link>
       </li>
     );
 
@@ -131,6 +154,31 @@ export default class App extends React.Component {
             {loading
               ? <Loading key="loading" />
               : clonedChildren}
+
+              <Modal  show={this.state.showAddStudents} onHide={this.closeAddStudents}>
+              <Modal.Header dialogClassName="custom-modal" closeButton>
+                <Modal.Title>Add Students</Modal.Title>
+              </Modal.Header>
+              <Modal.Body dialogClassName="custom-modal">
+                  <AddStudentPage groups={groups}/>
+              </Modal.Body>
+              <Modal.Footer dialogClassName="custom-modal">
+                <button className="btn btn-danger" onClick={this.closeAddStudents}>Cancel</button>
+              </Modal.Footer>
+            </Modal>
+
+            <Modal dialogClassName="custom-modal" show={this.state.showAddGroups} onHide={this.closeAddGroups}>
+            <Modal.Header closeButton>
+              <Modal.Title>Add Groups</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <AddGroupPage/>
+            </Modal.Body>
+            <Modal.Footer>
+              <button className="btn btn-danger" onClick={this.closeAddGroups}>Cancel</button>
+            </Modal.Footer>
+          </Modal>
+
           </ReactCSSTransitionGroup>
 
         </div>

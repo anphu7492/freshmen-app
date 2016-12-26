@@ -20,19 +20,13 @@ export default class TutorDashboard extends BaseComponent {
     super(props);
     this.state.users = Meteor.users.find().fetch();
     const id = Meteor.userId();
-
-
-
     this.state.tasks = Posts.find({type: "task", creator: Meteor.userId()}).fetch();
     this.state.otherPosts = Posts.find({type: {$not: "task"}}).fetch();
-
     this.update = this.update.bind(this);
   }
 
   update(){
     this.setState({otherPosts: Posts.find({type: {$not: "task"}}).fetch()});
-
-
   }
 
   taskFormFunc() {
