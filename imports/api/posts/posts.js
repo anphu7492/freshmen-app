@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Factory } from 'meteor/factory';
 import faker from 'faker';
@@ -148,6 +149,10 @@ Posts.helpers({
     return Posts.find({});
   },
   editableBy(userId) {
-    return this.editableBy(userId);
+    if (!this.creator) {
+      return true;
+    }
+
+    return this.creator === userId;
   },
 });

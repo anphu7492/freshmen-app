@@ -38,7 +38,14 @@ export const remove = new ValidatedMethod({
     _id: { type: String}
   }).validator(),
   run({ _id }) {
+    const post = Posts.findOne(_id);
 
+    if (!post.editableBy(this.userId)) {
+      throw new Meteor.Error('Not authorized', 'Cannot remove post that is not yours');
+    }
+
+    console.log('userID', this.userId);
+    Posts.remove({_id: _id, creator: this.userId});
   }
 });
 

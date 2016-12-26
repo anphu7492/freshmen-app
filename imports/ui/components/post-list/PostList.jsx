@@ -29,9 +29,9 @@ export default class PostList extends BaseComponent {
     }
     return (
       <div className="post-list">
-        <dvi className="content-scrollable post-items">
+        <div className="post-items">
           {loading ? <Message title="Loading"/> : Posts}
-        </dvi>
+        </div>
       </div>
     );
   }

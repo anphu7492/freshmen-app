@@ -15,6 +15,7 @@ import EventLocator from '../components/EventLocator';
 import { Groups } from '../../api/groups/groups.js';
 import { Posts } from '../../api/posts/posts.js';
 import PostList from '../components/post-list/PostList';
+import Loading from '../components/Loading';
 
 export default class TutorDashboard extends BaseComponent {
   constructor(props) {
@@ -35,15 +36,15 @@ export default class TutorDashboard extends BaseComponent {
   }
 
   render() {
-    const user = this.props;
     console.log(this.state.otherPosts);
     let postsToDisplay = [];
     for (let i = 0;  i < this.state.otherPosts.length ; i++ ) {
       postsToDisplay.push(<Posty key={i} name="Post" content={this.state.otherPosts[i].text} />);
     }
 
-    return (
+    const { posts, loading } = this.props;
 
+    return (
       <div className="tutor-dashboard">
         <div className ="tutor-main">
           <PostCreate callBack={this.update}></PostCreate>
@@ -53,7 +54,10 @@ export default class TutorDashboard extends BaseComponent {
           </div>
 
           {/*{postsToDisplay}*/}
-          {/*<PostList posts={this.state.otherPosts} loading={false}/>*/}
+          {loading
+            ? <Loading key="loading" />
+            : <PostList posts={posts} loading={false}/>
+          }
         </div>
       </div>
     );
@@ -61,5 +65,6 @@ export default class TutorDashboard extends BaseComponent {
 }
 
 TutorDashboard.propTypes = {
-  user: React.PropTypes.object,
+  loading: React.PropTypes.bool,
+  posts: React.PropTypes.array
 };
