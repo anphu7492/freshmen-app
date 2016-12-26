@@ -75,6 +75,10 @@ TaskSchema = new SimpleSchema({
 });
 
 CommentSchema = new SimpleSchema({
+  _id: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  },
   content: {
     type: String,
     max: 1000

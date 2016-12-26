@@ -1,5 +1,6 @@
 import { Posts } from './posts';
 import { Meteor } from 'meteor/meteor';
+import { Random } from 'meteor/random';
 import { _ } from 'meteor/underscore';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
@@ -44,13 +45,43 @@ export const remove = new ValidatedMethod({
       throw new Meteor.Error('Not authorized', 'Cannot remove post that is not yours');
     }
 
-    console.log('userID', this.userId);
     Posts.remove({_id: _id, creator: this.userId});
   }
 });
 
+export const addComment = new ValidatedMethod({
+  name: 'posts.addComment',
+  validate: new SimpleSchema({
+    content: {
+      type: String,
+      max: 1000
+    },
+    postId: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    }
+  }).validator(),
+  run({ content, postId }) {
+    let newComment = {
+      _id: Random.id(),
+      content: content,
+      creator: this.userId,
+      created: new Date()
+    };
+
+    Posts.update({_id: postId}, {
+      '$push': {
+        'comments': newComment
+      }
+    });
+
+  }
+});
+
 const POSTS_METHODS = _.pluck([
-  insert
+  insert,
+  remove,
+  addComment
 ], 'name');
 
 if (Meteor.isServer) {

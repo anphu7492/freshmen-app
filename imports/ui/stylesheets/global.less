@@ -1,0 +1,63 @@
+@import './utils.less';
+
+//layout
+
+[class^="layout"], [class*=" layout"] {
+  display: flex;
+}
+
+.layout--row-reverse {
+  flex-direction: row-reverse;
+}
+.layout--column {
+  flex-direction: column;
+}
+
+.layout-align--middle {
+  align-items: center;
+}
+
+
+.layout-align--center {
+  align-items: center;
+  justify-content: center;
+}
+
+[class^="flex"], [class*=" flex"] {
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.flex {
+  flex: 1 1 0%;
+}
+.flex-auto {
+  flex: auto; // flex: 0 0 auto
+}
+.flex-none {
+  flex: none; // flex: 0 0 0%
+}
+
+.flex-align--center {
+  align-self: center;
+}
+
+.user-avatar {
+  &:not(.square) {
+    border-radius: 50%;
+  }
+
+  &.xs {
+    width: 34px;
+    height: 34px;
+  }
+  &.sm {
+    width: 40px;
+    height: 40px;
+  }
+  &.medium {
+    width: 50px;
+    height: 50px;
+  }
+}

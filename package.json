@@ -30,6 +30,7 @@
     "react-places-autocomplete": "^2.3.2",
     "react-pure-render": "^1.0.2",
     "react-router": "^2.8.1",
+    "react-textarea-autosize": "^4.0.5",
     "superagent": "^3.3.0"
   },
   "devDependencies": {

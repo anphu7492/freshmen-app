@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import BaseComponent from '../BaseComponent.jsx';
-import Comments from '../../components/Comments.jsx';
+import CommentSection from '../comment-section/CommentSection.jsx';
 import { displayError } from '../../helpers/errors.js';
 import { Modal, Button } from 'react-bootstrap';
 
@@ -57,6 +57,10 @@ export default class Post extends BaseComponent {
         </div>
         <div className="post-body">
           {this.props.post.text}
+        </div>
+
+        <div className="post-footer">
+          <CommentSection post={this.props.post}/>
         </div>
 
         <Modal
