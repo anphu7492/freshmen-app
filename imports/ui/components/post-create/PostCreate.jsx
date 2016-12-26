@@ -29,10 +29,27 @@ export default class PostCreate extends BaseComponent {
       type: post.type,
       text: post.text.value
     };
+
+    if (post.type === 'event') {
+      newPost.event = {
+        location: post.event.location.value,
+        time: post.event.time.valueAsDate
+      }
+    } else if (post.type == 'task') {
+      newPost.task = {
+        todos: post.task.todos.map(todo => ({
+          _id: todo._id,
+          text: todo.text.value
+        }))
+      }
+    }
+
     console.log(newPost);
     insert.call({
       type: newPost.type,
-      text: newPost.text
+      text: newPost.text,
+      event: newPost.event ? newPost.event : null,
+      task: newPost.task ? newPost.task : null
     }, displayError)
   }
 
@@ -46,7 +63,7 @@ export default class PostCreate extends BaseComponent {
     post.event = null;
     post.task = {
       todos: [
-        {id: Random.id(), text: 'Enter a task'}
+        {_id: Random.id(), text: 'Enter a task'}
       ],
       assignees: [{}]
     };
@@ -62,7 +79,7 @@ export default class PostCreate extends BaseComponent {
     }
 
     const { post } = this.state;
-    post.task.todos.push({id: Random.id(), text: ''});
+    post.task.todos.push({_id: Random.id(), text: ''});
 
     this.setState({
       post: post
@@ -102,7 +119,7 @@ export default class PostCreate extends BaseComponent {
     const { post } = this.state;
     let items = post.task.todos.map((todo, index) => {
       return (
-        <div key={todo.id} className="row">
+        <div key={todo._id} className="row">
           <div className="col-sm-10">
             <input type="text"
                    className="form-control"
@@ -133,7 +150,7 @@ export default class PostCreate extends BaseComponent {
                type="text"
                ref={(c) => { post.event ? post.event.location = c : null}}/>
         <input className="date form-control"
-               type="text"
+               type="date"
                ref={(c) => { post.event ? post.event.time = c : null}}/>
       </div>
     )
@@ -141,7 +158,6 @@ export default class PostCreate extends BaseComponent {
 
   render() {
     const { post } = this.state;
-    console.log(post);
 
     return (
       <div className="post-box">
