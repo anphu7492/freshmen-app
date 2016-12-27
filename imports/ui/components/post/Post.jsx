@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import BaseComponent from '../BaseComponent.jsx';
 import CommentSection from '../comment-section/CommentSection.jsx';
@@ -53,7 +52,11 @@ export default class Post extends BaseComponent {
           <div className="user-info pull-left">
             {creator.profile.name}
           </div>
-          <i className="icon-close pull-right" onClick={this.showDeleteModal}></i>
+
+          { Meteor.userId() === post.creator
+            ? <i className="icon-close pull-right" onClick={this.showDeleteModal}></i>
+            : '' }
+
         </div>
         <div className="post-body">
           {this.props.post.text}

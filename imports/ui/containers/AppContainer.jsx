@@ -14,7 +14,6 @@ export default createContainer(() => {
   const allUserData = Meteor.subscribe('allUserData');
   const imageData = Meteor.subscribe('images');
   const groupsHandle = Meteor.subscribe('groups.all');
-  const postHandle = Meteor.subscribe('posts.query');
 
   return {
     user: Meteor.user(),
@@ -23,15 +22,13 @@ export default createContainer(() => {
       privateHandle.ready() &&
       userHandle.ready() &&
       groupsHandle.ready() &&
-      allUserData.ready() &&
-      postHandle.ready()
+      allUserData.ready()
     ),
     groups: Groups.find().fetch(),
     users: Meteor.users.find().fetch(),
     tasks: Posts.find({type: "task", creator: Meteor.userId()}).fetch(),
     connected: Meteor.status().connected,
     menuOpen: Session.get('menuOpen'),
-    posts: Posts.find().fetch(),
     lists: Lists.find({ $or: [
       { userId: { $exists: false } },
       { userId: Meteor.userId() },

@@ -97,11 +97,8 @@ openAddGroups() {
       location,
       users,
       groups,
-      posts,
       tasks
     } = this.props;
-
-    console.log('post', posts);
 
     // eslint-disable-next-line react/jsx-no-bind
     const closeMenu = this.toggleMenu.bind(this, false);

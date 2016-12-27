@@ -78,6 +78,31 @@ export const addComment = new ValidatedMethod({
   }
 });
 
+export const removeComment = new ValidatedMethod({
+  name: 'posts.removeComment',
+  validate: new SimpleSchema({
+    _id: {
+      type: String
+    },
+    postId: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    }
+  }).validator(),
+  run({ _id, postId }) {
+
+    Posts.update({_id: postId}, {
+      '$pull': {
+        'comments': {
+          _id: _id,
+          creator: this.userId
+        }
+      }
+    });
+
+  }
+});
+
 const POSTS_METHODS = _.pluck([
   insert,
   remove,
