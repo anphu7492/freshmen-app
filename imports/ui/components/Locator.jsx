@@ -85,10 +85,7 @@ var Locator = React.createClass({
   render: function () {
     console.log(this.props.address);
     return (
-      <div className="container">
-            <div className="map" ref={this.setMapElementReference}>
-            </div>
-     </div>
+      <div className="locator" ref={this.setMapElementReference}></div>
     );
   }
 });

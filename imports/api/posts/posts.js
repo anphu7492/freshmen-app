@@ -31,20 +31,17 @@ EventSchema = new SimpleSchema({
   time: {
     type: Date
   },
-  going: {
-    type: [String],
-    regEx: SimpleSchema.RegEx.Id,
+  confirmations: {
+    type: [Object],
     defaultValue: []
   },
-  notGoing: {
-    type: [String],
-    regEx: SimpleSchema.RegEx.Id,
-    defaultValue: []
+  "confirmations.$.user": {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
   },
-  maybe: {
-    type: [String],
-    regEx: SimpleSchema.RegEx.Id,
-    defaultValue: []
+  "confirmations.$.status": {
+    type: String,
+    allowedValues: ['going', 'notGoing', 'maybe']
   }
 });
 
