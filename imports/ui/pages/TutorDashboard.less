@@ -44,16 +44,31 @@ width: 50%;
   }
 }
 
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  //background-color: #ff8080;
+}
+
+::-webkit-scrollbar-thumb {
+  //background-color: @color-material-red;   //#19194d
+  opacity: 75%;
+  border-radius: 2px;
+
+}
+
 .tutor-rightbar, .student-rightbar  {
   padding: 10px;
   display: inline-block;
-  -webkit-overflow-scrolling: touch;
+
   //position:fixed;
   left:auto;
   right:0;
   width: @menu-width;
-  height: auto;
-  overflow: auto;
+  overflow: overlay;
 
   div h3{
     text-align: center;
@@ -78,19 +93,4 @@ width: 50%;
     font-size: 20px;
     color: white;
   }
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  //background-color: #ff8080;
-}
-
-::-webkit-scrollbar-thumb {
-  //background-color: @color-material-red;   //#19194d
-  opacity: 75%;
-  border-radius: 2px;
-
 }
