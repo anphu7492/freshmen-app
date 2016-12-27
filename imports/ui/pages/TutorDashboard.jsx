@@ -42,10 +42,10 @@ export default class TutorDashboard extends BaseComponent {
         <div className ="tutor-main">
           <PostCreate callBack={this.update}></PostCreate>
 
-          <div className="mapDiv">
+        {/*  <div className="mapDiv">
             <EventLocator/>
           </div>
-
+*/}
           {loading
             ? <Loading key="loading" />
             : <PostList posts={posts} loading={false}/>

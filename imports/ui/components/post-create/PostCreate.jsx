@@ -21,7 +21,8 @@ export default class PostCreate extends BaseComponent {
       post: {
         type: 'simple'
       },
-      errors: {}
+      errors: {},
+      placeholder: "Say something"
     });
     this.onPostCreate = this.onPostCreate.bind(this);
     this.onCreateTask = this.onCreateTask.bind(this);
@@ -82,7 +83,8 @@ export default class PostCreate extends BaseComponent {
     };
 
     this.setState({
-      post: post
+      post: post,
+      placeholder: "Name your task"
     });
   }
 
@@ -96,6 +98,7 @@ export default class PostCreate extends BaseComponent {
 
     this.setState({
       post: post
+
     });
   }
 
@@ -104,11 +107,14 @@ export default class PostCreate extends BaseComponent {
       return;
     }
 
+
+
     this.setState({
       post: update(this.state.post, {
         type: {$set: 'simple'},
         task: {$set: null}
-      })
+      }),
+      placeholder: "Say something"
     });
   }
 
@@ -137,7 +143,10 @@ export default class PostCreate extends BaseComponent {
           location: '',
           time: null
         }}
-      })
+
+      }),
+      placeholder: "Name your event"
+
     });
   }
 
@@ -150,7 +159,8 @@ export default class PostCreate extends BaseComponent {
       post: update(this.state.post, {
         type: {$set: 'simple'},
         event: {$set: null}
-      })
+      }),
+      placeholder: "Say something"
     });
   }
   onEventDateChange(date) {
@@ -174,7 +184,7 @@ export default class PostCreate extends BaseComponent {
                    placeholder="Enter a task"/>
           </div>
           {index > 0
-            ? <i className="icon-close col-sm-2"
+            ? <i className="icon-close"
                  onClick={() => this.onRemoveTaskItem(index)}></i>
             : null}
         </div>
@@ -183,10 +193,10 @@ export default class PostCreate extends BaseComponent {
     return (
       <div className="post-task">
         {items}
-        <button className="btn"
+        <button className="custom-btn-success"
                 type="button"
                 onClick={this.onAddTask}>Add task</button>
-        <a className="remove-btn" onClick={this.onRemoveTask}>
+              <a className="custom-btn-danger" onClick={this.onRemoveTask}>
           <i className="icon-trash"></i>
           Remove task
         </a>
@@ -203,14 +213,14 @@ export default class PostCreate extends BaseComponent {
 
     return (
       <div className="post-event">
-        <input className="location form-control"
+        <input placeholder="Where?" className="location form-control"
                type="text"
                ref={(c) => { post.event ? post.event.location = c : null}}/>
-        <Datetime isValidDate={ valid }
+             <Datetime placeholder="When?" isValidDate={ valid }
                   timeConstraints={{minutes: {step: 15}}}
                   dateFormat="DD/MM/YYYY"
                   onChange={this.onEventDateChange} />
-        <a className="remove-btn" onClick={this.onRemoveEvent}>
+                <a className="custom-btn-danger" onClick={this.onRemoveEvent}>
           <i className="icon-trash"></i>
           Remove event
         </a>
@@ -224,25 +234,26 @@ export default class PostCreate extends BaseComponent {
     return (
       <div className="post-box">
         <form className="post-create" onSubmit={this.onPostCreate}>
-          <textarea
+          <input
             name="text"
             className="text form-control"
+            placeholder = {this.state.placeholder}
             ref={(c) => {post.text = c}}>
-          </textarea>
+          </input>
           {post.type === 'task' ?
             this.renderTasksBox() :
             post.type === 'event' ? this.renderEventBox() : ''}
           <div className="post-types row">
             <div className="col-sm-10">
-              <button className="btn" type="button" onClick={this.onCreateTask}>
+              <button className="custom-btn-primary" type="button" onClick={this.onCreateTask}>
                 Task
               </button>
-              <button className="btn" type="button" onClick={this.onCreateEvent}>
+              <button className="custom-btn-primary" type="button" onClick={this.onCreateEvent}>
                 Event
               </button>
             </div>
             <div className="col-sm-2">
-              <button className="btn submit" type="submit">Post</button>
+              <button className="custom-btn-success submit" type="submit">Post</button>
             </div>
           </div>
         </form>
