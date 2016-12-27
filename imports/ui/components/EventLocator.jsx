@@ -109,7 +109,7 @@ var EventLocator = React.createClass({
                   <div className="form-group">
                     <label className="sr-only" htmlFor="address">Address</label>
                     <input type="text" className="form-control input-lg" id="address"
-                    placeholder="Aalto university, 02150 Espoo, Finland" ref={this.setSearchInputElementReference} required />
+                    placeholder="Aalto university, 02150 Espoo, Finland" ref={this.setSearchInputElementReference} required size="55" />
                   </div>
 
                 </div>
