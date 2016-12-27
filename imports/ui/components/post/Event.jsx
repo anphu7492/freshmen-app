@@ -4,13 +4,12 @@ import BaseComponent from '../BaseComponent.jsx';
 import CommentSection from '../comment-section/CommentSection.jsx';
 import { displayError } from '../../helpers/errors.js';
 import { Modal, Button } from 'react-bootstrap';
-import Event from './Event.jsx';
-import Task from './Task.jsx';
 import {
   remove
 } from '../../../api/posts/methods.js';
+import Locator from '../Locator.jsx';
 
-export default class Post extends BaseComponent {
+export default class Event extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = Object.assign(this.state, {
@@ -29,47 +28,52 @@ export default class Post extends BaseComponent {
     this.setState({showDeleteModal: false});
   }
   deletePost() {
-    remove.call({_id: this.props.post._id}, (err, res) => {
+    remove.call({_id: this.props.event._id}, (err, res) => {
       if (err) {
         displayError(err);
       }
 
-      toastr.success('Post has been removed', 'Success');
+      toastr.success('Event has been removed', 'Success');
     });
   }
 
   render() {
-    const { post } = this.props;
+    const { event } = this.props;
     //TODO: improve populating creator later
     //read more: collection-helpers and publishComposite
-    const creator = Meteor.users.findOne(post.creator);
-    const createdAt = new Date(post.createdAt);
+    const creator = Meteor.users.findOne(event.creator);
+    const createdAt = new Date(event.createdAt);
+    const eventDate = new Date(event.event.time);
     const creatorProfile = "/profile/" + creator._id;
+console.log(event.event.location);
 
-    if (post.type==="simple" || post.type==="task"){
     return (
-      <div className="posts">
-        <div className="post-header">
+      <div className="events">
+        <div className="event-header">
           <div className="avatar">
             <a href={creatorProfile}><img className="img-responsive img-circle" src={creator.profile.photo}/></a>
           </div>
-          <a href={creatorProfile}><div className="user-info">
-            {creator.profile.name}
-            <p id="date">on {createdAt.toUTCString()}</p>
-          </div></a>
+          <div className="user-info">
+            <a href={creatorProfile}>{creator.profile.name}</a><span id="eventTag"> created an event</span>
+            <p id="date"> on {createdAt.toUTCString()}</p>
+          </div>
 
-          { Meteor.userId() === post.creator
+        { Meteor.userId() === event.creator
             ? <i className="icon-close pull-right" onClick={this.showDeleteModal}></i>
             : '' }
 
         </div>
 
-        <div className="post-body">
-          {this.props.post.text}
+        <div className="event-body">
+          {this.props.event.text} on <span id="eventDate">{eventDate.toLocaleString()}</span>
         </div>
         <hr></hr>
-        <div className="post-footer">
-          <CommentSection post={this.props.post}/>
+          <div className="mapDiv">
+              <Locator address={event.event.location}/>
+            </div>
+        <hr></hr>
+        <div className="event-footer">
+          <CommentSection post={this.props.event}/>
         </div>
 
         <Modal
@@ -77,11 +81,11 @@ export default class Post extends BaseComponent {
           onHide={this.hideDeleteModal}>
 
           <Modal.Header closeButton>
-            <Modal.Title>Delete post</Modal.Title>
+            <Modal.Title>Delete event</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
-            <p>Are you sure you want to delete this post? This action cannot be undone.</p>
+            <p>Are you sure you want to delete this event? This action cannot be undone.</p>
           </Modal.Body>
 
           <Modal.Footer>
@@ -91,14 +95,11 @@ export default class Post extends BaseComponent {
         </Modal>
       </div>
     );
-  }
-  else if (post.type==="event"){
-    return <Event event={post}/>;
-  }
+
 
   }
 }
 
-Post.propTypes = {
-  post: React.PropTypes.object
+Event.propTypes = {
+  event: React.PropTypes.object
 };
