@@ -85,7 +85,7 @@ export default class SignInPage extends BaseComponent {
               title={i18n.__('pages.authPageSignIn.password')}
             />*/}
           </div>
-          <button type="submit" className="btn-primary">
+          <button type="submit" style={{width: '100%'}}className="custom-btn-primary">
             {i18n.__('pages.authPageSignIn.signInButton')}
           </button>
         </form>

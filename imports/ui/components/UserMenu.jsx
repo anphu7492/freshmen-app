@@ -25,19 +25,19 @@ export default class UserMenu extends BaseComponent {
  const profileLink = "/profile/" + user._id;
     return (
       <div className="user-menu vertical">
-        <a href="#toggle" className="btn-secondary" onClick={this.toggle}>
+        <a href="#toggle" className="custom-btn-secondary" onClick={this.toggle}>
           {open
             ? <span className="icon-arrow-up" />
             : <span className="icon-arrow-down" />}
           {user.profile.name}
         </a>
         {open
-          ? <a className="btn-secondary" href={profileLink}>
+          ? <a className="custom-btn-secondary" href={profileLink}>
             Profile
           </a>
           : null}
         {open
-          ? <a className="btn-secondary" onClick={logout}>
+          ? <a className="custom-btn-secondary" onClick={logout}>
             {i18n.__('components.userMenu.logout')}
           </a>
           : null}
@@ -48,10 +48,10 @@ export default class UserMenu extends BaseComponent {
   renderLoggedOut() {
     return (
       <div className="user-menu">
-        <Link to="/signin" className="btn-secondary">
+        <Link to="/signin" className="custom-btn-secondary">
           {i18n.__('components.userMenu.login')}
         </Link>
-        <Link to="/join" className="btn-secondary">
+        <Link to="/join" className="custom-btn-secondary">
           {i18n.__('components.userMenu.join')}
         </Link>
       </div>
