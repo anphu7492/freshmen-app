@@ -12,16 +12,16 @@ export default class ContactUs extends BaseComponent {
                     <form id="contact_form" action="http://localhost:3000" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <label for="subject" className="contact-label">Subject:</label><br/>
-                            <input id="subject" className="contact-subject" type="text" size="60"/>
+                            <input id="contact-subject" className="contact-subject" type="text" size="52"/>
                         </div>
-                        &nbsp;
+                        &nbsp;&nbsp;
                         <div class="row">
                             <label for="message" className="contact-label">Your message:</label><br/>
-                            <textarea id="message" class="contact-input-message" name="message" rows="7" cols="80"></textarea>
+                            <textarea id="contact-input-message" class="contact-input-message" name="message" rows="7" cols="60"></textarea>
                         </div>
                         &nbsp;
                         <div class="row">
-                            <input id="submit_button" className="contact-submit-btn" type="submit" value="Send email"/>
+                            <input id="contact-submit-btn" className="contact-submit-btn" type="submit" value="Send email"/>
                         </div>
                     </form>
                 </div>
