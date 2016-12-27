@@ -17,7 +17,7 @@ export default class About extends BaseComponent {
                     <p id="description">A Student , A Tutor , A Study Coordinator</p>
                     &nbsp;
                     <p id="content">
-                        <b>Freshmen Guide</b>
+                        <b>Freshmen Guide</b> &nbsp;
                         is a service designed to relieve the stress of the orientation week on newly enrolled students. It aims at providing a one-stop solution to all the guidance a new student might need during the orientation week.</p>
                 </div>
                 &nbsp;

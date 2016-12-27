@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Factory } from 'meteor/factory';
 import faker from 'faker';
@@ -74,6 +75,10 @@ TaskSchema = new SimpleSchema({
 });
 
 CommentSchema = new SimpleSchema({
+  _id: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  },
   content: {
     type: String,
     max: 1000
@@ -148,6 +153,10 @@ Posts.helpers({
     return Posts.find({});
   },
   editableBy(userId) {
-    return this.editableBy(userId);
+    if (!this.creator) {
+      return true;
+    }
+
+    return this.creator === userId;
   },
 });

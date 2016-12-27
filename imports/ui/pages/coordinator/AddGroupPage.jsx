@@ -54,7 +54,7 @@ export default class AddGroupPage extends BaseComponent {
             placeholder="Enter group name"
           />
 
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn btn-primary">
           Add
         </button>
         </div>

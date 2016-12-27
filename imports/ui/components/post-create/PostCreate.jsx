@@ -28,7 +28,9 @@ export default class PostCreate extends BaseComponent {
     this.onCreateEvent = this.onCreateEvent.bind(this);
     this.onAddTask = this.onAddTask.bind(this);
     this.onRemoveTask = this.onRemoveTask.bind(this);
+    this.onRemoveTaskItem = this.onRemoveTaskItem.bind(this);
     this.onEventDateChange = this.onEventDateChange.bind(this);
+    this.onRemoveEvent = this.onRemoveEvent.bind(this);
   }
 
   onPostCreate(event) {
@@ -54,15 +56,14 @@ export default class PostCreate extends BaseComponent {
       }
     }
 
-    console.log(newPost);
-
     insert.call({
       type: newPost.type,
       text: newPost.text,
       event: newPost.event ? newPost.event : null,
       task: newPost.task ? newPost.task : null
-    }, displayError)
-      this.props.callBack(newPost)
+    }, displayError);
+
+    this.props.callBack(newPost)
   }
 
   onCreateTask() {
@@ -98,7 +99,20 @@ export default class PostCreate extends BaseComponent {
     });
   }
 
-  onRemoveTask(index) {
+  onRemoveTask() {
+    if (this.state.post.type !== 'task') {
+      return;
+    }
+
+    this.setState({
+      post: update(this.state.post, {
+        type: {$set: 'simple'},
+        task: {$set: null}
+      })
+    });
+  }
+
+  onRemoveTaskItem(index) {
     if (this.state.post.type !== 'task') {
       return;
     }
@@ -127,6 +141,18 @@ export default class PostCreate extends BaseComponent {
     });
   }
 
+  onRemoveEvent() {
+    if (this.state.post.type !== 'event') {
+      return;
+    }
+
+    this.setState({
+      post: update(this.state.post, {
+        type: {$set: 'simple'},
+        event: {$set: null}
+      })
+    });
+  }
   onEventDateChange(date) {
     console.log(typeof date);
     if (typeof date === 'string' || !date.isValid()) {
@@ -149,7 +175,7 @@ export default class PostCreate extends BaseComponent {
           </div>
           {index > 0
             ? <i className="icon-close col-sm-2"
-                 onClick={() => this.onRemoveTask(index)}></i>
+                 onClick={() => this.onRemoveTaskItem(index)}></i>
             : null}
         </div>
       );
@@ -157,7 +183,13 @@ export default class PostCreate extends BaseComponent {
     return (
       <div className="post-task">
         {items}
-        <button className="btn" type="button" onClick={this.onAddTask}>Add task</button>
+        <button className="btn"
+                type="button"
+                onClick={this.onAddTask}>Add task</button>
+        <a className="remove-btn" onClick={this.onRemoveTask}>
+          <i className="icon-trash"></i>
+          Remove task
+        </a>
       </div>
     )
   }
@@ -169,7 +201,6 @@ export default class PostCreate extends BaseComponent {
       return current.isAfter( yesterday );
     };
 
-    console.log(post);
     return (
       <div className="post-event">
         <input className="location form-control"
@@ -178,8 +209,11 @@ export default class PostCreate extends BaseComponent {
         <Datetime isValidDate={ valid }
                   timeConstraints={{minutes: {step: 15}}}
                   dateFormat="DD/MM/YYYY"
-                  inputProps={{readOnly: true}}
                   onChange={this.onEventDateChange} />
+        <a className="remove-btn" onClick={this.onRemoveEvent}>
+          <i className="icon-trash"></i>
+          Remove event
+        </a>
       </div>
     )
   }
