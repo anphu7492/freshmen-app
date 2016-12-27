@@ -31,20 +31,18 @@ EventSchema = new SimpleSchema({
   time: {
     type: Date
   },
-  going: {
-    type: [String],
-    regEx: SimpleSchema.RegEx.Id,
+  confirmations: {
+    type: [Object],
     defaultValue: []
   },
-  notGoing: {
-    type: [String],
+  "confirmations.$.user": {
+    type: String,
     regEx: SimpleSchema.RegEx.Id,
-    defaultValue: []
+    unique: true
   },
-  maybe: {
-    type: [String],
-    regEx: SimpleSchema.RegEx.Id,
-    defaultValue: []
+  "confirmations.$.status": {
+    type: String,
+    allowedValues: ['going', 'notGoing', 'maybe']
   }
 });
 
@@ -66,7 +64,8 @@ TaskSchema = new SimpleSchema({
   },
   "assignees.$.user": {
     type: String,
-    regEx: SimpleSchema.RegEx.Id
+    regEx: SimpleSchema.RegEx.Id,
+    unique: true
   },
   "assignees.$.status": {
     type: String,

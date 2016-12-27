@@ -78,6 +78,51 @@ export const addComment = new ValidatedMethod({
   }
 });
 
+export const markEventConfirmation = new ValidatedMethod({
+  name: 'posts.markEventConfirmation',
+  validate: new SimpleSchema({
+    postId: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    },
+    confirmation: {
+      type: String,
+      allowedValues: ['going', 'notGoing', 'maybe']
+    }
+  }).validator(),
+  run({ postId, confirmation}) {
+
+    console.log('query', query);
+    Posts.update({
+      '_id': postId,
+      'type': 'event',
+      'event.confirmations.user': this.userId
+    }, {
+      '$set': {
+        'event.confirmation.$.status': confirmation
+      }
+    }, function(err, numOfModified) {
+      if (err) {
+        console.warn('Unexpected error', err);
+        throw new Meteor.Error('Update failed', 'Something went wrong. Please try again later');
+      }
+
+      console.log('numOfModified', numOfModified);
+      //if user is not in the list, do another update
+      if (numOfModified === 0) {
+        Posts.update({
+          '_id': postId,
+          'type': 'event'
+        }, {
+          '$push': {
+            'event.confirmations': {'user': this.userId, 'status': confirmation}
+          }
+        });
+      }
+    });
+  }
+});
+
 export const removeComment = new ValidatedMethod({
   name: 'posts.removeComment',
   validate: new SimpleSchema({
@@ -106,7 +151,8 @@ export const removeComment = new ValidatedMethod({
 const POSTS_METHODS = _.pluck([
   insert,
   remove,
-  addComment
+  addComment,
+  markEventConfirmation
 ], 'name');
 
 if (Meteor.isServer) {
