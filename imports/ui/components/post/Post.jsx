@@ -43,14 +43,14 @@ export default class Post extends BaseComponent {
     //read more: collection-helpers and publishComposite
     const creator = Meteor.users.findOne(post.creator);
     const createdAt = new Date(post.createdAt);
-    const userProfile = "/profile/" + creator._id;
+    const creatorProfile = "/profile/" + creator._id;
     return (
       <div className="posts">
         <div className="post-header">
           <div className="avatar">
-            <a href={userProfile}><img className="img-responsive img-circle" src={creator.profile.photo}/></a>
+            <a href={creatorProfile}><img className="img-responsive img-circle" src={creator.profile.photo}/></a>
           </div>
-          <a href={userProfile}><div className="user-info">
+          <a href={creatorProfile}><div className="user-info">
             {creator.profile.name}
             <p id="date">on {createdAt.toUTCString()}</p>
           </div></a>
@@ -64,7 +64,7 @@ export default class Post extends BaseComponent {
         <div className="post-body">
           {this.props.post.text}
         </div>
-
+        <hr></hr>
         <div className="post-footer">
           <CommentSection post={this.props.post}/>
         </div>

@@ -41,15 +41,16 @@ export default class Comment extends BaseComponent {
   render() {
     const { comment } = this.props;
     const creator = Meteor.users.findOne(comment.creator);
+    const creatorProfile = "/profile/" + creator._id;
     console.log('comment', comment, Meteor.userId());
     return (
       <div className="comment layout">
         <div className="avatar flex-none">
-          <img className="user-avatar square xs"
-               src={creator.profile.photo}/>
+          <a href={creatorProfile}><img className="user-avatar square xs"
+               src={creator.profile.photo}/></a>
         </div>
         <div className="comment-content flex">
-          {comment.content}
+          <div id="commenter"><a href={creatorProfile}>{creator.profile.name}</a> said: </div><div id="commentText">{comment.content}</div>
         </div>
 
         { Meteor.userId() === comment.creator
