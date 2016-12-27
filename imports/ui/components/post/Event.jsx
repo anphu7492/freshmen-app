@@ -45,7 +45,7 @@ export default class Event extends BaseComponent {
     const createdAt = new Date(event.createdAt);
     const eventDate = new Date(event.event.time);
     const creatorProfile = "/profile/" + creator._id;
-console.log(event.event.location);
+
 
     return (
       <div className="events">

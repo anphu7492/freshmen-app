@@ -72,6 +72,10 @@ export default class Post extends BaseComponent {
         <div className="post-body">
           {this.props.post.text}
         </div>
+
+        {post.type==="task" &&
+            <Task post={post} />
+        }
         <hr></hr>
         <div className="post-footer">
           <CommentSection post={this.props.post}/>
