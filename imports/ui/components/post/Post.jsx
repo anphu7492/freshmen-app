@@ -42,22 +42,25 @@ export default class Post extends BaseComponent {
     //TODO: improve populating creator later
     //read more: collection-helpers and publishComposite
     const creator = Meteor.users.findOne(post.creator);
-
+    const createdAt = new Date(post.createdAt);
+    const userProfile = "/profile/" + creator._id;
     return (
-      <div className="post">
+      <div className="posts">
         <div className="post-header">
-          <div className="avatar pull-left">
-            <img className="img-responsive img-circle" src={creator.profile.photo}/>
+          <div className="avatar">
+            <a href={userProfile}><img className="img-responsive img-circle" src={creator.profile.photo}/></a>
           </div>
-          <div className="user-info pull-left">
+          <a href={userProfile}><div className="user-info">
             {creator.profile.name}
-          </div>
+            <p id="date">on {createdAt.toUTCString()}</p>
+          </div></a>
 
           { Meteor.userId() === post.creator
             ? <i className="icon-close pull-right" onClick={this.showDeleteModal}></i>
             : '' }
 
         </div>
+
         <div className="post-body">
           {this.props.post.text}
         </div>

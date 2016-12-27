@@ -1,14 +1,59 @@
 @import '{}/imports/ui/stylesheets/utils.less';
 
-.post {
+.posts {
+  color: #532c5f;
+  box-shadow: 0 0 10px 0 rgba(0,0,0, 0.5);
+  margin: 10px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+
+
   .post-header {
-    overflow: auto;
-    height: 40px;
-    line-height: 40px;
+    width: 100%;
+
+
+
     .avatar img {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
+      float: left;
     }
+
+    .user-info{
+      font-weight: bolder;
+      margin-left: 10px;
+      display: inline-block;
+      margin-left: 10px;
+      margin-top:1%;
+      color: #532c5f;
+
+
+      #date{
+        font-family: 'Ubuntu', sans-serif;
+        color: black;
+
+        font-size: 10px;
+
+      }
+    }
+
+  }
+
+  .post-body{
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Roboto Slab', serif;
+    margin: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;
+  }
+
+  .post-footer{
+    width: 100%;
+    margin: 5px;
   }
 }
