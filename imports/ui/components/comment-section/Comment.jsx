@@ -2,7 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import BaseComponent from '../BaseComponent.jsx';
 import { displayError } from '../../helpers/errors.js';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import {
   removeComment
@@ -25,7 +25,6 @@ export default class Comment extends BaseComponent {
   }
 
   deleteComment() {
-    console.log('deleted');
     removeComment.call({
       _id: this.props.comment._id,
       postId: this.props.post._id
@@ -42,19 +41,27 @@ export default class Comment extends BaseComponent {
     const { comment } = this.props;
     const creator = Meteor.users.findOne(comment.creator);
     const creatorProfile = "/profile/" + creator._id;
-    console.log('comment', comment, Meteor.userId());
+    const deleteCommentBtn = (
+      <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">Delete</Tooltip>}>
+        <i className="icon-trash delete-btn" onClick={this.showDeleteModal}></i>
+      </OverlayTrigger>
+    );
+
     return (
-      <div className="comment layout">
+      <div className="comment layout-align--middle">
         <div className="avatar flex-none">
           <a href={creatorProfile}><img className="user-avatar square xs"
                src={creator.profile.photo}/></a>
         </div>
         <div className="comment-content flex">
-          <div id="commenter"><a href={creatorProfile}>{creator.profile.name}</a> said: </div><div id="commentText">{comment.content}</div>
+          <div className="commenter">
+            <a href={creatorProfile}>{creator.profile.name}</a> said:
+          </div>
+          <div className="comment-text">{comment.content}</div>
         </div>
 
         { Meteor.userId() === comment.creator
-          ? <i className="icon-trash" onClick={this.showDeleteModal}></i>
+          ? deleteCommentBtn
           : '' }
 
         <Modal

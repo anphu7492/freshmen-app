@@ -3,9 +3,10 @@ import { Meteor } from 'meteor/meteor';
 import BaseComponent from '../BaseComponent.jsx';
 import CommentSection from '../comment-section/CommentSection.jsx';
 import { displayError } from '../../helpers/errors.js';
-import { Modal, Button } from 'react-bootstrap';
 import Event from './Event.jsx';
 import Task from './Task.jsx';
+import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+
 import {
   remove
 } from '../../../api/posts/methods.js';
@@ -45,21 +46,25 @@ export default class Post extends BaseComponent {
     const creator = Meteor.users.findOne(post.creator);
     const createdAt = new Date(post.createdAt);
     const creatorProfile = "/profile/" + creator._id;
-
-    if (post.type==="simple" || post.type==="task"){
+    const deletePostBtn = (
+      <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">Delete</Tooltip>}>
+        <i className="icon-close delete-btn pull-right" onClick={this.showDeleteModal}></i>
+      </OverlayTrigger>
+    );
+ if (post.type==="simple" || post.type==="task"){
     return (
       <div className="posts">
-        <div className="post-header">
-          <div className="avatar">
+        <div className="post-header layout">
+          <div className="avatar flex-none">
             <a href={creatorProfile}><img className="img-responsive img-circle" src={creator.profile.photo}/></a>
           </div>
-          <a href={creatorProfile}><div className="user-info">
+          <a href={creatorProfile}><div className="user-info flex">
             {creator.profile.name}
             <p id="date">on {createdAt.toUTCString()}</p>
           </div></a>
 
           { Meteor.userId() === post.creator
-            ? <i className="icon-close pull-right" onClick={this.showDeleteModal}></i>
+            ? deletePostBtn
             : '' }
 
         </div>
