@@ -1,105 +1,79 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import BaseComponent from '../BaseComponent.jsx';
-import CommentSection from '../comment-section/CommentSection.jsx';
 import { displayError } from '../../helpers/errors.js';
-import { Modal, Button } from 'react-bootstrap';
 import {
-  remove
+  markEventConfirmation
 } from '../../../api/posts/methods.js';
 import Locator from '../Locator.jsx';
 
 export default class Event extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = Object.assign(this.state, {
-      showDeleteModal: false
-    });
-    this.deletePost = this.deletePost.bind(this);
-    this.showDeleteModal = this.showDeleteModal.bind(this);
-    this.hideDeleteModal = this.hideDeleteModal.bind(this);
+
+    this.markEventAs = this.markEventAs.bind(this);
   }
 
-  showDeleteModal() {
-    this.setState({showDeleteModal: true});
-  }
-
-  hideDeleteModal() {
-    this.setState({showDeleteModal: false});
-  }
-  deletePost() {
-    remove.call({_id: this.props.event._id}, (err, res) => {
+  markEventAs(confirmation) {
+    markEventConfirmation.call({
+      postId: this.props.post._id,
+      confirmation: confirmation
+    }, (err) => {
       if (err) {
         displayError(err);
+      } else {
+        toastr.success('Action has been confirmed', 'Success');
       }
-
-      toastr.success('Event has been removed', 'Success');
     });
+    console.log(confirmation);
   }
 
   render() {
-    const { event } = this.props;
-    //TODO: improve populating creator later
-    //read more: collection-helpers and publishComposite
-    const creator = Meteor.users.findOne(event.creator);
-    const createdAt = new Date(event.createdAt);
-    const eventDate = new Date(event.event.time);
-    const creatorProfile = "/profile/" + creator._id;
-console.log(event.event.location);
+    const { post } = this.props;
+    const event = post.event;
 
     return (
-      <div className="events">
-        <div className="event-header">
-          <div className="avatar">
-            <a href={creatorProfile}><img className="img-responsive img-circle" src={creator.profile.photo}/></a>
+      <div className="event-details">
+        <hr/>
+        <div className="layout">
+          <div className="map flex">
+            <Locator address={event.location}/>
           </div>
-          <div className="user-info">
-            <a href={creatorProfile}>{creator.profile.name}</a><span id="eventTag"> created an event</span>
-            <p id="date"> on {createdAt.toUTCString()}</p>
-          </div>
+          <div className="info flex-none">
+            <p className="location">
+              <i className="glyphicon glyphicon-map-marker"></i>
+              {event.location}
+            </p>
+            <p className="date">
+              <i className="glyphicon glyphicon-time"></i>
+              {event.time.toLocaleString()}
+            </p>
 
-        { Meteor.userId() === event.creator
-            ? <i className="icon-close pull-right" onClick={this.showDeleteModal}></i>
-            : '' }
-
-        </div>
-
-        <div className="event-body">
-          {this.props.event.text} on <span id="eventDate">{eventDate.toLocaleString()}</span>
-        </div>
-        <hr></hr>
-          <div className="mapDiv">
-              <Locator address={event.event.location}/>
+            <p>Mark myself as:</p>
+            <div className="btn-group">
+              <button type="button"
+                      className="btn btn-success"
+                      onClick={() => this.markEventAs('going')}>
+                Going
+              </button>
+              <button type="button"
+                      className="btn btn-info"
+                      onClick={() => this.markEventAs('maybe')}>
+                Maybe
+              </button>
+              <button type="button"
+                      className="btn btn-danger"
+                      onClick={() => this.markEventAs('notGoing')}>
+                Not going
+              </button>
             </div>
-        <hr></hr>
-        <div className="event-footer">
-          <CommentSection post={this.props.event}/>
+          </div>
         </div>
-
-        <Modal
-          show={this.state.showDeleteModal}
-          onHide={this.hideDeleteModal}>
-
-          <Modal.Header closeButton>
-            <Modal.Title>Delete event</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <p>Are you sure you want to delete this event? This action cannot be undone.</p>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button onClick={this.hideDeleteModal}>Cancel</Button>
-            <Button bsStyle="danger" onClick={this.deletePost}>Delete</Button>
-          </Modal.Footer>
-        </Modal>
       </div>
     );
-
-
   }
 }
 
 Event.propTypes = {
-  event: React.PropTypes.object
+  post: React.PropTypes.object
 };

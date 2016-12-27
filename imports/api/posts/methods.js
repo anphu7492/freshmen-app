@@ -20,7 +20,6 @@ export const insert = new ValidatedMethod({
   ])
   .validator(),
   run({ type, text, event, task }) {
-    console.log('create post', type, text, event, task);
     let newPost = {
       type: type,
       text: text,
@@ -92,16 +91,18 @@ export const markEventConfirmation = new ValidatedMethod({
   }).validator(),
   run({ postId, confirmation}) {
 
-    console.log('query', query);
+    const userId = this.userId;
+    console.log('aaa', postId, confirmation, userId);
+
     Posts.update({
       '_id': postId,
       'type': 'event',
-      'event.confirmations.user': this.userId
+      'event.confirmations.user': userId
     }, {
       '$set': {
-        'event.confirmation.$.status': confirmation
+        'event.confirmations.$.status': confirmation
       }
-    }, function(err, numOfModified) {
+    }, (err, numOfModified) => {
       if (err) {
         console.warn('Unexpected error', err);
         throw new Meteor.Error('Update failed', 'Something went wrong. Please try again later');
@@ -115,7 +116,7 @@ export const markEventConfirmation = new ValidatedMethod({
           'type': 'event'
         }, {
           '$push': {
-            'event.confirmations': {'user': this.userId, 'status': confirmation}
+            'event.confirmations': {'user': userId, 'status': confirmation}
           }
         });
       }

@@ -39,17 +39,17 @@ export default class TutorDashboard extends BaseComponent {
 
     return (
       <div className="tutor-dashboard">
-        <div className ="tutor-main">
-          <PostCreate callBack={this.update}></PostCreate>
-
-        {/*  <div className="mapDiv">
-            <EventLocator/>
+        <div className ="tutor-main layout--column">
+          <div className="flex-none">
+            <PostCreate callBack={this.update}></PostCreate>
           </div>
-*/}
-          {loading
-            ? <Loading key="loading" />
-            : <PostList posts={posts} loading={false}/>
-          }
+          <div className="flex">
+            {loading
+              ? <Loading key="loading" />
+              : <PostList posts={posts} loading={false}/>
+            }
+          </div>
+
         </div>
       </div>
     );

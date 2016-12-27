@@ -51,7 +51,7 @@ export default class Post extends BaseComponent {
         <i className="icon-close delete-btn pull-right" onClick={this.showDeleteModal}></i>
       </OverlayTrigger>
     );
- if (post.type==="simple" || post.type==="task"){
+
     return (
       <div className="posts">
         <div className="post-header layout">
@@ -70,7 +70,10 @@ export default class Post extends BaseComponent {
         </div>
 
         <div className="post-body">
-          {this.props.post.text}
+          <div className="text">
+            {post.text}
+          </div>
+          {post.type === 'event' ? <Event post={post}/> : ''}
         </div>
         <hr></hr>
         <div className="post-footer">
@@ -96,11 +99,6 @@ export default class Post extends BaseComponent {
         </Modal>
       </div>
     );
-  }
-  else if (post.type==="event"){
-    return <Event event={post}/>;
-  }
-
   }
 }
 

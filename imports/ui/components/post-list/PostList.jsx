@@ -16,7 +16,7 @@ export default class PostList extends BaseComponent {
       Posts = (
         <Message
           title="No posts found"
-          subtitle="Create a post now"
+          subtitle="Create a post to start communicating with people"
         />
       )
     } else {

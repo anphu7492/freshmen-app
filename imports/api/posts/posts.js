@@ -37,8 +37,7 @@ EventSchema = new SimpleSchema({
   },
   "confirmations.$.user": {
     type: String,
-    regEx: SimpleSchema.RegEx.Id,
-    unique: true
+    regEx: SimpleSchema.RegEx.Id
   },
   "confirmations.$.status": {
     type: String,
@@ -64,8 +63,7 @@ TaskSchema = new SimpleSchema({
   },
   "assignees.$.user": {
     type: String,
-    regEx: SimpleSchema.RegEx.Id,
-    unique: true
+    regEx: SimpleSchema.RegEx.Id
   },
   "assignees.$.status": {
     type: String,
