@@ -50,7 +50,7 @@ console.log(completedTasks, numTasks, numAssignments);
                     <h4>Completed by students</h4>
                     <h5>{completedTasks}</h5>
                     <h4>Completion rate</h4>
-                    <h5>{completionRate}</h5>
+                    <h5>{completionRate.toFixed(2)}%</h5>
                 </div>
             </div>
         )
