@@ -25,11 +25,11 @@ export default class UserInfo extends BaseComponent {
       twitter = "inlineBlock";
     return (
       <div className="student">
-        <p className="studenttitle">Hello!</p>
+        <p className="studenttitle"></p>
         <div className="student-image">
-          <img src={photo}
-               height="80px" width="80px" alt="Avatar"/>
-          <p className="profile-name">{user.profile.name}</p>
+          <a href={"/profile/"+user._id}><img src={photo}
+               height="80px" width="80px" alt="Avatar"/></a>
+             <a href={"/profile/"+user._id}><p className="profile-name">{user.profile.name}</p></a>
           <p className="profile-school">{user.profile.major}</p>
           <p className="profile-school">{user.profile.school}</p>
           <a style={{display: facebook}} href={user.profile.facebook}>
