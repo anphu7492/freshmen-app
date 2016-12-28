@@ -12,7 +12,6 @@ export default createContainer(() => {
   const privateHandle = Meteor.subscribe('lists.private');
   const userHandle = Meteor.subscribe('userData');
   const allUserData = Meteor.subscribe('allUserData');
-  const imageData = Meteor.subscribe('images');
   const groupsHandle = Meteor.subscribe('groups.all');
 
   return {

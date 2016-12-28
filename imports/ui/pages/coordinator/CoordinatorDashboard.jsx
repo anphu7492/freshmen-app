@@ -24,8 +24,6 @@ export default class CoordinatorDashboard extends BaseComponent {
         {loading
           ? <Message title="Loading" />
           : childrenWithProps}
-
-
           <Events/>
       </div>
     )

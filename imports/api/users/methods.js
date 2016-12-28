@@ -19,7 +19,6 @@ export const createUserFromCoordinator = new ValidatedMethod({
     role: {type: String}
   }).validator(),
   run({email, password, profile, group, role}) {
-    console.log('aa', email, password, profile);
     Accounts.createUser({email, password, profile, group, role});
   }
 });
