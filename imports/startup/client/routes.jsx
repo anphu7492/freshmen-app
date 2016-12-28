@@ -43,9 +43,9 @@ export const renderRoutes = () => (
       <Route path="/profile/:id" component={ProfilePage}/>
       <Route path="coordinator" component={CoordinatorPageContainer}>
         <Route path="add-group" component={AddGroupPage}/>
-        <Route path="add-student" component={AddStudentPage}/>
-
+        <Route path="/add-student" component={AddStudentPage}/>
       </Route>
+
     </Route>
     <Route path="*" component={NotFoundPage} />
   </Router>

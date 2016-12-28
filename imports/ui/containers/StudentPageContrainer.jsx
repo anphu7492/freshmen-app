@@ -8,7 +8,12 @@ const StudentPageContainer = createContainer(() => {
   const loading = !postsHandle.ready();
   return {
     loading,
-    posts: Posts.find().fetch()
+    posts: Posts.find({
+      $or: [
+        {group: {$exists: false}},
+        {group: Meteor.user().group}
+      ]
+    }).fetch()
   };
 }, StudentDashboard);
 

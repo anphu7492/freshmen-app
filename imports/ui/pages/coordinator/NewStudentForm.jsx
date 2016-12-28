@@ -60,7 +60,6 @@ export default class NewStudentForm extends BaseComponent {
       return;
     }
 
-    console.log(email, password, profile, group, role);
     createUserFromCoordinator.call({
       email: email,
       password: password,
@@ -72,12 +71,17 @@ export default class NewStudentForm extends BaseComponent {
         this.setState({
           errors: { none: err.reason },
         });
+        this.props.errCallback(this.props.student)
+      } else {
+        toastr.success('User has been created');
+        this.props.successCallback(this.props.student)
       }
     });
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.submitted) {
+    /*this can be called even if props.submitted haven't changed*/
+    if (nextProps.submitted && this.props.submitted !== nextProps.submitted) {
       this.createStudent();
     }
   }
@@ -91,7 +95,6 @@ export default class NewStudentForm extends BaseComponent {
     const groupOptions = groups.map(group => (
       <option key={group._id} value={group._id}>{group.name}</option>
     ));
-    console.log(errors, this.state);
 
     return (
       <Grid bsClass="student-form">
@@ -204,5 +207,8 @@ export default class NewStudentForm extends BaseComponent {
 }
 
 NewStudentForm.propTypes = {
-  groups: React.PropTypes.array
+  groups: React.PropTypes.array,
+  submitted: React.PropTypes.bool,
+  errCallback: React.PropTypes.func,
+  successCallback: React.PropTypes.func
 };

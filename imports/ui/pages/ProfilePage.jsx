@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
 import {findUser} from '../../api/users/methods.js';
 import request from 'superagent';
-import Images from '../../api/images/images.js';
 import { Accounts } from 'meteor/accounts-base';
 import { Groups } from '../../api/groups/groups.js';
 

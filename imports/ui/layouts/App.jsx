@@ -35,20 +35,20 @@ export default class App extends React.Component {
   }
 
   closeAddStudents() {
-   this.setState({ showAddStudents: false });
- }
+    this.setState({ showAddStudents: false });
+  }
 
- openAddStudents() {
-   this.setState({ showAddStudents: true });
- }
+  openAddStudents() {
+    this.setState({ showAddStudents: true });
+  }
 
- closeAddGroups() {
-  this.setState({ showAddGroups: false });
-}
+  closeAddGroups() {
+    this.setState({ showAddGroups: false });
+  }
 
-openAddGroups() {
-  this.setState({ showAddGroups: true });
-}
+  openAddGroups() {
+    this.setState({ showAddGroups: true });
+  }
 
   componentDidMount() {
     setTimeout(() => {
@@ -60,9 +60,9 @@ openAddGroups() {
   componentWillReceiveProps({ loading, children }) {
     // redirect / to a list once lists are ready
     /*if (!loading && !children) {
-      const list = Lists.findOne();
-      this.context.router.replace(`/lists/${list._id}`);
-    }*/
+     const list = Lists.findOne();
+     this.context.router.replace(`/lists/${list._id}`);
+     }*/
     if (!loading && !children) {
       if (Meteor.user().role === 'tutor') {
         this.context.router.replace('/tutor');
@@ -106,11 +106,12 @@ openAddGroups() {
     // clone route components with keys so that they can
     // have transitions
     const clonedChildren = children && React.cloneElement(children, {
-      key: location.pathname,
-    });
+        key: location.pathname,
+      });
 
     const coordinatorMenu = (
       <li>
+        {/*<Link to="/add-student">Add students</Link>*/}
         <Link onClick={this.openAddStudents}>Add students</Link>
         <Link onClick={this.openAddGroups}>Add groups</Link>
       </li>
@@ -120,82 +121,78 @@ openAddGroups() {
       <div>
         <div className="navibar">
           <div className="container-fluid">
-              <ul className="navibar-nav">
-                <li><a className="site-title" href="/">Freshmen Guide</a></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/faq">FAQ</Link></li>
-                <li><Link to="/contact-us">Contact US</Link></li>
-                {!loading && user.role === 'coordinator' ? coordinatorMenu : ''}
+            <ul className="navibar-nav">
+              <li><a className="site-title" href="/">Freshmen Guide</a></li>
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/faq">FAQ</Link></li>
+              <li><Link to="/contact-us">Contact US</Link></li>
+              {!loading && user.role === 'coordinator' ? coordinatorMenu : ''}
 
-              </ul>
+            </ul>
           </div>
         </div>
 
 
-      <div id="container" className={menuOpen ? 'menu-open' : ''}>
-        <section id="menu">
-          {/*<LanguageToggle />*/}
-          <UserMenu user={user} logout={this.logout} />
-          {!loading ?
-            <Profiles user={user}/>
-            : ''}
-          <ListList lists={lists}/>
-        </section>
-        {showConnectionIssue && !connected
-          ? <ConnectionNotification />
-          : null}
-        <div className="content-overlay" onClick={closeMenu} />
-        <div id="content-container">
-          <ReactCSSTransitionGroup
-            transitionName="fade"
-            transitionEnterTimeout={200}
-            transitionLeaveTimeout={200}
-          >
-            {loading
-              ? <Loading key="loading" />
-              : clonedChildren}
+        <div id="container" className={menuOpen ? 'menu-open' : ''}>
+          <section id="menu">
+            {/*<LanguageToggle />*/}
+            <UserMenu user={user} logout={this.logout} />
+            {!loading && <Profiles user={user}/>}
+            {user && user.role !== 'coordinator' && <ListList lists={lists}/>}
+          </section>
+          {showConnectionIssue && !connected
+            ? <ConnectionNotification />
+            : null}
+          <div className="content-overlay" onClick={closeMenu} />
+          <div id="content-container">
+            <ReactCSSTransitionGroup
+              transitionName="fade"
+              transitionEnterTimeout={200}
+              transitionLeaveTimeout={200}
+            >
+              {loading
+                ? <Loading key="loading" />
+                : clonedChildren}
 
-              <Modal  show={this.state.showAddStudents} onHide={this.closeAddStudents}>
-              <Modal.Header dialogClassName="custom-modal" closeButton>
-                <Modal.Title>Add Students</Modal.Title>
-              </Modal.Header>
-              <Modal.Body dialogClassName="custom-modal">
-                  <AddStudentPage groups={groups}/>
-              </Modal.Body>
-              <Modal.Footer dialogClassName="custom-modal">
-                <button className="btn btn-danger" onClick={this.closeAddStudents}>Cancel</button>
-              </Modal.Footer>
-            </Modal>
+            </ReactCSSTransitionGroup>
 
-            <Modal dialogClassName="custom-modal" show={this.state.showAddGroups} onHide={this.closeAddGroups}>
+          </div>
+          <div id="right-sidebar">
+            {user && (user.role === 'tutor' && !loading)
+              ? <TutorSidebar user={user} users={users} group={user.group} tasks={tasks}/>
+              : ''
+            }
+            {user && user.role === 'student' && !loading
+              ? <StudentSidebar user={user} group={user.group} users={users} groups={groups}/>
+              : ''
+            }
+          </div>
+
+          <Modal show={this.state.showAddStudents} onHide={this.closeAddStudents}>
+            <Modal.Header closeButton>
+              <Modal.Title>Add Students</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <AddStudentPage groups={groups}/>
+            </Modal.Body>
+            <Modal.Footer>
+              <button className="btn btn-danger" onClick={this.closeAddStudents}>Cancel</button>
+            </Modal.Footer>
+          </Modal>
+
+          <Modal show={this.state.showAddGroups} onHide={this.closeAddGroups}>
             <Modal.Header closeButton>
               <Modal.Title>Add Groups</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <AddGroupPage/>
+              <AddGroupPage/>
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-danger" onClick={this.closeAddGroups}>Cancel</button>
             </Modal.Footer>
           </Modal>
-
-          </ReactCSSTransitionGroup>
-
-        </div>
-        <div id="right-sidebar">
-          {user && (user.role === 'tutor' && !loading)
-            ? <TutorSidebar user={user} users={users} group={user.group} tasks={tasks}/>
-            : ''
-          }
-          {user && user.role === 'student' && !loading
-            ? <StudentSidebar user={user} group={user.group} users={users} groups={groups}/>
-            : ''
-          }
         </div>
       </div>
-
-      </div>
-
     );
   }
 }

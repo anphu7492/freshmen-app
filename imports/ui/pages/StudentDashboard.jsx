@@ -1,9 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
-import Tasks from '../components/Tasks.jsx';
-import Events from '../components/Events.jsx';
 import { Groups } from '../../api/groups/groups.js';
 import { Posts } from '../../api/posts/posts.js';
 import PostList from '../components/post-list/PostList';

@@ -1,9 +1,8 @@
 import React from 'react';
 import BaseComponent from '../../components/BaseComponent.jsx';
-import Message from '../../components/Message.jsx';
-import Tasks from '../../components/Tasks.jsx';
-import Events from '../../components/Events.jsx';
-import Posts from '../../components/Posts.jsx';
+import PostCreate from '../../components/post-create/PostCreate.jsx';
+import PostList from '../../components/post-list/PostList.jsx';
+import Loading from '../../components/Loading.jsx';
 
 export default class CoordinatorDashboard extends BaseComponent {
   constructor(props) {
@@ -12,7 +11,7 @@ export default class CoordinatorDashboard extends BaseComponent {
   }
 
   render() {
-    const { loading, groups } = this.props;
+    const { loading, groups, posts } = this.props;
 
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
@@ -21,12 +20,18 @@ export default class CoordinatorDashboard extends BaseComponent {
     );
     return (
       <div className="dashboard">
-        {loading
-          ? <Message title="Loading" />
-          : childrenWithProps}
-
-
-          <Events/>
+        <div className="flex-none">
+          <PostCreate callBack={this.update}></PostCreate>
+        </div>
+        <div className="flex">
+          {loading
+            ? <Loading key="loading" />
+            : <PostList posts={posts} loading={false}/>
+          }
+        </div>
+        {/*{loading*/}
+          {/*? <Message title="Loading" />*/}
+          {/*: childrenWithProps}*/}
       </div>
     )
   }
