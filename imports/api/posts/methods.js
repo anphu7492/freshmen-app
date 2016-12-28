@@ -16,7 +16,9 @@ export const insert = new ValidatedMethod({
     'task.todos',
     'task.todos.$',
     'task.todos.$._id',
-    'task.todos.$.text'
+    'task.todos.$.text',
+    'task.assignees.$.user',
+    'task.assignees.$.status'
   ])
   .validator(),
   run({ type, text, event, task }) {
@@ -135,7 +137,7 @@ export const markTaskCompletion = new ValidatedMethod({
   }).validator(),
   run({ postId, status }) {
 
-    Post.update({
+    Posts.update({
       '_id': postId,
       'task.assignees.user': this.userId
     }, {

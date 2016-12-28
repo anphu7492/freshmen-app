@@ -18,13 +18,10 @@ import 'react-datetime/css/react-datetime.css';
 export default class PostCreate extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = Object.assign(this.state, {
-      post: {
-        type: 'simple'
-      },
-      errors: {},
-      placeholder: "Say something"
-    });
+    this.user = Meteor.user();
+    this.members = Meteor.users.find({group: this.user.group, role: 'student'}).fetch();
+    this.initState();
+
     this.onPostCreate = this.onPostCreate.bind(this);
     this.onCreateTask = this.onCreateTask.bind(this);
     this.onCreateEvent = this.onCreateEvent.bind(this);
@@ -33,6 +30,19 @@ export default class PostCreate extends BaseComponent {
     this.onRemoveTaskItem = this.onRemoveTaskItem.bind(this);
     this.onEventDateChange = this.onEventDateChange.bind(this);
     this.onRemoveEvent = this.onRemoveEvent.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
+  }
+
+  initState() {
+    this.state = Object.assign(this.state, {
+      post: {
+        text: '',
+        type: 'simple'
+      },
+      errors: {},
+      placeholder: "Say something"
+    });
+
   }
 
   onPostCreate(event) {
@@ -41,7 +51,7 @@ export default class PostCreate extends BaseComponent {
     const { post } = this.state;
     let newPost = {
       type: post.type,
-      text: post.text.value
+      text: post.text
     };
 
     if (post.type === 'event') {
@@ -54,6 +64,11 @@ export default class PostCreate extends BaseComponent {
         todos: post.task.todos.map(todo => ({
           _id: todo._id,
           text: todo.text.value
+        })),
+        assignees: this.members.filter(member => member.checked)
+        .map(selected => ({
+          user: selected._id,
+          status: 'ongoing'
         }))
       }
     }
@@ -63,9 +78,17 @@ export default class PostCreate extends BaseComponent {
       text: newPost.text,
       event: newPost.event ? newPost.event : null,
       task: newPost.task ? newPost.task : null
-    }, displayError);
+    }, (err, res) => {
+      if (err) {
+        return displayError(err);
+      }
 
-    this.props.callBack(newPost)
+      toastr.success('Post has been created', 'Awesome');
+      this.initState();
+
+    });
+
+    // this.props.callBack(newPost)
   }
 
   onCreateTask() {
@@ -99,16 +122,21 @@ export default class PostCreate extends BaseComponent {
 
     this.setState({
       post: post
-
     });
   }
 
+  onTextChange(e) {
+    this.setState({
+      post: update(this.state.post, {
+        text: {$set: e.target.value}
+      })
+    });
+  }
+  
   onRemoveTask() {
     if (this.state.post.type !== 'task') {
       return;
     }
-
-
 
     this.setState({
       post: update(this.state.post, {
@@ -165,7 +193,6 @@ export default class PostCreate extends BaseComponent {
     });
   }
   onEventDateChange(date) {
-    console.log(typeof date);
     if (typeof date === 'string' || !date.isValid()) {
       this.errors.invalidEventDate = true;
       return;
@@ -175,6 +202,7 @@ export default class PostCreate extends BaseComponent {
 
   renderTasksBox() {
     const { post } = this.state;
+
     let items = post.task.todos.map((todo, index) => {
       return (
         <div key={todo._id} className="row">
@@ -191,6 +219,25 @@ export default class PostCreate extends BaseComponent {
         </div>
       );
     });
+
+    let memberList = this.members.map(member => (
+      <div key={member._id} className="item layout-align--midle">
+        <label className="checkbox flex-none" htmlFor={member._id}>
+          {/*cannot assign value to member.checked because it controls it's own state
+          ** https://facebook.github.io/react/docs/forms.html#controlled-components
+          */}
+          <input
+            id={member._id}
+            type="checkbox"
+            checked={member.selected}
+            name="checked"
+            ref={(c) => {member.checked = c}}
+          />
+          <span className="checkbox-custom" />
+        </label>
+        <div className="name flex">{member.profile.name}</div>
+      </div>
+    ));
     return (
       <div className="post-task">
         {items}
@@ -204,9 +251,9 @@ export default class PostCreate extends BaseComponent {
           Remove task
         </a>
 
-        <p>Assign task:</p>
         <div className="assignee-list">
-
+          <p>Assign task:</p>
+          {memberList}
         </div>
       </div>
     )
@@ -247,17 +294,20 @@ export default class PostCreate extends BaseComponent {
             minRows={3}
             maxRows={20}
             className="text form-control"
-            placeholder = {this.state.placeholder}
-            ref={(c) => {post.text = c}}>
+            value={this.state.post.text}
+            onChange={this.onTextChange}
+            placeholder = {this.state.placeholder}>
           </Textarea>
           {post.type === 'task' ?
             this.renderTasksBox() :
             post.type === 'event' ? this.renderEventBox() : ''}
           <div className="post-types layout">
             <div className="flex">
-              <button className="custom-btn-primary" type="button" onClick={this.onCreateTask}>
-                Task
-              </button>
+              {this.user.role === 'tutor' && (
+                <button className="custom-btn-primary" type="button" onClick={this.onCreateTask}>
+                  Task
+                </button>
+              )}
               <button className="custom-btn-primary" type="button" onClick={this.onCreateEvent}>
                 Event
               </button>
