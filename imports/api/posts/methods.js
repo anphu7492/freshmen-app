@@ -92,11 +92,9 @@ export const markEventConfirmation = new ValidatedMethod({
   run({ postId, confirmation}) {
 
     const userId = this.userId;
-    console.log('aaa', postId, confirmation, userId);
 
     Posts.update({
       '_id': postId,
-      'type': 'event',
       'event.confirmations.user': userId
     }, {
       '$set': {
@@ -108,7 +106,6 @@ export const markEventConfirmation = new ValidatedMethod({
         throw new Meteor.Error('Update failed', 'Something went wrong. Please try again later');
       }
 
-      console.log('numOfModified', numOfModified);
       //if user is not in the list, do another update
       if (numOfModified === 0) {
         Posts.update({
@@ -119,6 +116,31 @@ export const markEventConfirmation = new ValidatedMethod({
             'event.confirmations': {'user': userId, 'status': confirmation}
           }
         });
+      }
+    });
+  }
+});
+
+export const markTaskCompletion = new ValidatedMethod({
+  name: 'posts.markTaskCompletion',
+  validate: new SimpleSchema({
+    postId: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    },
+    status: {
+      type: String,
+      allowedValues: ['ongoing', 'completed']
+    }
+  }).validator(),
+  run({ postId, status }) {
+
+    Post.update({
+      '_id': postId,
+      'task.assignees.user': this.userId
+    }, {
+      '$set': {
+        'task.assignees.$.status': status
       }
     });
   }

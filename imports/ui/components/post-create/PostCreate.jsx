@@ -196,8 +196,10 @@ export default class PostCreate extends BaseComponent {
         {items}
         <button className="custom-btn-success"
                 type="button"
-                onClick={this.onAddTask}>Add task</button>
-              <a className="custom-btn-danger" onClick={this.onRemoveTask}>
+                onClick={this.onAddTask}>
+          Add task
+        </button>
+        <a className="custom-btn-danger" onClick={this.onRemoveTask}>
           <i className="icon-trash"></i>
           Remove task
         </a>
@@ -217,11 +219,11 @@ export default class PostCreate extends BaseComponent {
         <input placeholder="Where?" className="location form-control"
                type="text"
                ref={(c) => { post.event ? post.event.location = c : null}}/>
-             <Datetime placeholder="When?" isValidDate={ valid }
+        <Datetime placeholder="When?" isValidDate={ valid }
                   timeConstraints={{minutes: {step: 15}}}
                   dateFormat="DD/MM/YYYY"
                   onChange={this.onEventDateChange} />
-                <a className="custom-btn-danger" onClick={this.onRemoveEvent}>
+        <a className="custom-btn-danger" onClick={this.onRemoveEvent}>
           <i className="icon-trash"></i>
           Remove event
         </a>
