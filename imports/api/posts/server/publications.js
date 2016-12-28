@@ -10,7 +10,12 @@ Meteor.publishComposite('posts.query', {
     },
     children: [{
       find(post) {
-        return Meteor.users.find({_id: post.author});
+        return Meteor.users.find({_id: post.author}, {
+          fields: {
+            role: 1,
+            profile: 1
+          }
+        });
       }
     }]
 });

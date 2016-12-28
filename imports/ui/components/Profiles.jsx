@@ -1,28 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
-import Student from '../components/Student.jsx';
-import Tutor from '../components/Tutor.jsx';
-import { Groups } from '../../api/groups/groups.js';
+import UserInfo from './UserInfo.jsx';
 
-export default class Profiles extends React.Component {
-constructor(props){
-  super(props);
+export default class Profiles extends BaseComponent {
+  constructor(props){
+    super(props);
+  }
 
-}
+  render() {
 
+    const {user} = this.props;
 
-render() {
-
-  const {user, users} = this.props;
-  //console.log(user);
     return (
-        <div className="profiles">
-        <Student user={user}/>
-        <br/>
-        <Tutor user={user} users={users}/>
-        </div>
+      <div className="profiles">
+        <UserInfo user={user}/>
+        <hr/>
+      </div>
     );
   }
 }
+
+Profiles.propTypes = {
+  user: React.PropTypes.object
+};

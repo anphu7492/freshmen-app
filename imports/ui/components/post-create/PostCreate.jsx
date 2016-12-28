@@ -203,6 +203,11 @@ export default class PostCreate extends BaseComponent {
           <i className="icon-trash"></i>
           Remove task
         </a>
+
+        <p>Assign task:</p>
+        <div className="assignee-list">
+
+        </div>
       </div>
     )
   }
@@ -266,3 +271,7 @@ export default class PostCreate extends BaseComponent {
     );
   }
 }
+
+PostCreate.propTypes = {
+  callback: React.PropTypes.func
+};

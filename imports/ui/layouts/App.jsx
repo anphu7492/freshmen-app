@@ -137,7 +137,7 @@ openAddGroups() {
           {/*<LanguageToggle />*/}
           <UserMenu user={user} logout={this.logout} />
           {!loading ?
-            <Profiles user={user} users={users}/>
+            <Profiles user={user}/>
             : ''}
           <ListList lists={lists}/>
         </section>

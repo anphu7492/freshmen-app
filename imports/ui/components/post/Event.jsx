@@ -35,7 +35,7 @@ export default class Event extends BaseComponent {
       notGoing: event.confirmations.filter(conf => (conf.status === 'notGoing')),
       maybe: event.confirmations.filter(conf => (conf.status === 'maybe')),
     };
-    const myStatus = event.confirmations.find(conf => (conf.user === Meteor.userId()));
+    const myStatus = event.confirmations.find(conf => (conf.user === Meteor.userId())) || {};
     console.log(stats, myStatus);
 
     return (
