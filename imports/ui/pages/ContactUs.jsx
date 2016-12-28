@@ -1,15 +1,27 @@
 import React from 'react';
 import BaseComponent from '../components/BaseComponent.jsx';
+import { Link } from 'react-router';
 
 export default class ContactUs extends BaseComponent {
+
+  constructor(props){
+    super(props);
+    this.state.showSection = 'Block';
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(event){
+  console.log("submit")
+  event.preventDefault();
+  this.setState ({showSection:"none"});
+  }
+
     render() {
         return (
-            <div>&nbsp;
+            <div style= {{display:this.state.showSection}}>&nbsp;
               <br/> <br/>
                 <p id="contact-description">How can we help you?</p>
                 <br/>
                 <div className="contact-us-form">
-                    <form id="contact_form" action="http://localhost:3000" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <label for="subject" className="contact-label">Subject:</label><br/>
                             <input id="contact-subject" className="contact-subject" type="text" size="52"/>
@@ -21,9 +33,8 @@ export default class ContactUs extends BaseComponent {
                         </div>
                         &nbsp;
                         <div class="row">
-                            <input id="contact-submit-btn" className="contact-submit-btn" type="submit" value="Send email"/>
+                           <Link to="/"> <input id="contact-submit-btn" className="contact-submit-btn" type="submit" value="Send email"/></Link>
                         </div>
-                    </form>
                 </div>
             </div>
         )
