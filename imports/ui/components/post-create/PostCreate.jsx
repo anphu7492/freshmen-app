@@ -4,6 +4,7 @@ import Datetime from 'react-datetime';
 import { Random } from 'meteor/random';
 import BaseComponent from '../BaseComponent.jsx';
 import update from 'immutability-helper';
+import Textarea from 'react-textarea-autosize';
 import { displayError } from '../../helpers/errors.js';
 
 import { insert } from '../../../api/posts/methods.js';
@@ -195,11 +196,18 @@ export default class PostCreate extends BaseComponent {
         {items}
         <button className="custom-btn-success"
                 type="button"
-                onClick={this.onAddTask}>Add task</button>
-              <a className="custom-btn-danger" onClick={this.onRemoveTask}>
+                onClick={this.onAddTask}>
+          Add task
+        </button>
+        <a className="custom-btn-danger" onClick={this.onRemoveTask}>
           <i className="icon-trash"></i>
           Remove task
         </a>
+
+        <p>Assign task:</p>
+        <div className="assignee-list">
+
+        </div>
       </div>
     )
   }
@@ -216,11 +224,11 @@ export default class PostCreate extends BaseComponent {
         <input placeholder="Where?" className="location form-control"
                type="text"
                ref={(c) => { post.event ? post.event.location = c : null}}/>
-             <Datetime placeholder="When?" isValidDate={ valid }
+        <Datetime placeholder="When?" isValidDate={ valid }
                   timeConstraints={{minutes: {step: 15}}}
                   dateFormat="DD/MM/YYYY"
                   onChange={this.onEventDateChange} />
-                <a className="custom-btn-danger" onClick={this.onRemoveEvent}>
+        <a className="custom-btn-danger" onClick={this.onRemoveEvent}>
           <i className="icon-trash"></i>
           Remove event
         </a>
@@ -234,17 +242,19 @@ export default class PostCreate extends BaseComponent {
     return (
       <div className="post-box">
         <form className="post-create" onSubmit={this.onPostCreate}>
-          <input
+          <Textarea
             name="text"
+            minRows={3}
+            maxRows={20}
             className="text form-control"
             placeholder = {this.state.placeholder}
             ref={(c) => {post.text = c}}>
-          </input>
+          </Textarea>
           {post.type === 'task' ?
             this.renderTasksBox() :
             post.type === 'event' ? this.renderEventBox() : ''}
-          <div className="post-types row">
-            <div className="col-sm-10">
+          <div className="post-types layout">
+            <div className="flex">
               <button className="custom-btn-primary" type="button" onClick={this.onCreateTask}>
                 Task
               </button>
@@ -252,7 +262,7 @@ export default class PostCreate extends BaseComponent {
                 Event
               </button>
             </div>
-            <div className="col-sm-2">
+            <div className="flex-none">
               <button className="custom-btn-success submit" type="submit">Post</button>
             </div>
           </div>
@@ -261,3 +271,7 @@ export default class PostCreate extends BaseComponent {
     );
   }
 }
+
+PostCreate.propTypes = {
+  callback: React.PropTypes.func
+};

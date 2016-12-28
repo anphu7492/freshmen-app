@@ -14,7 +14,7 @@ Meteor.publish('groups.query', function queryGroups(params) {
 
   const { groupId } = params;
 
-  return Groups.findOne({
+  return Groups.find({
     _id: groupId
   });
 });
@@ -30,7 +30,12 @@ Meteor.publishComposite('groups.all', function queryAllGroups() {
     },
     children: [{
       find(group) {
-        return Meteor.users.find({_id: group.creator});
+        return Meteor.users.find({_id: group.creator}, {
+          fields: {
+            role: 1,
+            profile: 1
+          }
+        });
       }
     }]
   }
