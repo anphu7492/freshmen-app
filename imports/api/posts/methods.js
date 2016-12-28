@@ -29,6 +29,9 @@ export const insert = new ValidatedMethod({
       task: task ? task: null
     };
     newPost.creator = Meteor.userId();
+    if (Meteor.user().role !== 'coordinator') {
+      newPost.group = Meteor.user().group;
+    }
 
     Posts.insert(newPost);
   }
