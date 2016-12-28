@@ -75,6 +75,10 @@ export default class Post extends BaseComponent {
           </div>
           {post.type === 'event' ? <Event post={post}/> : ''}
         </div>
+
+        {post.type==="task" &&
+            <Task post={post} />
+        }
         <hr></hr>
         <div className="post-footer">
           <CommentSection post={this.props.post}/>
