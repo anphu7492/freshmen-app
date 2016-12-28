@@ -18,6 +18,11 @@ var ValidateAddress = React.createClass({
         this.geocodeAddress(this.props.address);
     },
 
+    handleSubmit: function() {
+        this.geocoder = new google.maps.Geocoder();
+        this.geocodeAddress(this.props.address);
+    },
+
     render: function() {
         return (
             <div></div>
