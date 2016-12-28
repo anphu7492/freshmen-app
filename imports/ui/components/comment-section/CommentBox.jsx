@@ -1,5 +1,4 @@
 import React from 'react';
-import Textarea from 'react-textarea-autosize';
 import BaseComponent from '../../components/BaseComponent.jsx';
 import { displayError } from '../../helpers/errors.js';
 

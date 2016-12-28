@@ -4,6 +4,7 @@ import Datetime from 'react-datetime';
 import { Random } from 'meteor/random';
 import BaseComponent from '../BaseComponent.jsx';
 import update from 'immutability-helper';
+import Textarea from 'react-textarea-autosize';
 import { displayError } from '../../helpers/errors.js';
 
 import { insert } from '../../../api/posts/methods.js';
@@ -234,17 +235,19 @@ export default class PostCreate extends BaseComponent {
     return (
       <div className="post-box">
         <form className="post-create" onSubmit={this.onPostCreate}>
-          <input
+          <Textarea
             name="text"
+            minRows={3}
+            maxRows={20}
             className="text form-control"
             placeholder = {this.state.placeholder}
             ref={(c) => {post.text = c}}>
-          </input>
+          </Textarea>
           {post.type === 'task' ?
             this.renderTasksBox() :
             post.type === 'event' ? this.renderEventBox() : ''}
-          <div className="post-types row">
-            <div className="col-sm-10">
+          <div className="post-types layout">
+            <div className="flex">
               <button className="custom-btn-primary" type="button" onClick={this.onCreateTask}>
                 Task
               </button>
@@ -252,7 +255,7 @@ export default class PostCreate extends BaseComponent {
                 Event
               </button>
             </div>
-            <div className="col-sm-2">
+            <div className="flex-none">
               <button className="custom-btn-success submit" type="submit">Post</button>
             </div>
           </div>
