@@ -184,7 +184,7 @@ openAddGroups() {
         </div>
         <div id="right-sidebar">
           {user && (user.role === 'tutor' && !loading)
-            ? <TutorSidebar user={user} group={user.group} users={users} groups={groups} tasks={tasks}/>
+            ? <TutorSidebar user={user} users={users} group={user.group} tasks={tasks}/>
             : ''
           }
           {user && user.role === 'student' && !loading

@@ -6,7 +6,7 @@ import { Posts } from '../../api/posts/posts.js';
 export default class TutorSidebar extends BaseComponent {
 
     render() {
-        const { user, users, groups, tasks } = this.props;
+        const { user, users, tasks } = this.props;
         const group = this.props.group;
         var members = users.filter(function( obj ) {
         return obj.group == group && obj.role!="tutor";
@@ -17,24 +17,30 @@ export default class TutorSidebar extends BaseComponent {
         return obj.type == "task";
         });*/
         var numTasks = tasks.length;
+
         var completedTasks = 0;
         var completionRate = 0;
-        /*for (var i=0; i< numTasks; i++ )
+        var numAssignments = 0;
+        for (var i=0; i < numTasks; i++ )
         {
-            let status = tasks[i].task.assignees.$.status;
-            for (varj=0; j< status.length; j++){
-              if (status[j] == "completed")
+            let assignees = tasks[i].task.assignees;
+
+            for (var j=0; j < assignees.length; j++){
+              if (assignees[j].status == "completed")
                 completedTasks++;
+              numAssignments++;
             }
-        }*/
+        }
+console.log(completedTasks, numTasks, numAssignments);
+
         if (completedTasks != 0){
-          completionRate = (completedTasks * 100)/(numTasks * members.length)
+          completionRate = (completedTasks * 100)/(numTasks * numAssignments);
         }
 
 
         return (
             <div className="tutor-rightbar">
-                <GroupMembers user={user} group={group} groups={groups} users={users}/>
+                <GroupMembers user={user} group={group} users={users}/>
                 <div id="stats-section">
                     <h3>Your stats</h3>
                     <h4>Students</h4>
