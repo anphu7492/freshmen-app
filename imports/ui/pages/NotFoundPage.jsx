@@ -11,9 +11,7 @@ class NotFoundPage extends BaseComponent {
         <nav>
           <MobileMenu />
         </nav>
-        <div className="content-scrollable">
-          <Message title={i18n.__('pages.notFoundPage.pageNotFound')} />
-        </div>
+        <Message title={i18n.__('pages.notFoundPage.pageNotFound')} customClass="absolute"/>
       </div>
     );
   }

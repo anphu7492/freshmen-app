@@ -158,14 +158,16 @@ export default class ListHeader extends BaseComponent {
           <div className="options-web">
             <a className="nav-item" onClick={this.toggleListPrivacy}>
               {list.userId
-                ? <span
-                  className="icon-lock"
-                  title={i18n.__('components.listHeader.makeListPublic')}
-                />
-                : <span
-                  className="icon-unlock"
-                  title={i18n.__('components.listHeader.makeListPrivate')}
-                />}
+                ? (
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Make this list public</Tooltip>}>
+                    <span className="icon-lock"/>
+                  </OverlayTrigger>
+                )
+                : (
+                <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Make this list private</Tooltip>}>
+                  <span className="icon-unlock"/>
+                </OverlayTrigger>
+                )}
             </a>
             <a className="nav-item trash" onClick={this.showDeleteModal}>
               <span

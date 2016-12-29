@@ -32,7 +32,7 @@ function requireAuth(nextState, replace) {
 export const renderRoutes = () => (
   <Router history={browserHistory}>
     <Route path="/login" component={AuthPageSignIn} />
-    <Route path="/join" component={AuthPageJoin} />
+    {/*<Route path="/join" component={AuthPageJoin} />*/}
     <Route path="/" component={AppContainer} onEnter={requireAuth}>
       <Route path="/about" component={About} />
       <Route path="/faq" component={Faq} />

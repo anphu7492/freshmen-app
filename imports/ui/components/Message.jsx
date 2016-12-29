@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Message = ({ title, subtitle }) => (
-  <div className="wrapper-message">
+const Message = ({ title, subtitle, customClass }) => (
+  <div className={`wrapper-message ${customClass}`}>
     {title ? <div className="title-message">{title}</div> : null}
     {subtitle ? <div className="subtitle-message">{subtitle}</div> : null}
   </div>
@@ -10,6 +10,7 @@ const Message = ({ title, subtitle }) => (
 Message.propTypes = {
   title: React.PropTypes.string,
   subtitle: React.PropTypes.string,
+  customClass: React.PropTypes.string
 };
 
 export default Message;
