@@ -9,6 +9,7 @@ import { displayError } from '../../helpers/errors.js';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { insert } from '../../../api/posts/methods.js';
+import Geosuggest from 'react-geosuggest';
 
 /**
  * css file must be import in js file,
@@ -134,7 +135,7 @@ export default class PostCreate extends BaseComponent {
       })
     });
   }
-  
+
   onRemoveTask() {
     if (this.state.post.type !== 'task') {
       return;
@@ -273,6 +274,17 @@ export default class PostCreate extends BaseComponent {
         <input placeholder="Where?" className="location form-control"
                type="text"
                ref={(c) => { post.event ? post.event.location = c : null}}/>
+       <Geosuggest
+              ref={(c) => { post.event ? post.event.location = c : null}}
+              placeholder="Start typing!"
+              initialValue="Helsinki"
+              fixtures={ [
+              {label: 'Helsinki, Finland', location: {lat: 60.1699, lng: 24.9384}}
+              ]}
+              onSuggestSelect={this.onSuggestSelect}
+              location={new google.maps.LatLng(60.1699, 24.9384)}
+              radius="20" />
+
         <Datetime placeholder="When?" isValidDate={ valid }
                   timeConstraints={{minutes: {step: 15}}}
                   dateFormat="DD/MM/YYYY"

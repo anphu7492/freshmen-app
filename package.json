@@ -26,6 +26,7 @@
     "react-datetime": "^2.8.1",
     "react-dom": "^15.4.1",
     "react-dropzone": "^3.7.3",
+    "react-geosuggest": "^2.0.0",
     "react-google-maps": "^4.11.0",
     "react-places-autocomplete": "^2.3.2",
     "react-pure-render": "^1.0.2",
