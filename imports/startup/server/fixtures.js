@@ -1,47 +1,61 @@
 import { Meteor } from 'meteor/meteor';
 import { Lists } from '../../api/lists/lists.js';
 import { Todos } from '../../api/todos/todos.js';
+import { BrowserPolicy } from 'meteor/browser-policy-common';
 
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
+  BrowserPolicy.content.allowSameOriginForAll();
+  BrowserPolicy.content.allowDataUrlForAll();
+  BrowserPolicy.content.allowOriginForAll('https://maxcdn.bootstrapcdn.com');
+  BrowserPolicy.content.allowOriginForAll('https://maps.googleapis.com');
+  BrowserPolicy.content.allowImageOrigin("http://res.cloudinary.com");
+  BrowserPolicy.content.allowImageOrigin("*.gstatic.com");
+  BrowserPolicy.content.allowFontOrigin("https://fonts.gstatic.com");
+  BrowserPolicy.content.allowStyleOrigin("https://fonts.googleapis.com");
+  BrowserPolicy.content.allowInlineStyles();
+  BrowserPolicy.content.allowFontDataUrl();
+
+  if (!Meteor.users.find().count()) {
+    Accounts.createUser({
+      email: process.env.ADMIN_EMAIL || 'coordinator@gmail.com',
+      password: process.env.ADMIN_PWD || 'supersecret',
+      role: 'coordinator',
+      profile: {
+        name: 'Franklyn Hudnall',
+        school: 'Aalto University',
+        photo: 'http://res.cloudinary.com/aalto/image/upload/v1483015813/default/teacher.png',
+        phone: '044 625 9326'
+      }
+    });
+  }
   if (Lists.find().count() === 0) {
     const data = [
       {
-        name: 'Meteor Principles',
+        name: 'Aalto Tips',
         items: [
-          'Data on the Wire',
-          'One Language',
-          'Database Everywhere',
-          'Latency Compensation',
-          'Full Stack Reactivity',
-          'Embrace the Ecosystem',
-          'Simplicity Equals Productivity',
+          'Make a lot of friends',
+          'Join Aalto Parties',
+          'Work hard',
+          'Play hard',
+          'Do not forget your exam registration',
+          'Never back down',
+          'Enjoy',
         ],
       },
       {
-        name: 'Languages',
+        name: 'Aalto Associations',
         items: [
-          'Lisp',
-          'C',
-          'C++',
-          'Python',
-          'Ruby',
-          'JavaScript',
-          'Scala',
-          'Erlang',
-          '6502 Assembly',
-        ],
-      },
-      {
-        name: 'Favorite Scientists',
-        items: [
-          'Ada Lovelace',
-          'Grace Hopper',
-          'Marie Curie',
-          'Carl Friedrich Gauss',
-          'Nikola Tesla',
-          'Claude Shannon',
+          'A!dventures',
+          'Aalto Debating Society',
+          'Aalto Cocktail',
+          'Aalto Beer Pong',
+          'AIESEC Aalto',
+          'Jury',
+          'Otanko ry',
+          'Polygame',
+          'Tea club chai'
         ],
       },
     ];

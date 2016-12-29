@@ -8,7 +8,7 @@
   padding: 15px;
   box-shadow: 0 0 10px 0 rgba(0,0,0, 0.5);
   text-align: center;
-  color: #532c5f;
+  color: @color-turquoise;
 
   .backhome{
     float:left;
@@ -21,7 +21,6 @@
   input {
     background-color: rgba(0,0,0,0);
     border: none;
-    margin: 5px;
   }
 
   h3{
@@ -37,10 +36,10 @@
     font-family: 'Roboto-Slab', sans-serif;
     font-size: 18px;
     padding: 3px;
-a{
-  text-decoration: none;
-  color : #532c5f;
-}
+    a{
+      text-decoration: none;
+      color : @color-turquoise;
+    }
 
     input {
       text-align: center;
@@ -58,12 +57,12 @@ a{
 
   opacity: 0;
   position: absolute;
-     z-index: -1;
+  z-index: -1;
 }
 
 .profile-pic{
   border-radius: 50%;
-  border: 5px solid #532c5f;
+  border: 5px solid @color-turquoise;
   margin: auto;
   max-height: 250px;
   max-width: 250px;
@@ -71,7 +70,7 @@ a{
 }
 
 #modifyPassword{
-  background-color: #532c5f;
+  background-color: @color-turquoise;
   color: white;
   border-radius: 5px;
   margin: 10px;
@@ -83,14 +82,17 @@ table{
   width: auto;
   position:relative;
   left: 15px;
-  text-align: center;
+  text-align: left;
   padding:10px;
   input{
-    text-align: center;
+    text-align: left;
   }
   tr{
     margin:10px;
     height:30px;
+  }
+  td {
+    padding: 5px;
   }
 }
 

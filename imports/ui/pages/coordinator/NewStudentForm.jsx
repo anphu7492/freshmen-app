@@ -35,7 +35,7 @@ export default class NewStudentForm extends BaseComponent {
     profile.school = student.school.value;
     profile.major = student.major.value;
     profile.facebook = "";
-    profile.photo = "http://res.cloudinary.com/aalto/image/upload/v1482682730/yvwksnthiwobczxwfm5c.png";
+    profile.photo = "http://res.cloudinary.com/aalto/image/upload/v1483015965/default/student.png";
     profile.twitter = "";
     profile.phone = "";
     const group = student.group;

@@ -18,7 +18,7 @@ export default class ListList extends BaseComponent {
       if (err) {
         router.push('/');
         /* eslint-disable no-alert */
-        alert(i18n.__('components.listList.newListError'));
+        toastr.error(i18n.__('components.listList.newListError'), 'Error');
       }
     });
     router.push(`/lists/${listId}`);
@@ -30,7 +30,7 @@ export default class ListList extends BaseComponent {
       <div className="list-todos">
         <a className="link-list-new" onClick={this.createNewList}>
           <span className="icon-plus" />
-          {i18n.__('components.listList.newList')}
+          New Todo List
         </a>
         {lists.map(list => (
           <Link
