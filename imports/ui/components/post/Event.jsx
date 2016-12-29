@@ -33,7 +33,7 @@ export default class Event extends BaseComponent {
         let user = Meteor.users.findOne(event.confirmations[i].user);
         peopleGoing.push(
           <OverlayTrigger placement="top" key={user._id} overlay={<Tooltip id="tooltip">{user.profile.name}</Tooltip>}>
-          <a href={"/profile" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
+          <a href={"/profile/" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
           </OverlayTrigger>
         );
       }
@@ -49,7 +49,7 @@ export default class Event extends BaseComponent {
         let user = Meteor.users.findOne(event.confirmations[i].user);
         peopleNotGoing.push(
           <OverlayTrigger key={user._id} placement="top" overlay={<Tooltip id="tooltip">{user.profile.name}</Tooltip>}>
-          <a href={"/profile" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
+          <a href={"/profile/" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
           </OverlayTrigger>
         );
       }
