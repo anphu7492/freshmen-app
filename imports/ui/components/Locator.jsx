@@ -59,24 +59,25 @@ var Locator = React.createClass({
 
   componentDidMount: function () {
     var mapElement = this.mapElement;
+    const {address} = this.props;
     this.map = new google.maps.Map(mapElement, {
       zoom: INITIAL_MAP_ZOOM_LEVEL,
       center: {
-        lat: INITIAL_LOCATION.position.latitude,
-        lng: INITIAL_LOCATION.position.longitude
+        lat: address.lat,
+        lng: address.long
       }
     });
 
     this.marker = new google.maps.Marker({
       map: this.map,
       position: {
-        lat: INITIAL_LOCATION.position.latitude,
-        lng: INITIAL_LOCATION.position.longitude
+        lat: address.lat,
+        lng: address.long
       }
     });
 
-    this.geocoder = new google.maps.Geocoder();
-    this.geocodeAddress(this.props.address);
+  //  this.geocoder = new google.maps.Geocoder();
+  //  this.geocodeAddress(this.props.address);
   },
   setMapElementReference: function (mapElementReference) {
     this.mapElement = mapElementReference;

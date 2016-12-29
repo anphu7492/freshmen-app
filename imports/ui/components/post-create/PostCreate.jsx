@@ -40,7 +40,10 @@ export default class PostCreate extends BaseComponent {
   onSuggestSelect(suggest){
     console.log(suggest);
     let post = this.state.post;
-    post.event.location = suggest.label;
+    post.event.location.type = 'latLong';
+    post.event.location.address = suggest.label;
+    post.event.location.lat = suggest.location.lat;
+    post.event.location.long = suggest.location.lng;
     this.setState({ post : post });
     console.log(this.state.post);
   }
@@ -93,13 +96,17 @@ export default class PostCreate extends BaseComponent {
       event: newPost.event ? newPost.event : null,
       task: newPost.task ? newPost.task : null
     }, (err, res) => {
-      if (err) {
+      if (err && newPost.event)
+      {
+        toastr.error("Please choose appropriate location from suggestions and time from the calendar");
+      }
+      else if(err){
         return displayError(err);
       }
-
+      else{
       toastr.success('Post has been created', 'Awesome');
       this.initState();
-
+      }
     });
 
     // this.props.callBack(newPost)
@@ -187,7 +194,7 @@ export default class PostCreate extends BaseComponent {
         type: {$set: 'event'},
         task: {$set: null},
         event: {$set: {
-          location: '',
+          location: {},
           time: null
         }}
 
