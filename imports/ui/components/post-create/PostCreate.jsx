@@ -32,6 +32,7 @@ export default class PostCreate extends BaseComponent {
     this.onEventDateChange = this.onEventDateChange.bind(this);
     this.onRemoveEvent = this.onRemoveEvent.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
+    this.onAssignTask = this.onAssignTask.bind(this);
   }
 
   initState() {
@@ -160,6 +161,10 @@ export default class PostCreate extends BaseComponent {
     });
   }
 
+  onAssignTask(member) {
+    member.checked = !member.checked;
+  }
+
   onCreateEvent() {
     if (this.state.post.type === 'event') {
       return;
@@ -232,7 +237,7 @@ export default class PostCreate extends BaseComponent {
             type="checkbox"
             checked={member.selected}
             name="checked"
-            ref={(c) => {member.checked = c}}
+            onChange={() => this.onAssignTask(member)}
           />
           <span className="checkbox-custom" />
         </label>
