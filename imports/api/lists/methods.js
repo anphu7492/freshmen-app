@@ -18,7 +18,11 @@ export const insert = new ValidatedMethod({
     },
   }).validator(),
   run({ locale }) {
-    return Lists.insert({}, null, locale);
+    let newList = {};
+    if (this.userId) {
+      newList.userId = this.userId;
+    }
+    return Lists.insert(newList, null, locale);
   },
 });
 

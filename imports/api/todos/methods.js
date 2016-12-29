@@ -87,7 +87,7 @@ export const remove = new ValidatedMethod({
   run({ todoId }) {
     const todo = Todos.findOne(todoId);
 
-    if (!todo.editableBy(this.userId)) {
+    if (todo && !todo.editableBy(this.userId)) {
       throw new Meteor.Error('api.todos.remove.accessDenied',
         'Cannot remove todos in a private list that is not yours');
     }
