@@ -1,10 +1,22 @@
 import { Meteor } from 'meteor/meteor';
 import { Lists } from '../../api/lists/lists.js';
 import { Todos } from '../../api/todos/todos.js';
+import { BrowserPolicy } from 'meteor/browser-policy-common';
 
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
+  BrowserPolicy.content.allowSameOriginForAll();
+  BrowserPolicy.content.allowDataUrlForAll();
+  BrowserPolicy.content.allowOriginForAll('https://maxcdn.bootstrapcdn.com');
+  BrowserPolicy.content.allowOriginForAll('https://maps.googleapis.com');
+  BrowserPolicy.content.allowImageOrigin("http://res.cloudinary.com");
+  BrowserPolicy.content.allowImageOrigin("https://csi.gstatic.com");
+  BrowserPolicy.content.allowFontOrigin("https://fonts.gstatic.com");
+  BrowserPolicy.content.allowStyleOrigin("https://fonts.googleapis.com");
+  BrowserPolicy.content.allowInlineStyles();
+  BrowserPolicy.content.allowFontDataUrl();
+
   if (!Meteor.users.find().count()) {
     Accounts.createUser({
       email: process.env.ADMIN_EMAIL || 'coordinator@gmail.com',
