@@ -9,6 +9,7 @@ import { displayError } from '../../helpers/errors.js';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { insert } from '../../../api/posts/methods.js';
+import Geosuggest from 'react-geosuggest';
 
 /**
  * css file must be import in js file,
@@ -273,6 +274,19 @@ export default class PostCreate extends BaseComponent {
         <input placeholder="Where?" className="location form-control"
                type="text"
                ref={(c) => { post.event ? post.event.location = c : null}}/>
+       <Geosuggest
+              ref={el=>this._geoSuggest=el}
+              placeholder="Start typing!"
+              initialValue="Hamburg"
+              fixtures={ [
+              {label: 'Old Elbe Tunnel, Hamburg', location: {lat: 53.5459, lng: 9.966576}},
+              {label: 'Reeperbahn, Hamburg', location: {lat: 53.5495629, lng: 9.9625838}},
+              {label: 'Alster, Hamburg', location: {lat: 53.5610398, lng: 10.0259135}}
+              ]}
+              onSuggestSelect={this.onSuggestSelect}
+              location={new google.maps.LatLng(53.558572, 9.9278215)}
+              radius="20" />
+
         <Datetime placeholder="When?" isValidDate={ valid }
                   timeConstraints={{minutes: {step: 15}}}
                   dateFormat="DD/MM/YYYY"
