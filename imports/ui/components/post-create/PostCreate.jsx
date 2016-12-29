@@ -134,7 +134,7 @@ export default class PostCreate extends BaseComponent {
       })
     });
   }
-  
+
   onRemoveTask() {
     if (this.state.post.type !== 'task') {
       return;
