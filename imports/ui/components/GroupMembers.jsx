@@ -35,7 +35,7 @@ export default class GroupMembers extends BaseComponent {
     return (
       <div className="tutor-rightbar">
         <h3>{group.name}</h3>
-        <div>Tutor</div>
+        <div>Tutors</div>
         {TutorCards}
         <hr/>
         <div id="group-section">
