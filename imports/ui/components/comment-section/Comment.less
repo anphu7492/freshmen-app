@@ -5,21 +5,20 @@
 
   .comment-content{
     margin-left: 5px;
-    font-size: 15px;
+    font-size: 14px;
     color: black;
     display: inline;
 
     .commenter {
-      color: #532c5f;
-      float: left;
-    }
-    .commenter a {
-      color: #532c5f;
-      font-weight: bolder;
-      margin-right: 5px;
+      color: @color-turquoise;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
     }
     .comment-text {
       left: 5px;
+      margin-right: 15px;
+      margin-top: 6px;
       position: relative;
     }
   }
@@ -29,9 +28,10 @@
     padding: 1px;
     cursor: pointer;
     position: absolute;
-    right: 5px;
+    right: 0;
     display: none;
     font-size: 0.8em;
+    top: 15px;
   }
 
   &:hover .delete-btn {
