@@ -33,11 +33,11 @@ export default class UserInfo extends BaseComponent {
           <p className="profile-school">{user.profile.major}</p>
           <p className="profile-school">{user.profile.school}</p>
           <a style={{display: facebook}} href={user.profile.facebook}>
-            <img src="https://www.seeklogo.net/wp-content/uploads/2016/09/facebook-icon-preview.png"
+            <img src="https://res.cloudinary.com/aalto/image/upload/v1483025260/w63j3xs6928tkt692eqm.png"
                  height="40px" width="40px" alt="Facebook" target="_blank"/>
           </a>
           <a style={{display: twitter}} href={user.profile.twitter}>
-            <img src="https://www.seeklogo.net/wp-content/uploads/2015/09/twitter-icon-circle-logo.png"
+            <img src="https://res.cloudinary.com/aalto/image/upload/v1483025418/pvrfhrqnlhynruqrdndz.png"
                  height="38px" width="38px" alt="Twitter" target="_blank"/>
           </a>
         </div>
