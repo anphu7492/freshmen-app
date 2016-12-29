@@ -275,16 +275,14 @@ export default class PostCreate extends BaseComponent {
                type="text"
                ref={(c) => { post.event ? post.event.location = c : null}}/>
        <Geosuggest
-              ref={el=>this._geoSuggest=el}
+              ref={(c) => { post.event ? post.event.location = c : null}}
               placeholder="Start typing!"
-              initialValue="Hamburg"
+              initialValue="Helsinki"
               fixtures={ [
-              {label: 'Old Elbe Tunnel, Hamburg', location: {lat: 53.5459, lng: 9.966576}},
-              {label: 'Reeperbahn, Hamburg', location: {lat: 53.5495629, lng: 9.9625838}},
-              {label: 'Alster, Hamburg', location: {lat: 53.5610398, lng: 10.0259135}}
+              {label: 'Helsinki, Finland', location: {lat: 60.1699, lng: 24.9384}}
               ]}
               onSuggestSelect={this.onSuggestSelect}
-              location={new google.maps.LatLng(53.558572, 9.9278215)}
+              location={new google.maps.LatLng(60.1699, 24.9384)}
               radius="20" />
 
         <Datetime placeholder="When?" isValidDate={ valid }
