@@ -97,8 +97,7 @@ Posts.schema = new SimpleSchema({
   },
   text: {
     type: String,
-    max: 1000,
-    optional: true
+    max: 1000
   },
   event: {
     type: EventSchema,

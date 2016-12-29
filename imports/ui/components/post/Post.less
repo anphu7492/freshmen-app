@@ -6,11 +6,13 @@
   margin: 10px;
   background-color: white;
   border-radius: 5px;
-  padding: 10px;
+  //padding: 10px;
   position: relative;
 
   .post-header {
     width: 100%;
+    padding: (@padding-base/2) @padding-base;
+    background-color: @color-ancillary;
 
     .avatar img {
       width: 50px;
@@ -19,20 +21,20 @@
       float: left;
     }
 
-    .user-info{
+    .user-info {
       font-weight: bolder;
       margin-left: 10px;
-      display: inline-block;
-      margin-top:1%;
-      color: #532c5f;
+      //display: inline-block;
+
+      a {
+        color: wheat;
+      }
 
 
       #date{
         font-family: 'Ubuntu', sans-serif;
-        color: black;
-
+        color: white;
         font-size: 10px;
-
       }
     }
 
@@ -53,9 +55,7 @@
     font-size: 18px;
     font-weight: bold;
     font-family: 'Roboto Slab', serif;
-    margin: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding: @padding-base;
     color: black;
   }
 
@@ -65,8 +65,8 @@
 
   .post-footer{
     width: 100%;
-    margin: 5px;
-    margin-top: 0;
+    padding: @padding-base;
+    background-color: #e9ebee;
   }
 
   hr{

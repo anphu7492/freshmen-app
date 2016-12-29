@@ -55,7 +55,7 @@ export default class Comment extends BaseComponent {
         </div>
         <div className="comment-content flex">
           <div className="commenter">
-            <a href={creatorProfile}>{creator.profile.name}</a> said:
+            <a href={creatorProfile}>{creator.profile.name} :</a>
           </div>
           <div className="comment-text">{comment.content}</div>
         </div>

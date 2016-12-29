@@ -6,6 +6,7 @@ import BaseComponent from '../BaseComponent.jsx';
 import update from 'immutability-helper';
 import Textarea from 'react-textarea-autosize';
 import { displayError } from '../../helpers/errors.js';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { insert } from '../../../api/posts/methods.js';
 
@@ -241,15 +242,11 @@ export default class PostCreate extends BaseComponent {
     return (
       <div className="post-task">
         {items}
-        <button className="custom-btn-success"
+        <div className="add-btn"
                 type="button"
                 onClick={this.onAddTask}>
-          Add task
-        </button>
-        <a className="custom-btn-danger" onClick={this.onRemoveTask}>
-          <i className="icon-trash"></i>
-          Remove task
-        </a>
+          <i className="glyphicon glyphicon-plus"></i> Add todo
+        </div>
 
         <div className="assignee-list">
           <p>Assign task:</p>
@@ -275,16 +272,45 @@ export default class PostCreate extends BaseComponent {
                   timeConstraints={{minutes: {step: 15}}}
                   dateFormat="DD/MM/YYYY"
                   onChange={this.onEventDateChange} />
-        <a className="custom-btn-danger" onClick={this.onRemoveEvent}>
-          <i className="icon-trash"></i>
-          Remove event
-        </a>
       </div>
     )
   }
 
   render() {
     const { post } = this.state;
+
+    let taskBtn = (
+      <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Add a task</Tooltip>}>
+        <button className="custom-btn-primary" type="button" onClick={this.onCreateTask}>
+          <i className="glyphicon glyphicon-align-left"></i>
+        </button>
+      </OverlayTrigger>
+    );
+    if (post.type === 'task') {
+      taskBtn = (
+        <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Remove this task</Tooltip>}>
+          <button className="custom-btn-danger" type="button" onClick={this.onRemoveTask}>
+            <i className="glyphicon glyphicon-remove-circle"></i>
+          </button>
+        </OverlayTrigger>
+      )
+    }
+    let eventBtn = (
+      <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Add an event</Tooltip>}>
+        <button className="custom-btn-primary" type="button" onClick={this.onCreateEvent}>
+          <i className="glyphicon glyphicon-map-marker"></i>
+        </button>
+      </OverlayTrigger>
+    );
+    if (post.type === 'event') {
+      eventBtn = (
+        <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Remove this event</Tooltip>}>
+          <button className="custom-btn-danger" type="button" onClick={this.onRemoveEvent}>
+            <i className="glyphicon glyphicon-remove-circle"></i>
+          </button>
+        </OverlayTrigger>
+      )
+    }
 
     return (
       <div className="post-box">
@@ -303,14 +329,9 @@ export default class PostCreate extends BaseComponent {
             post.type === 'event' ? this.renderEventBox() : ''}
           <div className="post-types layout">
             <div className="flex">
-              {this.user.role === 'tutor' && (
-                <button className="custom-btn-primary" type="button" onClick={this.onCreateTask}>
-                  Task
-                </button>
-              )}
-              <button className="custom-btn-primary" type="button" onClick={this.onCreateEvent}>
-                Event
-              </button>
+              {this.user.role === 'tutor' && taskBtn}
+              {eventBtn}
+
             </div>
             <div className="flex-none">
               <button className="custom-btn-success submit" type="submit">Post</button>
