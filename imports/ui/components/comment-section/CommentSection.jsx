@@ -25,7 +25,11 @@ export default class CommentSection extends BaseComponent {
     return (
       <div className="comment-section">
         <CommentBox post={this.props.post}/>
-        {commentList}
+        {commentList && (
+          <div className="comment-list">
+            {commentList}
+          </div>
+        )}
       </div>
     )
   }

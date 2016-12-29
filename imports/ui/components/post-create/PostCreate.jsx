@@ -6,8 +6,10 @@ import BaseComponent from '../BaseComponent.jsx';
 import update from 'immutability-helper';
 import Textarea from 'react-textarea-autosize';
 import { displayError } from '../../helpers/errors.js';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { insert } from '../../../api/posts/methods.js';
+import Geosuggest from 'react-geosuggest';
 
 /**
  * css file must be import in js file,
@@ -31,6 +33,7 @@ export default class PostCreate extends BaseComponent {
     this.onEventDateChange = this.onEventDateChange.bind(this);
     this.onRemoveEvent = this.onRemoveEvent.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
+    this.onAssignTask = this.onAssignTask.bind(this);
   }
 
   initState() {
@@ -132,7 +135,7 @@ export default class PostCreate extends BaseComponent {
       })
     });
   }
-  
+
   onRemoveTask() {
     if (this.state.post.type !== 'task') {
       return;
@@ -157,6 +160,10 @@ export default class PostCreate extends BaseComponent {
         task: {todos: {$splice: [[index,1]]}}
       })
     });
+  }
+
+  onAssignTask(member) {
+    member.checked = !member.checked;
   }
 
   onCreateEvent() {
@@ -231,7 +238,7 @@ export default class PostCreate extends BaseComponent {
             type="checkbox"
             checked={member.selected}
             name="checked"
-            ref={(c) => {member.checked = c}}
+            onChange={() => this.onAssignTask(member)}
           />
           <span className="checkbox-custom" />
         </label>
@@ -241,15 +248,11 @@ export default class PostCreate extends BaseComponent {
     return (
       <div className="post-task">
         {items}
-        <button className="custom-btn-success"
+        <div className="add-btn"
                 type="button"
                 onClick={this.onAddTask}>
-          Add task
-        </button>
-        <a className="custom-btn-danger" onClick={this.onRemoveTask}>
-          <i className="icon-trash"></i>
-          Remove task
-        </a>
+          <i className="glyphicon glyphicon-plus"></i> Add todo
+        </div>
 
         <div className="assignee-list">
           <p>Assign task:</p>
@@ -271,20 +274,60 @@ export default class PostCreate extends BaseComponent {
         <input placeholder="Where?" className="location form-control"
                type="text"
                ref={(c) => { post.event ? post.event.location = c : null}}/>
+       <Geosuggest
+              ref={(c) => { post.event ? post.event.location = c : null}}
+              placeholder="Start typing!"
+              initialValue="Helsinki"
+              fixtures={ [
+              {label: 'Helsinki, Finland', location: {lat: 60.1699, lng: 24.9384}}
+              ]}
+              onSuggestSelect={this.onSuggestSelect}
+              location={new google.maps.LatLng(60.1699, 24.9384)}
+              radius="20" />
+
         <Datetime placeholder="When?" isValidDate={ valid }
                   timeConstraints={{minutes: {step: 15}}}
                   dateFormat="DD/MM/YYYY"
                   onChange={this.onEventDateChange} />
-        <a className="custom-btn-danger" onClick={this.onRemoveEvent}>
-          <i className="icon-trash"></i>
-          Remove event
-        </a>
       </div>
     )
   }
 
   render() {
     const { post } = this.state;
+
+    let taskBtn = (
+      <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Add a task</Tooltip>}>
+        <button className="custom-btn-primary" type="button" onClick={this.onCreateTask}>
+          <i className="glyphicon glyphicon-align-left"></i>
+        </button>
+      </OverlayTrigger>
+    );
+    if (post.type === 'task') {
+      taskBtn = (
+        <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Remove this task</Tooltip>}>
+          <button className="custom-btn-danger" type="button" onClick={this.onRemoveTask}>
+            <i className="glyphicon glyphicon-remove-circle"></i>
+          </button>
+        </OverlayTrigger>
+      )
+    }
+    let eventBtn = (
+      <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Add an event</Tooltip>}>
+        <button className="custom-btn-primary" type="button" onClick={this.onCreateEvent}>
+          <i className="glyphicon glyphicon-map-marker"></i>
+        </button>
+      </OverlayTrigger>
+    );
+    if (post.type === 'event') {
+      eventBtn = (
+        <OverlayTrigger placement="bottom" overlay={<Tooltip id="add-task">Remove this event</Tooltip>}>
+          <button className="custom-btn-danger" type="button" onClick={this.onRemoveEvent}>
+            <i className="glyphicon glyphicon-remove-circle"></i>
+          </button>
+        </OverlayTrigger>
+      )
+    }
 
     return (
       <div className="post-box">
@@ -303,14 +346,9 @@ export default class PostCreate extends BaseComponent {
             post.type === 'event' ? this.renderEventBox() : ''}
           <div className="post-types layout">
             <div className="flex">
-              {this.user.role === 'tutor' && (
-                <button className="custom-btn-primary" type="button" onClick={this.onCreateTask}>
-                  Task
-                </button>
-              )}
-              <button className="custom-btn-primary" type="button" onClick={this.onCreateEvent}>
-                Event
-              </button>
+              {this.user.role === 'tutor' && taskBtn}
+              {eventBtn}
+
             </div>
             <div className="flex-none">
               <button className="custom-btn-success submit" type="submit">Post</button>

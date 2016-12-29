@@ -54,14 +54,16 @@ export default class Post extends BaseComponent {
 
     return (
       <div className="posts">
-        <div className="post-header layout">
+        <div className="post-header layout-align--middle">
           <div className="avatar flex-none">
             <a href={creatorProfile}><img className="img-responsive img-circle" src={creator.profile.photo}/></a>
           </div>
-          <a href={creatorProfile}><div className="user-info flex">
-            {creator.profile.name}
-            <p id="date">on {createdAt.toUTCString()}</p>
-          </div></a>
+          <div className="user-info flex">
+            <a href={creatorProfile}>
+              {creator.profile.name}
+            </a>
+            <div id="date">on {createdAt.toUTCString()}</div>
+          </div>
 
           { Meteor.userId() === post.creator
             ? deletePostBtn
@@ -76,7 +78,6 @@ export default class Post extends BaseComponent {
           {post.type === 'event' && <Event post={post}/>}
           {post.type === 'task' && <Task post={post} />}
         </div>
-        <hr></hr>
         <div className="post-footer">
           <CommentSection post={this.props.post}/>
         </div>
