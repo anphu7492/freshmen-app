@@ -106,7 +106,7 @@ export default class Event extends BaseComponent {
           <div className="info flex-none">
             <p className="location">
               <i className="glyphicon glyphicon-map-marker"></i>
-              {event.location}
+              {event.location.address}
             </p>
             <p className="date">
               <i className="glyphicon glyphicon-time"></i>

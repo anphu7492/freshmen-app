@@ -25,9 +25,25 @@ Posts.deny({
 
 EventSchema = new SimpleSchema({
   location: {
-    type: String,
-    max: 100
+    type: Object,
+    defaultValue: []
   },
+  "location.type":{
+    type: String,
+    allowedValues: ['address','latLong']
+  },
+  "location.lat":{
+    type: Number,
+    decimal: true
+  },
+  "location.long":{
+    type: Number,
+    decimal: true
+  },
+  "location.address":{
+    type: String
+  },
+
   time: {
     type: Date
   },
