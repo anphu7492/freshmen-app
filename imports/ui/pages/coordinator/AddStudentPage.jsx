@@ -32,7 +32,6 @@ export default class AddStudentPage extends BaseComponent {
   }
 
   removeFromList(student) {
-    console.log(student, this.state.newStudents);
     let list;
     if (this.state.newStudents.length > 1) {
       list = this.state.newStudents.filter(st => (st._id !== student._id));

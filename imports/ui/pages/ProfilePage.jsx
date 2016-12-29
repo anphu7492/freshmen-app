@@ -4,26 +4,27 @@ import BaseComponent from '../components/BaseComponent.jsx';
 import { displayError } from '../helpers/errors.js';
 
 import { Accounts } from 'meteor/accounts-base';
-import { Groups } from '../../api/groups/groups.js';
-import { findUser } from '../../api/users/methods.js';
 
 export default class ProfilePage extends BaseComponent {
   constructor(props){
     super(props);
-    let id = this.props.params.id.trim();
-    let user = Meteor.users.findOne(id);
-    let group = Groups.findOne(user.group);
-    const groupName = group.name;
+    const id = this.props.params.id.trim();
+    const { user, group} = this.props;
 
     if (id !== Meteor.userId()) {
       this.state.notEditable = "none";
     } else {
       this.state.notEditable = "inlineBlock";
     }
+
+    if (group.name) {
+      //make sure group has been fetched
+      //because group can be an empty object because it's still waiting for response from server
+      this.state.group = group.name;
+    }
     this.state.id = id;
     this.state.name = user.profile.name;
     this.state.role = user.role;
-    this.state.group = groupName;
     this.state.major = user.profile.major;
     this.state.school = user.profile.school;
     this.state.photo = user.profile.photo;
@@ -48,6 +49,14 @@ export default class ProfilePage extends BaseComponent {
     this.handleCancelPasswordChange = this.handleCancelPasswordChange.bind(this);
     this.showPasswordSection = this.showPasswordSection.bind(this);
     this.passwordError = this.passwordError.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.group !== nextProps.group && nextProps.group.name) {
+      this.setState({
+        group: nextProps.group.name
+      });
+    }
   }
 
   showPasswordSection(){
@@ -159,6 +168,7 @@ export default class ProfilePage extends BaseComponent {
         displayError(err);
         return;
       }
+
       let userId = Meteor.userId();
       picLink = result.secure_url;
       let imagesURL = {
@@ -212,17 +222,17 @@ export default class ProfilePage extends BaseComponent {
           </tr>
           <tr>
             <td>Phone </td>
-            <td>  <input name='phone' className='edit' placeholder="Not available" readOnly={this.state.editMode} onChange={this.handlePhoneChange} value={this.state.phone} />
+            <td>  <input name='phone' className='edit' placeholder="Not provided" readOnly={this.state.editMode} onChange={this.handlePhoneChange} value={this.state.phone} />
             </td>
           </tr>
           <tr>
             <td>Facebook </td>
-            <td><input name='facebook' className='edit' placeholder="Not available" readOnly={this.state.editMode} onChange={this.handleFacebookChange} value={this.state.facebook} />
+            <td><input name='facebook' className='edit' placeholder="Not provided" readOnly={this.state.editMode} onChange={this.handleFacebookChange} value={this.state.facebook} />
             </td>
           </tr>
           <tr>
             <td>Twitter </td>
-            <td><input name='facebook' className='edit' placeholder="Not available" readOnly={this.state.editMode} onChange={this.handleTwitterChange} value={this.state.twitter} />
+            <td><input name='facebook' className='edit' placeholder="Not provided" readOnly={this.state.editMode} onChange={this.handleTwitterChange} value={this.state.twitter} />
             </td>
           </tr>
           </tbody>

@@ -25,15 +25,15 @@ export default class Event extends BaseComponent {
 
   showInfoModal(event) {
     this.setState({showInfoModal: true});
-    var peopleGoing=[];
-      var peopleNotGoing=[];
-      var peopleMaybe=[];
+    let peopleGoing=[];
+    let peopleNotGoing=[];
+    let peopleMaybe=[];
     for (var i=0;i < event.confirmations.length; i++){
       if (event.confirmations[i].status ==="going"){
         let user = Meteor.users.findOne(event.confirmations[i].user);
         peopleGoing.push(
           <OverlayTrigger placement="top" key={user._id} overlay={<Tooltip id="tooltip">{user.profile.name}</Tooltip>}>
-          <a href={"/profile/" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
+            <a href={"/profile/" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
           </OverlayTrigger>
         );
       }
@@ -41,7 +41,7 @@ export default class Event extends BaseComponent {
         let user = Meteor.users.findOne(event.confirmations[i].user);
         peopleMaybe.push(
           <OverlayTrigger key={user._id} placement="top" overlay={<Tooltip id="tooltip">{user.profile.name}</Tooltip>}>
-          <a href={"/profile/" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
+            <a href={"/profile/" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
           </OverlayTrigger>
         );
       }
@@ -49,7 +49,7 @@ export default class Event extends BaseComponent {
         let user = Meteor.users.findOne(event.confirmations[i].user);
         peopleNotGoing.push(
           <OverlayTrigger key={user._id} placement="top" overlay={<Tooltip id="tooltip">{user.profile.name}</Tooltip>}>
-          <a href={"/profile/" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
+            <a href={"/profile/" + user._id}><img className="event-attendee-pic" src={user.profile.photo} /></a>
           </OverlayTrigger>
         );
       }
@@ -87,14 +87,8 @@ export default class Event extends BaseComponent {
       notGoing: event.confirmations.filter(conf => (conf.status === 'notGoing')),
       maybe: event.confirmations.filter(conf => (conf.status === 'maybe')),
     };
-  /*  var peopleGoing=[];
-    var peopleNotGoing=[];
-    var peopleMaybe=[];
 
-*/
-    console.log (this.state.peopleGoing, this.state.peopleMaybe, this.state.peopleNotGoing);
     const myStatus = event.confirmations.find(conf => (conf.user === Meteor.userId())) || {};
-  //  console.log(stats, myStatus);
 
     return (
       <div className="event-details">
@@ -155,13 +149,13 @@ export default class Event extends BaseComponent {
 
           <Modal.Body>
             <div id="event-attendees">
-            <p>Going: {stats.going.length}</p>
-            {this.state.peopleGoing}
-            <p>Maybe: {stats.maybe.length}</p>
-            {this.state.peopleMaybe}
-            <p>Not going: {stats.notGoing.length}</p>
-            {this.state.peopleNotGoing}
-          </div>
+              <p>Going: {stats.going.length}</p>
+              {this.state.peopleGoing}
+              <p>Maybe: {stats.maybe.length}</p>
+              {this.state.peopleMaybe}
+              <p>Not going: {stats.notGoing.length}</p>
+              {this.state.peopleNotGoing}
+            </div>
           </Modal.Body>
 
           <Modal.Footer>

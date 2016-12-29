@@ -38,14 +38,12 @@ export default class PostCreate extends BaseComponent {
   }
 
   onSuggestSelect(suggest){
-    console.log(suggest);
     let post = this.state.post;
     post.event.location.type = 'latLong';
     post.event.location.address = suggest.label;
     post.event.location.lat = suggest.location.lat;
     post.event.location.long = suggest.location.lng;
     this.setState({ post : post });
-    console.log(this.state.post);
   }
 
   initState() {
@@ -62,7 +60,6 @@ export default class PostCreate extends BaseComponent {
 
   onPostCreate(event) {
     event.preventDefault();
-    console.log(this.state.post);
     const { post } = this.state;
     let newPost = {
       type: post.type,
@@ -73,9 +70,8 @@ export default class PostCreate extends BaseComponent {
       newPost.event = {
         location: post.event.location,
         time: post.event.time.toDate()
-      }
+      };
 
-      console.log(newPost);
     } else if (post.type == 'task') {
       newPost.task = {
         todos: post.task.todos.map(todo => ({

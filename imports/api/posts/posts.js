@@ -9,9 +9,7 @@ class PostsCollection extends Mongo.Collection {
   insert(doc, callback) {
     const ourDoc = doc;
     ourDoc.createdAt = ourDoc.createdAt || new Date();
-    console.log('doc', ourDoc);
-    const result = super.insert(ourDoc, callback);
-    return result;
+    return super.insert(ourDoc, callback);
   }
 }
 
