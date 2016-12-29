@@ -1,29 +1,23 @@
 import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import BaseComponent from '../components/BaseComponent.jsx';
-import {findUser} from '../../api/users/methods.js';
-import request from 'superagent';
+import { displayError } from '../helpers/errors.js';
+
 import { Accounts } from 'meteor/accounts-base';
 import { Groups } from '../../api/groups/groups.js';
+import { findUser } from '../../api/users/methods.js';
 
 export default class ProfilePage extends BaseComponent {
   constructor(props){
     super(props);
-    var id = this.props.params.id.trim();
-    var user = Meteor.users.findOne(id);
-    //var userss = Meteor.users.find().fetch();
-    //const imageData = Meteor.subscribe('images');
-    var group = Groups.findOne(user.group);
+    let id = this.props.params.id.trim();
+    let user = Meteor.users.findOne(id);
+    let group = Groups.findOne(user.group);
     const groupName = group.name;
-    console.log(user);
-    //console.log(Meteor.user());
-    /*var userObj = userss.filter(function( obj ) {
-      return obj._id == id;
-    });*/
-    if(id != Meteor.userId()){
+
+    if (id !== Meteor.userId()) {
       this.state.notEditable = "none";
-    }
-    else{
+    } else {
       this.state.notEditable = "inlineBlock";
     }
     this.state.id = id;
@@ -73,7 +67,7 @@ export default class ProfilePage extends BaseComponent {
 
   passwordError(error){
     if(error){
-    toastr.error("Failed: " + error);
+      toastr.error("Failed: " + error);
     }
     else {
       toastr.success("Password changed successfully");
@@ -101,8 +95,8 @@ export default class ProfilePage extends BaseComponent {
   }
 
   handleEdit(){
-    var elements = document.querySelectorAll('.edit');
-    for(var i=0; i<elements.length; i++){
+    let elements = document.querySelectorAll('.edit');
+    for(let i=0; i<elements.length; i++){
       elements[i].style.textDecoration = "underline";
       elements[i].style.textDecoration = "underline";
     }
@@ -113,8 +107,8 @@ export default class ProfilePage extends BaseComponent {
   }
 
   handleSubmit(){
-    var elements = document.querySelectorAll('.edit');
-    for(var i=0; i<elements.length; i++){
+    let elements = document.querySelectorAll('.edit');
+    for(let i=0; i<elements.length; i++){
       elements[i].style.textDecoration = "none";
       elements[i].style.textDecoration = "none";
     }
@@ -124,9 +118,9 @@ export default class ProfilePage extends BaseComponent {
         'profile.phone': this.state.phone}
       });
 
-      this.setState({oldfacebook: this.state.facebook});
-      this.setState({oldphone: this.state.phone});
-      this.setState({oldtwitter: this.state.twitter});
+    this.setState({oldfacebook: this.state.facebook});
+    this.setState({oldphone: this.state.phone});
+    this.setState({oldtwitter: this.state.twitter});
 
     this.setState({editMode: true});
     document.getElementById("saveform").setAttribute("style","display:none");
@@ -136,8 +130,8 @@ export default class ProfilePage extends BaseComponent {
 
   handleCancel(){
 
-    var elements = document.querySelectorAll('.edit');
-    for(var i=0; i<elements.length; i++){
+    let elements = document.querySelectorAll('.edit');
+    for(let i=0; i<elements.length; i++){
       elements[i].style.textDecoration = "none";
       elements[i].style.textDecoration = "none";
     }
@@ -154,34 +148,33 @@ export default class ProfilePage extends BaseComponent {
 
 
   handleImageUpload() {
-    console.log('In handle upload');
-    var files = document.querySelector('input[type=file]').files;
-    console.log(files);
-    var picLink = this.state.photo;
+    let files = document.querySelector('input[type=file]').files;
+    let picLink = this.state.photo;
     $.cloudinary.config({
       cloud_name: 'aalto',
     });
 
-    Cloudinary.upload(files, {}, function(err, result)  {
+    Cloudinary.upload(files, {}, (err, result) => {
       if (err){
-        console.log(err);
+        displayError(err);
         return;
       }
-      console.log(result);
-      var userId = Meteor.userId();
+      let userId = Meteor.userId();
       picLink = result.secure_url;
-      var imagesURL = {
+      let imagesURL = {
         'profile.photo': picLink
       };
-      Meteor.users.update(userId, {$set: imagesURL});
 
-    });
-    setTimeout(() => {
-      this.setState({
-        photo: picLink
+      Meteor.users.update(userId, {$set: imagesURL}, (err, res) => {
+        if (err) {
+          displayError(err);
+        } else {
+          this.setState({
+            photo: picLink
+          });
+        }
       });
-    },3000);
-
+    });
   }
 
   componentWillMount() {
@@ -196,68 +189,65 @@ export default class ProfilePage extends BaseComponent {
 
   };
 
-  render(){
-    var mailto = "mailto:" + this.state.emails;
+  render() {
+    const mailto = "mailto:" + this.state.emails;
+
+    return (
+      <div id="profile-page">
+        <a href="/" className="btn btn-danger backhome">Back to dashboard</a>
+        <br /><br />
+        <img className="profile-pic" src={this.state.photo}
+             alt="Profile photo"/><br />
+        <label style={{display:this.state.notEditable}} className="btn btn-success" id="pic-label" htmlFor="pic-selector">Change photo</label>
+        <input id="pic-selector"  type="file" name="photo" onChange={this.handleImageUpload}/>
+        <h3>{this.state.name}</h3>
+        <p>{this.state.role.toUpperCase()}</p>
+        <p>{this.state.major}, {this.state.school}</p>
+        <p><a href={mailto}>{this.state.emails}</a></p>
+
+        <table id="info-table">
+          <tbody>
+          <tr>
+            <td>Group </td><td>{this.state.group}</td>
+          </tr>
+          <tr>
+            <td>Phone </td>
+            <td>  <input name='phone' className='edit' placeholder="Not available" readOnly={this.state.editMode} onChange={this.handlePhoneChange} value={this.state.phone} />
+            </td>
+          </tr>
+          <tr>
+            <td>Facebook </td>
+            <td><input name='facebook' className='edit' placeholder="Not available" readOnly={this.state.editMode} onChange={this.handleFacebookChange} value={this.state.facebook} />
+            </td>
+          </tr>
+          <tr>
+            <td>Twitter </td>
+            <td><input name='facebook' className='edit' placeholder="Not available" readOnly={this.state.editMode} onChange={this.handleTwitterChange} value={this.state.twitter} />
+            </td>
+          </tr>
+          </tbody>
+        </table>
 
 
-    return (<div id="profile-page">
-      <a href="/" className="btn btn-danger backhome">Back to dashboard</a>
-      <br /><br />
-      <img className="profile-pic" src={this.state.photo}
-           alt="Profile photo"/><br />
-      <label style={{display:this.state.notEditable}} className="btn btn-success" id="pic-label" htmlFor="pic-selector">Change photo</label>
-      <input id="pic-selector"  type="file" name="photo" onChange={this.handleImageUpload}/>
-      <h3>{this.state.name}</h3>
-      <p>{this.state.role.toUpperCase()}</p>
-      <p>{this.state.major}, {this.state.school}</p>
-      <p><a href={mailto}>{this.state.emails}</a></p>
+        <button id="editbutton" style={{display:this.state.notEditable}}  className="btn btn-info" onClick={this.handleEdit}>Edit info <span className="glyphicon glyphicon-pencil"></span></button>
+        <button id="saveform" style={{display:"none"}} className="btn btn-success" onClick={this.handleSubmit}>Save</button>
+        <button id="cancelform" style= {{display:"none"}} className="btn btn-danger" onClick={this.handleCancel}>Cancel</button>
 
-<table id="info-table">
-  <tbody>
-  <tr>
-    <td>Group </td><td>{this.state.group}</td>
-        </tr>
-        <tr>
-      <td>Phone </td>
-      <td>  <input name='phone' className='edit' placeholder="Not available" readOnly={this.state.editMode} onChange={this.handlePhoneChange} value={this.state.phone} />
-      </td>
-</tr>
-<tr>
-      <td>Facebook </td>
-        <td><input name='facebook' className='edit' placeholder="Not available" readOnly={this.state.editMode} onChange={this.handleFacebookChange} value={this.state.facebook} />
-      </td>
-</tr>
-<tr>
-      <td>Twitter </td>
-        <td><input name='facebook' className='edit' placeholder="Not available" readOnly={this.state.editMode} onChange={this.handleTwitterChange} value={this.state.twitter} />
-  </td>
-  </tr>
-  </tbody>
-</table>
+        <br /><button id="modifyPassword" style={{display:this.state.notEditable}} onClick={this.showPasswordSection}>Modify password <span className="glyphicon glyphicon-lock"></span></button>
+        <div id="password-section" style= {{display:this.state.showSection}}>
+          <p>Old password -
+            <input name='oldpassword' type="password" className='edit'   onChange={this.oldPasswordChange} value={this.state.oldpassword} />
+          </p>
+          <p>New Password -
+            <input name='newpassword' type="password" className='edit'   onChange={this.newPasswordChange} value={this.state.newpassword} />
+          </p>
 
+          <button id="password-change" className="btn btn-success" onClick={this.handlePasswordChange}><span className="glyphicon glyphicon-pencil"></span>Change password</button>
+          <button id="cancelform" className="btn btn-danger" onClick={this.handleCancelPasswordChange}>Cancel</button>
 
-      <button id="editbutton" style={{display:this.state.notEditable}}  className="btn btn-info" onClick={this.handleEdit}>Edit info <span className="glyphicon glyphicon-pencil"></span></button>
-      <button id="saveform" style={{display:"none"}} className="btn btn-success" onClick={this.handleSubmit}>Save</button>
-      <button id="cancelform" style= {{display:"none"}} className="btn btn-danger" onClick={this.handleCancel}>Cancel</button>
-
-      <br /><button id="modifyPassword" style={{display:this.state.notEditable}} onClick={this.showPasswordSection}>Modify password <span className="glyphicon glyphicon-lock"></span></button>
-      <div id="password-section" style= {{display:this.state.showSection}}>
-      <p>Old password -
-        <input name='oldpassword' type="password" className='edit'   onChange={this.oldPasswordChange} value={this.state.oldpassword} />
-      </p>
-      <p>New Password -
-        <input name='newpassword' type="password" className='edit'   onChange={this.newPasswordChange} value={this.state.newpassword} />
-      </p>
-
-      <button id="password-change" className="btn btn-success" onClick={this.handlePasswordChange}><span className="glyphicon glyphicon-pencil"></span>Change password</button>
-      <button id="cancelform" className="btn btn-danger" onClick={this.handleCancelPasswordChange}>Cancel</button>
-
-    </div>
-
-
-
-
-    </div>);
+        </div>
+      </div>
+    );
   }
 
 }
