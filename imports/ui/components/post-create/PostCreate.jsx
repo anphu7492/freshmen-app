@@ -34,6 +34,15 @@ export default class PostCreate extends BaseComponent {
     this.onRemoveEvent = this.onRemoveEvent.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
     this.onAssignTask = this.onAssignTask.bind(this);
+    this.onSuggestSelect = this.onSuggestSelect.bind(this);
+  }
+
+  onSuggestSelect(suggest){
+    console.log(suggest);
+    let post = this.state.post;
+    post.event.location = suggest.label;
+    this.setState({ post : post });
+    console.log(this.state.post);
   }
 
   initState() {
@@ -59,9 +68,11 @@ export default class PostCreate extends BaseComponent {
 
     if (post.type === 'event') {
       newPost.event = {
-        location: post.event.location.value,
+        location: post.event.location,
         time: post.event.time.toDate()
       }
+
+      console.log(newPost);
     } else if (post.type == 'task') {
       newPost.task = {
         todos: post.task.todos.map(todo => ({
@@ -271,21 +282,18 @@ export default class PostCreate extends BaseComponent {
 
     return (
       <div className="post-event">
-        <input placeholder="Where?" className="location form-control"
+        {/*<input placeholder="Where?" className="location form-control"
                type="text"
-               ref={(c) => { post.event ? post.event.location = c : null}}/>
+               ref={(c) => { post.event ? post.event.location = c : null}}/>*/}
        <Geosuggest
-              ref={(c) => { post.event ? post.event.location = c : null}}
-              placeholder="Start typing!"
-              initialValue="Helsinki"
-              fixtures={ [
-              {label: 'Helsinki, Finland', location: {lat: 60.1699, lng: 24.9384}}
-              ]}
+              placeholder="Where?"
+              className="Geosuggest"
               onSuggestSelect={this.onSuggestSelect}
-              location={new google.maps.LatLng(60.1699, 24.9384)}
+              location={new google.maps.LatLng(0,0)}
+              autoActivateFirstSuggest={true}
               radius="20" />
 
-        <Datetime placeholder="When?" isValidDate={ valid }
+            <Datetime inputProps={{ placeholder: ('When?')}} isValidDate={ valid }
                   timeConstraints={{minutes: {step: 15}}}
                   dateFormat="DD/MM/YYYY"
                   onChange={this.onEventDateChange} />
