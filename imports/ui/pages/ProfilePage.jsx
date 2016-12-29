@@ -180,7 +180,7 @@ export default class ProfilePage extends BaseComponent {
       this.setState({
         photo: picLink
       });
-    },2000);
+    },3000);
 
   }
 
