@@ -201,6 +201,9 @@ export default class ProfilePage extends BaseComponent {
 
   render() {
     const mailto = "mailto:" + this.state.emails;
+    if(this.state.major){
+      var major = this.state.major + ',';
+    }
 
     return (
       <div id="profile-page">
@@ -212,13 +215,13 @@ export default class ProfilePage extends BaseComponent {
         <input id="pic-selector"  type="file" name="photo" onChange={this.handleImageUpload}/>
         <h3>{this.state.name}</h3>
         <p>{this.state.role.toUpperCase()}</p>
-        <p>{this.state.major}, {this.state.school}</p>
+        <p>{major} {this.state.school}</p>
         <p><a href={mailto}>{this.state.emails}</a></p>
 
         <table id="info-table">
           <tbody>
           <tr>
-            <td>Group </td><td>{this.state.group}</td>
+            <td>Group </td><td>{this.state.group ? this.state.group : "NA"}</td>
           </tr>
           <tr>
             <td>Phone </td>
