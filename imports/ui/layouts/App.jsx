@@ -126,7 +126,7 @@ export default class App extends React.Component {
           <MobileMenu />
           <div className="container-fluid">
             <ul className="navibar-nav">
-              <li><a className="site-title" href="/">Freshmen Guide</a></li>
+              <li><img className="site-title" src="/favicon/favicon-32x32.png"/><a className="site-title" href="/">Freshmen Guide</a></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/faq">FAQ</Link></li>
               <li><Link to="/contact-us">Contact US</Link></li>
