@@ -13,6 +13,7 @@ export default createContainer(() => {
   const userHandle = Meteor.subscribe('userData');
   const allUserData = Meteor.subscribe('allUserData');
   const groupsHandle = Meteor.subscribe('groups.all');
+  const postsHandle = Meteor.subscribe('posts.query');
 
   return {
     user: Meteor.user(),
@@ -21,7 +22,8 @@ export default createContainer(() => {
       privateHandle.ready() &&
       userHandle.ready() &&
       groupsHandle.ready() &&
-      allUserData.ready()
+      allUserData.ready() &&
+      postsHandle.ready()
     ),
     groups: Groups.find().fetch(),
     users: Meteor.users.find().fetch(),
