@@ -127,7 +127,6 @@ export default class ListHeader extends BaseComponent {
     const { list } = this.props;
     return (
       <div>
-        <MobileMenu />
         <h1 className="title-page" onClick={this.editList}>
           <span className="title-wrapper">{list.name}</span>
           <span className="count-list">{list.incompleteCount}</span>

@@ -1,0 +1,46 @@
+.mobile-menu {
+  display: none;
+}
+@media screen and (max-width: 500px) {
+  .navibar {
+    .container-fluid {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: block;
+
+      [class*='layout-'] {
+        height: 40px;
+      }
+
+      a {
+        color: white;
+        font-family: 'Lobster', cursive;
+      }
+    }
+
+  }
+
+  #menu, #right-sidebar {
+    display: none;
+  }
+
+  .menu-open {
+    #menu {
+      display: block;
+    }
+    #right-sidebar {
+      display: none;
+    }
+  }
+
+  .right-menu-open {
+    #menu {
+      display: none;
+    }
+    #right-sidebar {
+      display: block;
+    }
+  }
+}

@@ -106,10 +106,10 @@ export default class PostCreate extends BaseComponent {
         toastr.error("Please choose appropriate location from suggestions and time from the calendar");
       } else if(err){
         return displayError(err);
-      }
-      else{
-      toastr.success('Post has been created', 'Awesome');
-      this.initState();
+      } else {
+        this.members.forEach((member) => (member.checked = false));
+        toastr.success('Post has been created', 'Awesome');
+        this.initState();
       }
     });
 

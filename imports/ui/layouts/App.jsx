@@ -15,6 +15,7 @@ import StudentSidebar from '../components/StudentSidebar.jsx';
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 import AddGroupPage from '../pages/coordinator/AddGroupPage.jsx';
 import AddStudentPage from '../pages/coordinator/AddStudentPage.jsx';
+import MobileMenu from '../components/MobileMenu.jsx';
 
 
 export default class App extends React.Component {
@@ -22,6 +23,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       menuOpen: false,
+      rightMenuOpen: false,
       showConnectionIssue: false,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -93,6 +95,7 @@ export default class App extends React.Component {
       loading,
       lists,
       menuOpen,
+      rightMenuOpen,
       children,
       location,
       users,
@@ -120,6 +123,7 @@ export default class App extends React.Component {
     return (
       <div>
         <div className="navibar">
+          <MobileMenu />
           <div className="container-fluid">
             <ul className="navibar-nav">
               <li><a className="site-title" href="/">Freshmen Guide</a></li>
@@ -133,7 +137,7 @@ export default class App extends React.Component {
         </div>
 
 
-        <div id="container" className={menuOpen ? 'menu-open' : ''}>
+        <div id="container" className={menuOpen ? 'menu-open' : rightMenuOpen ? 'right-menu-open': ''}>
           <section id="menu">
             {/*<LanguageToggle />*/}
             <UserMenu user={user} logout={this.logout} />
@@ -202,6 +206,7 @@ App.propTypes = {
   connected: React.PropTypes.bool,   // server connection status
   loading: React.PropTypes.bool,     // subscription status
   menuOpen: React.PropTypes.bool,    // is side menu open?
+  rightMenuOpen: React.PropTypes.bool,    // is side menu open?
   lists: React.PropTypes.array,      // all lists visible to the current user
   children: React.PropTypes.element, // matched child route component
   location: React.PropTypes.object,  // current router location
