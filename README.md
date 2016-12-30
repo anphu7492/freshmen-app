@@ -17,7 +17,7 @@ d.	Student dashboard<br />
 The student can check on the tasks that are assigned to him, events that are coming up and recent posts by fellow students or tutors.
 
 e.Profile page<br />
-This pages allows the user to change password and add his/her social media contacts.
+This pages allows the user to change password and add his/her social media contacts.<br />
 
 Links<br />
 http://freshmen-app.herokuapp.com/
