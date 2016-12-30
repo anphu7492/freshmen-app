@@ -22,19 +22,19 @@ export default class About extends BaseComponent {
         &nbsp;
         <div className="contributors">
           <div id="abhishek">
-            <img className="img-circle" src="https://res.cloudinary.com/aalto/image/upload/v1482946111/vz7gi3glpvougkfraeba.png" height="100px" width="100px"/>
+            <img className="img-circle" src="https://res.cloudinary.com/aalto/image/upload/v1482610930/frrn9j1xarpvsr5akjxx.jpg" height="100px" width="100px"/>
             <h3>Abhishek Ramesh Shetty</h3>
             <h4>Master's Programme in ICT Innovation.</h4>
           </div>
 
           <div id="phu">
-            <img className="img-circle" src="https://res.cloudinary.com/aalto/image/upload/v1482946111/vz7gi3glpvougkfraeba.png" height="100px" width="100px"/>
+            <img className="img-circle" src="https://res.cloudinary.com/aalto/image/upload/v1483099803/default/phu.jpg" height="100px" width="100px"/>
             <h3>Phu Pham</h3>
             <h4>Master's Programme in Computer Science.</h4>
           </div>
 
           <div id="kalai">
-            <img className="img-circle" src="https://res.cloudinary.com/aalto/image/upload/v1482946111/vz7gi3glpvougkfraeba.png" height="100px" width="100px"/>
+            <img className="img-circle" src="https://res.cloudinary.com/aalto/image/upload/v1483100384/IMG_20161202_112017_irr1t1.jpg" height="100px" width="100px"/>
             <h3>Kalaiarasan Saminathan</h3>
             <h4>Master's Programme in Computer Science.</h4>
           </div>
