@@ -31,6 +31,6 @@ export default createContainer(() => {
     lists: Lists.find({ $or: [
       { userId: { $exists: false } },
       { userId: Meteor.userId() },
-    ] }).fetch(),
+    ] }, {sort: {createdAt: -1}}).fetch(),
   };
 }, App);

@@ -23,7 +23,7 @@ Meteor.startup(() => {
       password: process.env.ADMIN_PWD || 'supersecret',
       role: 'coordinator',
       profile: {
-        name: 'Franklyn Hudnall',
+        name: 'Janella London',
         school: 'Aalto University',
         photo: 'https://res.cloudinary.com/aalto/image/upload/v1483015813/default/teacher.png',
         phone: '044 625 9326'
