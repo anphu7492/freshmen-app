@@ -100,7 +100,7 @@ CommentSchema = new SimpleSchema({
   },
   created: {
     type: Date,
-    defaultValue: Date.now
+    defaultValue: new Date()
   }
 });
 
@@ -137,7 +137,7 @@ Posts.schema = new SimpleSchema({
   },
   createdAt: {
     type: Date,
-    defaultValue: Date.now,
+    defaultValue: new Date(),
     denyUpdate: true,
   },
 });

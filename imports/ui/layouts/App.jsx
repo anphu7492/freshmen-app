@@ -176,7 +176,7 @@ export default class App extends React.Component {
               <AddStudentPage groups={groups}/>
             </Modal.Body>
             <Modal.Footer>
-              <button className="btn btn-danger" onClick={this.closeAddStudents}>Cancel</button>
+              <button className="btn btn-default" onClick={this.closeAddStudents}>Close</button>
             </Modal.Footer>
           </Modal>
 
@@ -188,7 +188,7 @@ export default class App extends React.Component {
               <AddGroupPage/>
             </Modal.Body>
             <Modal.Footer>
-              <button className="btn btn-danger" onClick={this.closeAddGroups}>Cancel</button>
+              <button className="btn btn-default" onClick={this.closeAddGroups}>Close</button>
             </Modal.Footer>
           </Modal>
         </div>

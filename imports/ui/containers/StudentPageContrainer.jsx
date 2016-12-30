@@ -13,7 +13,7 @@ const StudentPageContainer = createContainer(() => {
         {group: {$exists: false}},
         {group: Meteor.user().group}
       ]
-    }).fetch()
+    }, { sort: { createdAt: -1}}).fetch()
   };
 }, StudentDashboard);
 
