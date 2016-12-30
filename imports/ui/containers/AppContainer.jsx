@@ -28,6 +28,7 @@ export default createContainer(() => {
     tasks: Posts.find({type: "task", creator: Meteor.userId()}).fetch(),
     connected: Meteor.status().connected,
     menuOpen: Session.get('menuOpen'),
+    rightMenuOpen: Session.get('rightMenuOpen'),
     lists: Lists.find({ $or: [
       { userId: { $exists: false } },
       { userId: Meteor.userId() },

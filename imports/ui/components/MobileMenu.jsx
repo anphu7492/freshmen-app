@@ -8,21 +8,31 @@ class MobileMenu extends BaseComponent {
   constructor(props) {
     super(props);
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.toggleRightMenu = this.toggleRightMenu.bind(this);
   }
 
   toggleMenu() {
     Session.set('menuOpen', !Session.get('menuOpen'));
   }
 
+  toggleRightMenu() {
+    Session.set('rightMenuOpen', !Session.get('rightMenuOpen'));
+  }
+
   render() {
     return (
-      <div className="nav-group">
-        <a href="#toggle-menu" className="nav-item" onClick={this.toggleMenu}>
-          <span
-            className="icon-list-unordered"
-            title={i18n.__('components.mobileMenu.showMenu')}
-          />
-        </a>
+      <div className="nav-group mobile-menu ">
+        <div className="layout-align--middle">
+          <a href="#toggle-menu" className="nav-item flex-none" onClick={this.toggleMenu}>
+            <i className="glyphicon glyphicon-align-justify"></i>
+          </a>
+          <div className="flex">
+            <a href="/">Freshmen Guide</a>
+          </div>
+          <a href="#toggle-right-menu" className="nav-item flex-none" onClick={this.toggleRightMenu}>
+            <i className="glyphicon glyphicon-stats"></i>
+          </a>
+        </div>
       </div>
     );
   }
