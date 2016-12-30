@@ -1,24 +1,26 @@
-[![Circle CI](https://circleci.com/gh/meteor/todos/tree/react.svg?style=svg)](https://circleci.com/gh/meteor/todos/tree/react)
+FRESHMEN GUIDE
 
-This is a Todos example app built on the principles described in the [Meteor Guide](http://guide.meteor.com/structure.html). This app uses the module functionality introduced in Meteor 1.3.
+Introduction
+This Platform aims at providing a one-stop solution to all the guidance a new student might need during the orientation week. There are lots of problems like difficulties in locating the place, taking the right documents, language barrier, too many sources to obtain instructions from etc.So, to overcome all these issues and provide a single platform for students and tutors to communicate easily about all the practicalities we have devised Freshmen guide.
 
-This branch (`react`) implements the UI in [React](https://facebook.github.io/react/index.html). You can read more about using React in Meteor in the [Meteor guide article on the subject](http://guide.meteor.com/v1.3/react.html).
+Important pages
+a.Login page
+The login allows the user to log in to the service via password authentication.
 
-### Running the app
+b.Study coordinator dashboard
+This page enables the study coordinator to create a plan for the orientation week by creating events.
 
-```bash
-meteor npm install
-meteor
-```
+c.Tutor dashboard
+This page provides the tutor with utilities to create a task, create a post, create an event, comment on current events. He will also be able to access the profile of any student in his group and check their details and tasks assigned to them.
 
-### Scripts
+d.	Student dashboard
+The student can check on the tasks that are assigned to him, events that are coming up and recent posts by fellow students or tutors.
 
-To lint:
+e.Profile page
+This pages allows the user to change password and add his/her social media contacts.
 
-```bash
-meteor npm run lint
-```
+Links
+http://freshmen-app.herokuapp.com/
 
-### Useful links:
-Roles and permissions:
-https://guide.meteor.com/accounts.html#roles-and-permissions
+Git Repository
+https://github.com/anphu7492/freshmen-app
