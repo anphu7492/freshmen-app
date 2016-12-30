@@ -82,6 +82,15 @@ export default class App extends React.Component {
 
   logout() {
     Meteor.logout();
+    /**
+     * Init this session on AppPageContainer will cause problem because
+     * AppPageContainer listen to Session.set event (because it has props related to
+     * Session.get => whenever user click toggle menu button, it trigger Session.set on
+     * MobileMenu.jsx => trigger AppPageContainer.jsx => trigger init Session func there
+     * Put Session('menuOpen', false) on AppPageContainer to see what happen.
+     * */
+    Session.set('menuOpen', false);
+    Session.set('rightMenuOpen', false);
 
     //redirect to login page
     this.context.router.push('/login');

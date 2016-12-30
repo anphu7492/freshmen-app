@@ -23,9 +23,9 @@ class MobileMenu extends BaseComponent {
     return (
       <div className="nav-group mobile-menu ">
         <div className="layout-align--middle">
-          <a href="#toggle-menu" className="nav-item flex-none" onClick={this.toggleMenu}>
+          <span className="nav-item flex-none" onClick={this.toggleMenu}>
             <i className="glyphicon glyphicon-align-justify"></i>
-          </a>
+          </span>
           <div className="flex">
             <a href="/">Freshmen Guide</a>
           </div>
