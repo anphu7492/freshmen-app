@@ -92,13 +92,9 @@ export default class SignInPage extends BaseComponent {
       </div>
     );
 
-    const link = (
-      <Link to="#" className="link-auth-alt">
-        FAQ
-      </Link>
-    );
 
-    return <AuthPage content={content} link={link} />;
+
+    return <AuthPage content={content} />;
   }
 }
 
