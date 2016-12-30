@@ -62,7 +62,7 @@ export default class Post extends BaseComponent {
             <a href={creatorProfile}>
               {creator.profile.name}
             </a>
-            <div id="date">on {createdAt.toUTCString()}</div>
+            <div id="date">on {createdAt.toLocaleString()}</div>
           </div>
 
           { Meteor.userId() === post.creator

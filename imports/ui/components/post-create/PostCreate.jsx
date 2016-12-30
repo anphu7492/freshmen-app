@@ -53,7 +53,7 @@ export default class PostCreate extends BaseComponent {
         type: 'simple'
       },
       errors: {},
-      placeholder: "Say something"
+      placeholder: `Hey ${this.user.profile.name}, what's going on?`
     });
 
   }
@@ -61,12 +61,23 @@ export default class PostCreate extends BaseComponent {
   onPostCreate(event) {
     event.preventDefault();
     const { post } = this.state;
+
+    if (!post.text) {
+      toastr.error('Post content is required', 'Error');
+      return;
+    }
+
     let newPost = {
       type: post.type,
       text: post.text
     };
 
     if (post.type === 'event') {
+
+      if (!post.event.time || this.state.errors.invalidEventDate) {
+        toastr.error('Please select a valid date', 'Error');
+        return;
+      }
       newPost.event = {
         location: post.event.location,
         time: post.event.time.toDate()
@@ -92,11 +103,9 @@ export default class PostCreate extends BaseComponent {
       event: newPost.event ? newPost.event : null,
       task: newPost.task ? newPost.task : null
     }, (err, res) => {
-      if (err && newPost.event)
-      {
+      if (err && newPost.event) {
         toastr.error("Please choose appropriate location from suggestions and time from the calendar");
-      }
-      else if(err){
+      } else if(err){
         return displayError(err);
       }
       else{
@@ -125,7 +134,7 @@ export default class PostCreate extends BaseComponent {
 
     this.setState({
       post: post,
-      placeholder: "Name your task"
+      placeholder: "Write some lines about the task"
     });
   }
 
@@ -160,7 +169,7 @@ export default class PostCreate extends BaseComponent {
         type: {$set: 'simple'},
         task: {$set: null}
       }),
-      placeholder: "Say something"
+      placeholder: `Hey ${this.user.profile.name}, what's going on?`
     });
   }
 
@@ -195,7 +204,7 @@ export default class PostCreate extends BaseComponent {
         }}
 
       }),
-      placeholder: "Name your event"
+      placeholder: "What is the event about?"
 
     });
   }
@@ -210,15 +219,24 @@ export default class PostCreate extends BaseComponent {
         type: {$set: 'simple'},
         event: {$set: null}
       }),
-      placeholder: "Say something"
+      placeholder: `Hey ${this.user.profile.name}, what's going on?`
     });
   }
   onEventDateChange(date) {
     if (typeof date === 'string' || !date.isValid()) {
-      this.errors.invalidEventDate = true;
+      this.setState({
+        errors: update(this.state.errors, {
+          invalidEventDate: {$set: true}
+        })
+      });
       return;
     }
     this.state.post.event.time = date;
+    this.setState({
+      errors: update(this.state.errors, {
+        invalidEventDate: {$set: false}
+      })
+    });
   }
 
   renderTasksBox() {
