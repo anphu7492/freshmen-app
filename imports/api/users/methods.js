@@ -7,7 +7,10 @@ export const createUserFromCoordinator = new ValidatedMethod({
   name: 'user.create',
   validate: new SimpleSchema({
     email: {type: String},
-    password: {type: String},
+    password: {
+      type: String,
+      min: 8
+    },
     'profile.name': {type: String},
     'profile.school': {type: String},
     'profile.major': {type: String},
