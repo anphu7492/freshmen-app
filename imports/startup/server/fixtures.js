@@ -10,7 +10,7 @@ Meteor.startup(() => {
   BrowserPolicy.content.allowDataUrlForAll();
   BrowserPolicy.content.allowOriginForAll('https://maxcdn.bootstrapcdn.com');
   BrowserPolicy.content.allowOriginForAll('https://maps.googleapis.com');
-  BrowserPolicy.content.allowImageOrigin("http://res.cloudinary.com");
+  BrowserPolicy.content.allowImageOrigin("res.cloudinary.com");
   BrowserPolicy.content.allowImageOrigin("*.gstatic.com");
   BrowserPolicy.content.allowFontOrigin("https://fonts.gstatic.com");
   BrowserPolicy.content.allowStyleOrigin("https://fonts.googleapis.com");
