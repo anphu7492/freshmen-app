@@ -1,5 +1,4 @@
 import React from 'react';
-import 'moment';
 import Datetime from 'react-datetime';
 import { Random } from 'meteor/random';
 import BaseComponent from '../BaseComponent.jsx';
