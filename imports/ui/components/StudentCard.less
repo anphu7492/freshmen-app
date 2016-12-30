@@ -16,15 +16,21 @@
     padding:3px;
   }
 
-  a, a:hover{
+  a{
     text-align: center;
     .position(relative,0,0,0,0);
     display: block;
     margin:auto;
     width:100%;
-    font-family: 'Roboto Slab', serif;
-    color: white;
-    font-weight: bold;
     text-decoration: none;
+    p{
+      font-family: 'Roboto Slab', serif;
+      color: white;
+      font-size: 14px;
+    }
+    p:hover{
+      color:@color-ancillary
+    }
+
   }
 }
