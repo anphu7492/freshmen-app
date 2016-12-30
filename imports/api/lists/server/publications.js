@@ -9,6 +9,7 @@ Meteor.publish('lists.public', function listsPublic() {
     userId: { $exists: false },
   }, {
     fields: Lists.publicFields,
+    sort: { createdAt: -1}
   });
 });
 

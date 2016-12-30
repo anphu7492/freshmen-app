@@ -22,8 +22,6 @@ Meteor.publish("allUserData", function() {
       'role': 1,
       'profile': 1,
       'group': 1,
-      'facebook': 1,
-      'twitter': 1,
       'emails' : 1
     }
   });

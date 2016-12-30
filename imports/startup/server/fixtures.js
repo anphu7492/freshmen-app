@@ -25,7 +25,7 @@ Meteor.startup(() => {
       profile: {
         name: 'Franklyn Hudnall',
         school: 'Aalto University',
-        photo: 'http://res.cloudinary.com/aalto/image/upload/v1483015813/default/teacher.png',
+        photo: 'https://res.cloudinary.com/aalto/image/upload/v1483015813/default/teacher.png',
         phone: '044 625 9326'
       }
     });

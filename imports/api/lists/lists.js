@@ -44,6 +44,7 @@ Lists.schema = new SimpleSchema({
   name: { type: String },
   incompleteCount: { type: Number, defaultValue: 0 },
   userId: { type: String, regEx: SimpleSchema.RegEx.Id, optional: true },
+  createdAt: { type: Date, defaultValue: new Date() }
 });
 
 Lists.attachSchema(Lists.schema);
@@ -55,6 +56,7 @@ Lists.publicFields = {
   name: 1,
   incompleteCount: 1,
   userId: 1,
+  createdAt: 1
 };
 
 Factory.define('list', Lists, {});

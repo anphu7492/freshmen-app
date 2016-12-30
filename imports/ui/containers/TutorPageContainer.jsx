@@ -6,6 +6,7 @@ import TutorDashboard from '../pages/TutorDashboard';
 const TutorPageContainer = createContainer(() => {
   const postsHandle = Meteor.subscribe('posts.query');
   const loading = !postsHandle.ready();
+
   return {
     loading,
     posts: Posts.find({
@@ -13,7 +14,7 @@ const TutorPageContainer = createContainer(() => {
         {group: {$exists: false}},
         {group: Meteor.user().group}
       ]
-    }).fetch()
+    }, { sort: { createdAt: -1}}).fetch()
   };
 }, TutorDashboard);
 

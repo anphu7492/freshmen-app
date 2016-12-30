@@ -35,12 +35,12 @@ export const makePrivate = new ValidatedMethod({
         'Must be logged in to make private lists.');
     }
 
-    const list = Lists.findOne(listId);
+    // const list = Lists.findOne(listId);
 
-    if (list.isLastPublicList()) {
+    /*if (list.isLastPublicList()) {
       throw new Meteor.Error('api.lists.makePrivate.lastPublicList',
         'Cannot make the last public list private.');
-    }
+    }*/
 
     Lists.update(listId, {
       $set: { userId: this.userId },
@@ -109,10 +109,10 @@ export const remove = new ValidatedMethod({
     // XXX the security check above is not atomic, so in theory a race condition could
     // result in exposing private data
 
-    if (list.isLastPublicList()) {
+    /*if (list.isLastPublicList()) {
       throw new Meteor.Error('api.lists.remove.lastPublicList',
         'Cannot delete the last public list.');
-    }
+    }*/
 
     Lists.remove(listId);
   },

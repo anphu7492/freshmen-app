@@ -4,9 +4,13 @@
   margin: 10px 0;
   text-align: center;
   font-family: 'Ubuntu', serif;
-  background-color: @color-ancillary;
   font-weight: bold;
 
+  > a {
+    background: @color-ancillary;
+    border: 1px solid white;
+    box-shadow: none;
+  }
 
   .custom-btn-secondary {
     .font-s0;
@@ -28,7 +32,7 @@
 
       &:before {
         .position(absolute, -.5rem, 50%, auto, auto, 1px, .5rem);
-        background: lighten(#517096, 5%);
+        background: white;
         content: '';
       }
     }

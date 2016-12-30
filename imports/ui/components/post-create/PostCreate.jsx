@@ -1,5 +1,4 @@
 import React from 'react';
-import 'moment';
 import Datetime from 'react-datetime';
 import { Random } from 'meteor/random';
 import BaseComponent from '../BaseComponent.jsx';
@@ -38,14 +37,12 @@ export default class PostCreate extends BaseComponent {
   }
 
   onSuggestSelect(suggest){
-    console.log(suggest);
     let post = this.state.post;
     post.event.location.type = 'latLong';
     post.event.location.address = suggest.label;
     post.event.location.lat = suggest.location.lat;
     post.event.location.long = suggest.location.lng;
     this.setState({ post : post });
-    console.log(this.state.post);
   }
 
   initState() {
@@ -55,27 +52,36 @@ export default class PostCreate extends BaseComponent {
         type: 'simple'
       },
       errors: {},
-      placeholder: "Say something"
+      placeholder: `Hey ${this.user.profile.name}, what's going on?`
     });
 
   }
 
   onPostCreate(event) {
     event.preventDefault();
-    console.log(this.state.post);
     const { post } = this.state;
+
+    if (!post.text) {
+      toastr.error('Post content is required', 'Error');
+      return;
+    }
+
     let newPost = {
       type: post.type,
       text: post.text
     };
 
     if (post.type === 'event') {
+
+      if (!post.event.time || this.state.errors.invalidEventDate) {
+        toastr.error('Please select a valid date', 'Error');
+        return;
+      }
       newPost.event = {
         location: post.event.location,
         time: post.event.time.toDate()
-      }
+      };
 
-      console.log(newPost);
     } else if (post.type == 'task') {
       newPost.task = {
         todos: post.task.todos.map(todo => ({
@@ -96,11 +102,9 @@ export default class PostCreate extends BaseComponent {
       event: newPost.event ? newPost.event : null,
       task: newPost.task ? newPost.task : null
     }, (err, res) => {
-      if (err && newPost.event)
-      {
+      if (err && newPost.event) {
         toastr.error("Please choose appropriate location from suggestions and time from the calendar");
-      }
-      else if(err){
+      } else if(err){
         return displayError(err);
       }
       else{
@@ -129,7 +133,7 @@ export default class PostCreate extends BaseComponent {
 
     this.setState({
       post: post,
-      placeholder: "Name your task"
+      placeholder: "Write some lines about the task"
     });
   }
 
@@ -164,7 +168,7 @@ export default class PostCreate extends BaseComponent {
         type: {$set: 'simple'},
         task: {$set: null}
       }),
-      placeholder: "Say something"
+      placeholder: `Hey ${this.user.profile.name}, what's going on?`
     });
   }
 
@@ -199,7 +203,7 @@ export default class PostCreate extends BaseComponent {
         }}
 
       }),
-      placeholder: "Name your event"
+      placeholder: "What is the event about?"
 
     });
   }
@@ -214,15 +218,24 @@ export default class PostCreate extends BaseComponent {
         type: {$set: 'simple'},
         event: {$set: null}
       }),
-      placeholder: "Say something"
+      placeholder: `Hey ${this.user.profile.name}, what's going on?`
     });
   }
   onEventDateChange(date) {
     if (typeof date === 'string' || !date.isValid()) {
-      this.errors.invalidEventDate = true;
+      this.setState({
+        errors: update(this.state.errors, {
+          invalidEventDate: {$set: true}
+        })
+      });
       return;
     }
     this.state.post.event.time = date;
+    this.setState({
+      errors: update(this.state.errors, {
+        invalidEventDate: {$set: false}
+      })
+    });
   }
 
   renderTasksBox() {

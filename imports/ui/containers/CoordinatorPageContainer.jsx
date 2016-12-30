@@ -13,7 +13,7 @@ const CoordinatorPageContainer = createContainer(() => {
   return {
     loading,
     groups,
-    posts: Posts.find().fetch()
+    posts: Posts.find({}, {sort: {createdAt: -1}}).fetch()
   };
 }, CoordinatorDashboard);
 

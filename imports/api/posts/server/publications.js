@@ -4,8 +4,8 @@ import { Posts } from '../posts';
 Meteor.publishComposite('posts.query', {
     find() {
       return Posts.find({}, {
-        sort: {createdAt: -1},
-        limit: 20
+        fields: Posts.publicFields,
+        sort: {createdAt: -1}
       });
     },
     children: [{

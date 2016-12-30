@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import BaseComponent from '../BaseComponent.jsx';
@@ -6,6 +7,7 @@ import { displayError } from '../../helpers/errors.js';
 import Event from './Event.jsx';
 import Task from './Task.jsx';
 import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import TimeAgo from 'react-timeago';
 
 import {
   remove
@@ -44,13 +46,23 @@ export default class Post extends BaseComponent {
     //TODO: improve populating creator later
     //read more: collection-helpers and publishComposite
     const creator = Meteor.users.findOne(post.creator);
-    const createdAt = new Date(post.createdAt);
     const creatorProfile = "/profile/" + creator._id;
     const deletePostBtn = (
       <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">Delete</Tooltip>}>
         <i className="icon-close delete-btn pull-right" onClick={this.showDeleteModal}></i>
       </OverlayTrigger>
     );
+
+    let postTime;
+    if (moment().diff(post.createdAt, 'days') > 2) {
+      postTime = (
+        <span>{moment(post.createdAt).format('DD/MM/YYYY at HH:mm A')}</span>
+      )
+    } else {
+      postTime = (
+        <TimeAgo date={post.createdAt} minPeriod={10}/>
+      )
+    }
 
     return (
       <div className="posts">
@@ -62,7 +74,8 @@ export default class Post extends BaseComponent {
             <a href={creatorProfile}>
               {creator.profile.name}
             </a>
-            <div id="date">on {createdAt.toUTCString()}</div>
+            {/*<div id="date"><TimeAgo date={createdAt}/></div>*/}
+            <div id="date">{postTime}</div>
           </div>
 
           { Meteor.userId() === post.creator

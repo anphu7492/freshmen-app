@@ -72,10 +72,9 @@ export default class Task extends BaseComponent {
     const { post } = this.props;
     const todos = post.task.todos;
     const user = Meteor.user();
-    console.log(user);
     const myStatus = post.task.assignees.find(assignee => (assignee.user === Meteor.userId()));
-    var numCompleted = post.task.assignees.filter(assignee => (assignee.status === "completed")).length;
-    var numOngoing = post.task.assignees.length - numCompleted;
+    let numCompleted = post.task.assignees.filter(assignee => (assignee.status === "completed")).length;
+    let numOngoing = post.task.assignees.length - numCompleted;
     let toggleBtn;
     if(user.role==="tutor" || user.role ==="coordinator"){
       toggleBtn = (

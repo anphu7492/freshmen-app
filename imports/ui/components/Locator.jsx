@@ -1,6 +1,6 @@
-var React = require('react');
+const React = require('react');
 
-var INITIAL_LOCATION = {
+const INITIAL_LOCATION = {
   address: 'Aalto university, 02150 Espoo, Finland',
   position: {
     latitude: 60.184649,
@@ -8,14 +8,14 @@ var INITIAL_LOCATION = {
   }
 };
 
-var INITIAL_MAP_ZOOM_LEVEL = 14;
+const INITIAL_MAP_ZOOM_LEVEL = 14;
 
-var ATLANTIC_OCEAN = {
+const ATLANTIC_OCEAN = {
   latitude: 29.532804,
   longitude: -55.491477
 };
 
-var Locator = React.createClass({
+let Locator = React.createClass({
   getInitialState: function () {
     return {
       isGeocodingError: false,
@@ -58,7 +58,7 @@ var Locator = React.createClass({
   },
 
   componentDidMount: function () {
-    var mapElement = this.mapElement;
+    let mapElement = this.mapElement;
     const {address} = this.props;
     this.map = new google.maps.Map(mapElement, {
       zoom: INITIAL_MAP_ZOOM_LEVEL,
@@ -84,13 +84,13 @@ var Locator = React.createClass({
   },
 
   render: function () {
-    console.log(this.props.address);
     return (
       <div className="locator" ref={this.setMapElementReference}></div>
     );
   }
 });
-propTypes: {
-  address:React.PropTypes.string
-}
+
+Locator.propTypes = {
+  address: React.PropTypes.object
+};
 module.exports = Locator;

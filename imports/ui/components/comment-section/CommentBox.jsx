@@ -14,7 +14,6 @@ export default class CommentBox extends BaseComponent {
 
   createComment(event) {
     event.preventDefault();
-    console.log(this.commentContent.value);
     const content = this.commentContent.value.trim();
     if (content) {
       addComment.call({

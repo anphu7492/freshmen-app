@@ -33,6 +33,7 @@ export default class ListPage extends BaseComponent {
         <Message
           title={i18n.__('pages.listPage.noTasks')}
           subtitle={i18n.__('pages.listPage.addAbove')}
+          customClass="absolute"
         />
       );
     } else {
@@ -51,7 +52,7 @@ export default class ListPage extends BaseComponent {
         <ListHeader list={list} />
         <div className="content-scrollable list-items">
           {loading
-            ? <Message title={i18n.__('pages.listPage.loading')} />
+            ? <Message title={i18n.__('pages.listPage.loading')} customClass="absolute"/>
             : Todos}
         </div>
       </div>
