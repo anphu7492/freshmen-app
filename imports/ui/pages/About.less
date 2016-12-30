@@ -1,8 +1,16 @@
 @import '{}/imports/ui/stylesheets/utils.less';
 
+
+#about{
+background-color: white;
+border-radius: 5px;
+margin:10px;
+padding:20px;
+height:90%;
+
 .about-content {
     align-content: center;
-    color: white;
+    color: @color-turquoise;
     align-items: center;
 }
 
@@ -22,37 +30,32 @@
     font-family: 'Roboto Slab', serif;
     padding: 2px;
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
+    font-size: 18px;
 }
 
 #content {
     padding: 2px;
     margin-top: 0;
     margin-bottom: 5px;
-    font-family: 'Mirza',serif;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
 }
 
-#abhishek {
-    height: 300px;
-    width: 250px;
-    color: white;
-    font-family: 'Roboto Slab','Molle', serif;
-    float: right;
+.contributors{
+  text-align: center;
 }
 
-#phu {
-    height: 300px;
-    width: 250px;
-    color: white;
-    font-family: 'Roboto Slab','Molle', serif;
-}
-
-#kalai {
-    height: 300px;
-    width: 250px;
-    color: white;
+.person {
+    height: auto;
+    width: 180px;
     font-family: 'Roboto Slab', serif;
-    position: absolute;
-    top: 10;
-    right: 15;
+    color: @color-turquoise;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
 }
