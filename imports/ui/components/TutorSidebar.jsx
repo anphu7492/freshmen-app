@@ -32,9 +32,6 @@ export default class TutorSidebar extends BaseComponent {
       }
     }
 
-    console.log(completedTasks, numAssignments);
-    console.log(tasks);
-
     if (completedTasks != 0){
       completionRate = (completedTasks * 100)/(numTasks * numAssignments);
     }
