@@ -17,11 +17,10 @@ body {
     background-color: @color-ancillary;
     position: fixed;
     top: 0;
-    height: 50px;
+    height: 45px;
     color: white;
     text-align: center;
-    font-size: 18px;
-    line-height: 25px;
+    font-size: 20px;
     z-index: 999;
     padding: 5px;
     width: 100%;
@@ -50,11 +49,16 @@ body {
     display: block;
     padding: 8px;
     color: white;
+    text-decoration: none;
+}
+
+.navibar div ul li a:hover {
+  color: @color-turquoise;
 }
 
 #container {
   .position(absolute, 0, 0, 0, 0);
-    top: 50px;
+    top: 45px;
   @media screen and (min-width: 60em) {
     left: @column;
     right: @column;
