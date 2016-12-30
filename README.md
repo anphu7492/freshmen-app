@@ -21,3 +21,14 @@ This pages allows the user to change password and add his/her social media conta
 
 **Links**
 http://freshmen-app.herokuapp.com/
+
+**To build the project**
+* Install node, mongoDB, meteor
+* Cd to project root folder
+* Install packages
+
+      meteor npm install
+      
+* Run server:
+
+      meteor
