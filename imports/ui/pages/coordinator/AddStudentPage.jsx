@@ -69,12 +69,18 @@ export default class AddStudentPage extends BaseComponent {
       <div className="student-list">
         <form onSubmit={this.onSubmit}>
           {StudentList}
-          <button type="button" className="btn btn-primary" onClick={this.addStudent}>
-            Add
-          </button>
-          <button type="submit" className="btn btn-success">
-            Create
-          </button>
+          <div className="col-sm-6 col-xs-12">
+            <button type="button" className="btn btn-primary" onClick={this.addStudent}>
+              Add
+            </button>
+          </div>
+
+          <div className="col-sm-6 col-xs-12">
+            <button type="submit" className="btn btn-success">
+              Create
+            </button>
+          </div>
+
         </form>
       </div>
     )
