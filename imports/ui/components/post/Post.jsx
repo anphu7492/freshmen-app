@@ -56,7 +56,7 @@ export default class Post extends BaseComponent {
     let postTime;
     if (moment().diff(post.createdAt, 'days') > 2) {
       postTime = (
-        <span>{moment(post.createdAt).format('DD/MM/YYYY at HH:mm A')}</span>
+        <span>{moment(post.createdAt).format('DD/MM/YYYY HH:mm A')}</span>
       )
     } else {
       postTime = (
